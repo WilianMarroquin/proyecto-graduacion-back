@@ -21,13 +21,13 @@ return new class extends Migration
             $table->string('action');
             $table->string('subject');
 
-            $table->bigInteger('option_id')
+            $table->bigInteger('parent_id')
                 ->unsigned()
                 ->nullable()
-                ->index('fk_options_options1_idx')
+                ->index('fk_parent_parents1_idx')
                 ->comment('opcion padre');
 
-            $table->foreign('option_id', 'fk_options_options1')
+            $table->foreign('parent_id', 'fk_parents1')
                 ->references('id')
                 ->on('menu_opciones')
                 ->onDelete('cascade')

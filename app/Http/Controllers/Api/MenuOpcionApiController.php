@@ -48,7 +48,7 @@ class MenuOpcionApiController extends AppbaseController
                 'orden',
                 'action',
                 'subject',
-                'option_id'
+                'parent_id'
             ])
             ->allowedSorts([
                 'titulo',
@@ -58,7 +58,7 @@ class MenuOpcionApiController extends AppbaseController
                 'orden',
                 'action',
                 'subject',
-                'option_id'
+                'parent_id'
             ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
                 ->Padres()

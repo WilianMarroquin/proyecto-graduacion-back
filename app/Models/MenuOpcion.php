@@ -55,7 +55,7 @@ class MenuOpcion extends Model
     'orden',
     'action',
     'subject',
-    'option_id'
+    'parent_id'
 ];
 
 
@@ -74,7 +74,7 @@ class MenuOpcion extends Model
         'orden' => 'integer',
         'action' => 'string',
         'subject' => 'string',
-        'option_id' => 'integer',
+        'parent_id' => 'integer',
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp',
     ];
@@ -95,7 +95,7 @@ class MenuOpcion extends Model
     'orden' => 'nullable|integer|nullable',
     'action' => 'required|string|max:255',
     'subject' => 'required|string|max:255',
-    'option_id' => 'nullable|integer',
+    'parent_id' => 'nullable|integer',
 ];
 
 
@@ -116,13 +116,13 @@ class MenuOpcion extends Model
      */
     public function children()
     {
-     return $this->hasMany(MenuOpcion::class,'option_id','id');
+     return $this->hasMany(MenuOpcion::class,'parent_id','id');
     }
 
     public function scopePadres()
     {
 
-        return $this->whereNull('option_id');
+        return $this->whereNull('parent_id');
 
     }
 
