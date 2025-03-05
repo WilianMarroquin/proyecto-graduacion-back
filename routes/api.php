@@ -8,3 +8,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::post('menu-opcions/actualizar/orden', [App\Http\Controllers\Api\MenuOpcionApiController::class, 'actualizarOrden'])->name('menu-opcions.getColumnas');
+
+Route::apiResource('menu-opcions', App\Http\Controllers\Api\MenuOpcionApiController::class);
