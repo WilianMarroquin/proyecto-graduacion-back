@@ -78,6 +78,10 @@ class MenuOpcionApiController extends AppbaseController
     {
         $input = $request->all();
 
+        $ultimaOpcion = MenuOpcion::orderBy('orden', 'desc')->first();
+
+        $input['orden'] = $ultimaOpcion ? $ultimaOpcion->orden + 1 : 0;
+
         MenuOpcion::create($input);
 
         $opcionesMenu = MenuOpcion::Padres()
@@ -93,9 +97,9 @@ class MenuOpcionApiController extends AppbaseController
      * Display the specified MenuOpcion.
      * GET|HEAD /menu-opcions/{id}
      */
-    public function show(MenuOpcion $menu_opcion)
+    public function show(MenuOpcion $menu_opcione)
     {
-        return $this->sendResponse($menu_opcion->toArray(), 'MenuOpcion recuperado con éxito.');
+        return $this->sendResponse($menu_opcione->toArray(), 'MenuOpcion recuperado con éxito.');
     }
 
 
@@ -120,9 +124,9 @@ class MenuOpcionApiController extends AppbaseController
      * Remove the specified MenuOpcion from storage.
      * DELETE /menu-opcions/{id}
      */
-    public function destroy(MenuOpcion $menu_opcion): JsonResponse
+    public function destroy(MenuOpcion $menu_opcione): JsonResponse
     {
-        $menu_opcion->delete();
+        $menu_opcione->delete();
         return $this->sendResponse(null, 'MenuOpcion eliminado con éxito.');
     }
 
@@ -170,4 +174,14 @@ class MenuOpcionApiController extends AppbaseController
 
     }
 
+    public function getOpcionesMenu()
+    {
+        $opcionesMenu = MenuOpcion::Padres()
+            ->with('children')
+            ->orderBy('orden', 'asc')
+            ->get();
+
+        return $this->sendResponse($opcionesMenu, 'Opciones de menú recuperadas con éxito.');
+
+    }
 }

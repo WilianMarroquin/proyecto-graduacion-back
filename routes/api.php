@@ -12,7 +12,9 @@ require __DIR__.'/auth.php';
 
 Route::post('menu-opcions/actualizar/orden', [App\Http\Controllers\Api\MenuOpcionApiController::class, 'actualizarOrden'])->name('menu-opcions.getColumnas');
 
-Route::apiResource('menu-opcions', App\Http\Controllers\Api\MenuOpcionApiController::class);
+Route::apiResource('menu-opciones', App\Http\Controllers\Api\MenuOpcionApiController::class);
+
+Route::get('get/menu-opciones/', [App\Http\Controllers\Api\MenuOpcionApiController::class, 'getOpcionesMenu']);
 
 Route::apiResource('permissions', App\Http\Controllers\Api\PermissionApiController::class)
         ->parameters(['permissions' => 'permission']);

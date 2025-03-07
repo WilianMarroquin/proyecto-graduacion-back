@@ -116,7 +116,9 @@ class MenuOpcion extends Model
      */
     public function children()
     {
-     return $this->hasMany(MenuOpcion::class,'parent_id','id');
+     return $this->hasMany(MenuOpcion::class,'parent_id','id')
+         ->with('children')
+         ->orderBy('orden','asc');
     }
 
     public function scopePadres()
