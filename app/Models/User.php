@@ -19,7 +19,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nombre_usuario',
+        'primer_nombre',
+        'segundo_nombre',
+        'primer_apellido',
+        'segundo_apellido',
         'email',
         'password',
     ];
@@ -46,4 +50,27 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Devolver al usuario autenticado, sus roles y permisos.
+     *
+     * @return User
+     */
+    public function responseUser(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->primer_nombre,
+            'email' => $this->primer_apellido,
+            'roles' => $this->getRoleNames(),
+            'permisos' => $this->getAllPermissions()->map(function ($permission) {
+                return [
+                    'accion' => $permission->name, // Acción que el usuario puede realizar
+                    'recurso' => $permission->subject // Puedes cambiar esto por el recurso correcto
+                ];
+            })->toArray(),
+        ];
+    }
+
+
 }
