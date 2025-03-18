@@ -16,21 +16,22 @@ use Spatie\QueryBuilder\QueryBuilder;
 /**
  * Class MenuOpcionApiController
  */
-class MenuOpcionApiController extends AppbaseController
+class MenuOpcionApiController extends AppbaseController implements HasMiddleware
 {
 
     /**
      * //     * @return array
      * //     */
-    //    public static function middleware(): array
-    //    {
-    //        return [
-    //            new Middleware('abilities:ver menu-opcions', only: ['index', 'show']),
-    //            new Middleware('abilities:crear menu-opcions', only: ['store']),
-    //            new Middleware('abilities:editar menu-opcions', only: ['update']),
-    //            new Middleware('abilities:eliminar menu-opcions', only: ['destroy']),
-    //        ];
-    //    }
+        public static function middleware(): array
+        {
+            return [
+                new Middleware('abilities:Listar Menu Opcion', only: ['index']),
+                new Middleware('abilities:Ver Menu Opcion', only: ['show']),
+                new Middleware('abilities:Crear Menu Opcion', only: ['store']),
+                new Middleware('abilities:Editar Menu Opcion', only: ['update']),
+                new Middleware('abilities:Eliminar Menu Opcion', only: ['destroy']),
+            ];
+        }
 
     /**
      * Display a listing of the Menu_opciones.
