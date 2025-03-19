@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PermisosTableSeeder extends Seeder
 {
@@ -16,6 +17,11 @@ class PermisosTableSeeder extends Seeder
     public function run()
     {
 
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        Permission::truncate();
+
+        // Permisos de las opciones del menu.
         Permission::create([
             'name' => 'Listar Menu Opcion',
             'subject' => 'Menu Opcion',
@@ -41,6 +47,9 @@ class PermisosTableSeeder extends Seeder
             'subject' => 'Menu Opcion',
             'guard_name' => 'Api'
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
 
 
     }
