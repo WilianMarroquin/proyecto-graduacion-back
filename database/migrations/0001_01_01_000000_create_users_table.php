@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('segundo_nombre')->nullable();
             $table->string('primer_apellido');
             $table->string('segundo_apellido')->nullable();
-            $table->string('nombre_usuario')->unique();
-            $table->string('email')->unique();
+            $table->string('usuario')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
