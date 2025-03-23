@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Permission extends Model
 {
 
-
+    
     use HasFactory;
 
     protected $table = 'permissions';
@@ -43,7 +43,6 @@ class Permission extends Model
     'guard_name'
 ];
 
-    protected $appends = ['name_y_subjet'];
 
     /**
      * The attributes that should be casted to native types.
@@ -71,7 +70,7 @@ class Permission extends Model
     [
     'name' => 'required|string|max:255|unique:permissions,name',
     'subject' => 'required|string|max:255',
-    'guard_name' => 'required|string|max:255',
+    'guard_name' => 'required|string|max:255|unique:permissions,guard_name',
 ];
 
 
@@ -90,12 +89,6 @@ class Permission extends Model
      *
      * @var array
      */
-
-    public function getNameYSubjetAttribute()
-    {
-
-        return $this->name . ' - ' . $this->subject;
-
-    }
+    
 
 }

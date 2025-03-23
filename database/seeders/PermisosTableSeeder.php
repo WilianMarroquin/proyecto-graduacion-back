@@ -25,27 +25,27 @@ class PermisosTableSeeder extends Seeder
         Permission::create([
             'name' => 'Listar Menu Opcion',
             'subject' => 'Menu Opcion',
-            'guard_name' => 'Api'
+            'guard_name' => 'web'
         ]);
         Permission::create([
             'name' => 'Ver Menu Opcion',
             'subject' => 'Menu Opcion',
-            'guard_name' => 'Api'
+            'guard_name' => 'web'
         ]);
         Permission::create([
             'name' => 'Crear Menu Opcion',
             'subject' => 'Menu Opcion',
-            'guard_name' => 'Api'
+            'guard_name' => 'web'
         ]);
         Permission::create([
             'name' => 'Editar Menu Opcion',
             'subject' => 'Menu Opcion',
-            'guard_name' => 'Api'
+            'guard_name' => 'web'
         ]);
         Permission::create([
             'name' => 'Eliminar Menu Opcion',
             'subject' => 'Menu Opcion',
-            'guard_name' => 'Api'
+            'guard_name' => 'web'
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
