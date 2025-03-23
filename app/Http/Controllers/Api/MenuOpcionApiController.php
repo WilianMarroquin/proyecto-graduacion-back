@@ -25,11 +25,11 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
         public static function middleware(): array
         {
             return [
-                new Middleware('role:Empleado', only: ['index']),
-                new Middleware('role:Administrador', only: ['show']),
-                new Middleware('role:Administrador', only: ['store']),
-                new Middleware('role:Administrador', only: ['update']),
-                new Middleware('role:Administrador', only: ['destroy']),
+//                new Middleware('role:Empleado', only: ['index']),
+//                new Middleware('role:Administrador', only: ['show']),
+//                new Middleware('role:Administrador', only: ['store']),
+//                new Middleware('role:Administrador', only: ['update']),
+//                new Middleware('role:Administrador', only: ['destroy']),
             ];
         }
 

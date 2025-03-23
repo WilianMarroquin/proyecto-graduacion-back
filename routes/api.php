@@ -7,6 +7,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user()->responseUser();
 });
 
+Route::middleware('auth:sanctum')->group(function () {
+
+    require __DIR__.'/admin/api.php';
+
+});
+
 require __DIR__.'/auth.php';
 
 
@@ -16,5 +22,5 @@ Route::apiResource('menu-opciones', App\Http\Controllers\Api\MenuOpcionApiContro
 
 Route::get('get/menu-opciones/', [App\Http\Controllers\Api\MenuOpcionApiController::class, 'getOpcionesMenu']);
 
-Route::apiResource('permissions', App\Http\Controllers\Api\PermissionApiController::class)
-        ->parameters(['permissions' => 'permission']);
+
+
