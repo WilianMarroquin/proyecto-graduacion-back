@@ -77,6 +77,12 @@ class UserApiController extends AppbaseController
     {
         $input = $request->all();
 
+        if($input['password'] != $input['password_confirmation']){
+            return $this->sendError('Las contraseñas no coinciden', 400);
+        }
+
+        $input['password'] = bcrypt($input['password']);
+
         $users = User::create($input);
 
         return $this->sendResponse($users->toArray(), 'User creado con éxito.');

@@ -11,5 +11,7 @@ Route::prefix('modulo-usuarios')->group(function () {
     Route::apiResource('permissions', App\Http\Controllers\Api\PermissionApiController::class)
         ->parameters(['permissions' => 'permission']);
 
+    Route::apiResource('users', App\Http\Controllers\Api\UserApiController::class);
+
 });
 

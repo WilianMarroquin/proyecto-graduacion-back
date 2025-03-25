@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Models\User;
 
 
-
 class CreateUserApiRequest extends FormRequest
 {
     public function authorize()
@@ -16,9 +15,12 @@ class CreateUserApiRequest extends FormRequest
 
     public function rules()
     {
+        return User::$rules;
+    }
 
-           return User::$rules;
-
+    public function messages()
+    {
+        return User::$messages;
     }
 }
 

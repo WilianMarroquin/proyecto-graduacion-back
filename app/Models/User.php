@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -20,7 +21,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'nombre_usuario',
+        'usuario',
         'primer_nombre',
         'segundo_nombre',
         'primer_apellido',
@@ -38,6 +39,45 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    //definir reglas
+    public static $rules = [
+        'usuario' => 'required|string|max:255',
+        'primer_nombre' => 'required|string|max:255',
+        'segundo_nombre' => 'nullable|string|max:255',
+        'primer_apellido' => 'required|string|max:255',
+        'segundo_apellido' => 'nullable|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
+    ];
+
+    //definir reglas de mensajes
+
+    public static $messages = [
+        'usuario.required' => 'El usuario es requerido',
+        'usuario.string' => 'El usuario debe ser una cadena de texto',
+        'usuario.max' => 'El usuario no debe exceder los 255 caracteres',
+        'primer_nombre.required' => 'El primer nombre es requerido',
+        'primer_nombre.string' => 'El primer nombre debe ser una cadena de texto',
+        'primer_nombre.max' => 'El primer nombre no debe exceder los 255 caracteres',
+        'segundo_nombre.string' => 'El segundo nombre debe ser una cadena de texto',
+        'segundo_nombre.max' => 'El segundo nombre no debe exceder los 255 caracteres',
+        'primer_apellido.required' => 'El primer apellido es requerido',
+        'primer_apellido.string' => 'El primer apellido debe ser una cadena de texto',
+        'primer_apellido.max' => 'El primer apellido no debe exceder los 255 caracteres',
+        'segundo_apellido.string' => 'El segundo apellido debe ser una cadena de texto',
+        'segundo_apellido.max' => 'El segundo apellido no debe exceder los 255 caracteres',
+        'email.required' => 'El email es requerido',
+        'email.string' => 'El email debe ser una cadena de texto',
+        'email.email' => 'El email debe ser un correo electrónico válido',
+        'email.max' => 'El email no debe exceder los 255 caracteres',
+        'email.unique' => 'El email ya se encuentra registrado',
+        'password.required' => 'La contraseña es requerida',
+        'password.string' => 'La contraseña debe ser una cadena de texto',
+        'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+    ];
+
+    protected $appends = ['nombre_completo'];
 
     /**
      * Get the attributes that should be cast.
@@ -76,6 +116,12 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         return $this->hasRole('Super Admin');
+
+    }
+
+    public function getNombreCompletoAttribute()
+    {
+        return $this->primer_nombre . ' ' . $this->segundo_nombre . ' ' . $this->primer_apellido . ' ' . $this->segundo_apellido;
 
     }
 
