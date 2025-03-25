@@ -19,18 +19,18 @@ use Spatie\QueryBuilder\QueryBuilder;
 class UserApiController extends AppbaseController
 {
 
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver users', only: ['index', 'show']),
-  //            new Middleware('abilities:crear users', only: ['store']),
-  //            new Middleware('abilities:editar users', only: ['update']),
-  //            new Middleware('abilities:eliminar users', only: ['destroy']),
-  //        ];
-  //    }
+    /**
+     * //     * @return array
+     * //     */
+    //    public static function middleware(): array
+    //    {
+    //        return [
+    //            new Middleware('abilities:ver users', only: ['index', 'show']),
+    //            new Middleware('abilities:crear users', only: ['store']),
+    //            new Middleware('abilities:editar users', only: ['update']),
+    //            new Middleware('abilities:eliminar users', only: ['destroy']),
+    //        ];
+    //    }
 
     /**
      * Display a listing of the Users.
@@ -39,29 +39,25 @@ class UserApiController extends AppbaseController
     public function index(Request $request): JsonResponse
     {
         $users = QueryBuilder::for(User::class)
-            ->with([])
+            ->allowedIncludes([
+                'roles',
+            ])
             ->allowedFilters([
-    'primer_nombre',
-    'segundo_nombre',
-    'primer_apellido',
-    'segundo_apellido',
-    'usuario',
-    'email',
-    'email_verified_at',
-    'password',
-    'remember_token'
-])
+                'primer_nombre',
+                'segundo_nombre',
+                'primer_apellido',
+                'segundo_apellido',
+                'usuario',
+                'email',
+            ])
             ->allowedSorts([
-    'primer_nombre',
-    'segundo_nombre',
-    'primer_apellido',
-    'segundo_apellido',
-    'usuario',
-    'email',
-    'email_verified_at',
-    'password',
-    'remember_token'
-])
+                'primer_nombre',
+                'segundo_nombre',
+                'primer_apellido',
+                'segundo_apellido',
+                'usuario',
+                'email',
+            ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
@@ -77,7 +73,7 @@ class UserApiController extends AppbaseController
     {
         $input = $request->all();
 
-        if($input['password'] != $input['password_confirmation']){
+        if ($input['password'] != $input['password_confirmation']) {
             return $this->sendError('Las contraseñas no coinciden', 400);
         }
 
@@ -99,11 +95,10 @@ class UserApiController extends AppbaseController
     }
 
 
-
     /**
-    * Update the specified User in storage.
-    * PUT/PATCH /users/{id}
-    */
+     * Update the specified User in storage.
+     * PUT/PATCH /users/{id}
+     */
     public function update(UpdateUserApiRequest $request, $id): JsonResponse
     {
         $user = User::findOrFail($id);
@@ -112,9 +107,9 @@ class UserApiController extends AppbaseController
     }
 
     /**
-    * Remove the specified User from storage.
-    * DELETE /users/{id}
-    */
+     * Remove the specified User from storage.
+     * DELETE /users/{id}
+     */
     public function destroy(User $user): JsonResponse
     {
         $user->delete();
@@ -122,9 +117,9 @@ class UserApiController extends AppbaseController
     }
 
     /**
-    * Get columns of the table
-    * GET /users/columns
-    */
+     * Get columns of the table
+     * GET /users/columns
+     */
     public function getColumnas(): JsonResponse
     {
 
@@ -138,7 +133,7 @@ class UserApiController extends AppbaseController
             'columns' => array_values($columnasSinTimesTamps),
             'nombreDelModelo' => 'User',
             'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
+            'ruta' => 'api/' . $nombreDeTabla,
         ];
 
         return $this->sendResponse($data, 'Columnas de la tabla users recuperadas con éxito.');
