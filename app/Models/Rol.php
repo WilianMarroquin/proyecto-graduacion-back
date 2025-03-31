@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -25,10 +25,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rol whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Rol extends Model
+use Spatie\Permission\Models\Role as SpatieRole;
+
+class Rol extends SpatieRole
 {
 
-    
+
     use HasFactory;
 
     protected $table = 'roles';
@@ -84,6 +86,6 @@ class Rol extends Model
      *
      * @var array
      */
-    
+
 
 }

@@ -126,4 +126,11 @@ class RolApiController extends AppbaseController
         return $this->sendResponse($permisos ?? [], 'Permisos asignados recuperados con éxito.');
     }
 
+    public function obtenerTodos()
+    {
+        $roles = Rol::all();
+
+        return $this->sendResponse($roles->toArray(), 'roles recuperados con éxito.');
+    }
+
 }

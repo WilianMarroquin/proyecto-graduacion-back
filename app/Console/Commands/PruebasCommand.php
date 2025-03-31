@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -28,6 +29,9 @@ class PruebasCommand extends Command
     {
         $user = User::find(1);
 
-        dd($user->roles);
+        $rol = Rol::find(4);
+
+        $user->assignRole($rol);
+
     }
 }

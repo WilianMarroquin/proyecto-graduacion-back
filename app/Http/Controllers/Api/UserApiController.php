@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Models\Rol;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\Api\CreateUserApiRequest;
@@ -91,7 +92,13 @@ class UserApiController extends AppbaseController
      */
     public function show(User $user)
     {
-        return $this->sendResponse($user->toArray(), 'User recuperado con éxito.');
+        $data = [
+            'user' => $user,
+            'roles' => $user->roles,
+            'permisos' => $user->getAllPermissions(),
+        ];
+
+        return $this->sendResponse($data, 'User recuperado con éxito.');
     }
 
 
@@ -116,27 +123,35 @@ class UserApiController extends AppbaseController
         return $this->sendResponse(null, 'User eliminado con éxito.');
     }
 
-    /**
-     * Get columns of the table
-     * GET /users/columns
-     */
-    public function getColumnas(): JsonResponse
+    public function obtenerRolesDeUser(User $user)
     {
+        $roles = $user->roles;
 
-        $columns = Schema::getColumnListing((new User)->getTable());
+        if ($roles->isEmpty()) {
+            return $this->sendResponse(null, 'El usuario no tiene roles asignados.');
+        }
 
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
-
-        $nombreDeTabla = (new User)->getTable();
-
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'User',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/' . $nombreDeTabla,
-        ];
-
-        return $this->sendResponse($data, 'Columnas de la tabla users recuperadas con éxito.');
+        return $this->sendResponse($roles->toArray(), 'Roles recuperados con éxito.');
     }
+
+    public function asignarRolAUser(Request $request)
+    {
+        $validated = $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
+            'rol_id'  => ['required', 'exists:roles,id'],
+        ]);
+
+        $user = User::find($validated['user_id']);
+        $rol = Rol::find($validated['rol_id']);
+
+        if (!$user || !$rol) {
+            return $this->sendError('Usuario o rol no encontrado.', 404);
+        }
+
+        $user->assignRole($rol);
+
+        return $this->sendResponse(null, 'Rol asignado con éxito.');
+    }
+
 
 }
