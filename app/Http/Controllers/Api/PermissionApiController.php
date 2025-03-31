@@ -103,27 +103,10 @@ class PermissionApiController extends AppbaseController
         return $this->sendResponse(null, 'Permission eliminado con éxito.');
     }
 
-    /**
-    * Get columns of the table
-    * GET /permissions/columns
-    */
-    public function getColumnas(): JsonResponse
+    public function obtenerTodos()
     {
-
-        $columns = Schema::getColumnListing((new Permission)->getTable());
-
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
-
-        $nombreDeTabla = (new Permission)->getTable();
-
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'Permission',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
-        ];
-
-        return $this->sendResponse($data, 'Columnas de la tabla permissions recuperadas con éxito.');
+        $permissions = Permission::all();
+        return $this->sendResponse($permissions->toArray(), 'Permisos recuperados con éxito.');
     }
 
 }

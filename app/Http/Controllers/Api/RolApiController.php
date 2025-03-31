@@ -101,27 +101,29 @@ class RolApiController extends AppbaseController
         return $this->sendResponse(null, 'Rol eliminado con éxito.');
     }
 
-    /**
-    * Get columns of the table
-    * GET /roles/columns
-    */
-    public function getColumnas(): JsonResponse
+    public function asignarPermisosARol(Rol $rol, Request $request)
     {
 
-        $columns = Schema::getColumnListing((new Rol)->getTable());
+        $rol->syncPermissions($request->get('permisos', []));
 
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
+        return $this->sendResponse(null, 'Permisos asignados con éxito.');
 
-        $nombreDeTabla = (new Rol)->getTable();
+    }
 
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'Rol',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
-        ];
+    public function quitarPermisosARol(Rol $rol, Request $request)
+    {
 
-        return $this->sendResponse($data, 'Columnas de la tabla roles recuperadas con éxito.');
+        $rol->revokePermissionTo($request->get('permisos', []));
+
+        return $this->sendResponse(null, 'Permisos quitados con éxito.');
+
+    }
+
+    public function obtenerPermisosAsignados(Rol $rol)
+    {
+        $permisos = $rol->permissions;
+
+        return $this->sendResponse($permisos ?? [], 'Permisos asignados recuperados con éxito.');
     }
 
 }
