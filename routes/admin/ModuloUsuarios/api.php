@@ -37,6 +37,8 @@ Route::prefix('modulo-usuarios')->group(function () {
 
         Route::post('asignar/rol/aUser', [App\Http\Controllers\Api\UserApiController::class, 'asignarRolAUser']);
 
+        Route::post('quitar/rol/aUser', [App\Http\Controllers\Api\UserApiController::class, 'quitarRolAUser']);
+
     });
 
 });

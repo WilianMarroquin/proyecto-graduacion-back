@@ -123,6 +123,11 @@ class UserApiController extends AppbaseController
         return $this->sendResponse(null, 'User eliminado con éxito.');
     }
 
+    /**
+     * Obtiene los roles asignados a un usuario.
+     * @param User $user
+     * @return JsonResponse
+     */
     public function obtenerRolesDeUser(User $user)
     {
         $roles = $user->roles;
@@ -134,6 +139,11 @@ class UserApiController extends AppbaseController
         return $this->sendResponse($roles->toArray(), 'Roles recuperados con éxito.');
     }
 
+    /**
+     * Asigna un rol a un usuario.
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function asignarRolAUser(Request $request)
     {
         $validated = $request->validate([
@@ -151,6 +161,30 @@ class UserApiController extends AppbaseController
         $user->assignRole($rol);
 
         return $this->sendResponse(null, 'Rol asignado con éxito.');
+    }
+
+    /**
+     * Quita un rol a un usuario.
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function quitarRolAUser(Request $request)
+    {
+        $validated = $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
+            'rol_id'  => ['required', 'exists:roles,id'],
+        ]);
+
+        $user = User::find($validated['user_id']);
+        $rol = Rol::find($validated['rol_id']);
+
+        if (!$user || !$rol) {
+            return $this->sendError('Usuario o rol no encontrado.', 404);
+        }
+
+        $user->removeRole($rol);
+
+        return $this->sendResponse(null, 'Se ha quitado el rol con éxito.');
     }
 
 
