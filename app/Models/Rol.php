@@ -25,31 +25,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rol whereUpdatedAt($value)
  * @mixin \Eloquent
  */
+
 use Spatie\Permission\Models\Role as SpatieRole;
 
 class Rol extends SpatieRole
 {
-
 
     use HasFactory;
 
     protected $table = 'roles';
 
 
-    protected $fillable =
-        [
-    'name',
-    'guard_name'
-];
-
+    protected $fillable = [
+        'name',
+        'guard_name'
+    ];
 
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'name' => 'string',
         'guard_name' => 'string',
@@ -57,35 +54,28 @@ class Rol extends SpatieRole
         'updated_at' => 'timestamp',
     ];
 
-
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'name' => 'required|string|max:255|unique:roles,name',
-    'guard_name' => 'required|string|max:255|unique:roles,guard_name',
-];
-
+    public static $rules = [
+        'name' => 'required|string|max:255|unique:roles,name',
+    ];
 
     /**
      * Custom messages for validation
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
-
 
     /**
      * Accessor for relationships
      *
      * @var array
      */
-
 
 }

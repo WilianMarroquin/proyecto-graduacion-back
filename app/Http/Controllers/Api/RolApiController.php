@@ -19,18 +19,18 @@ use Spatie\QueryBuilder\QueryBuilder;
 class RolApiController extends AppbaseController
 {
 
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver roles', only: ['index', 'show']),
-  //            new Middleware('abilities:crear roles', only: ['store']),
-  //            new Middleware('abilities:editar roles', only: ['update']),
-  //            new Middleware('abilities:eliminar roles', only: ['destroy']),
-  //        ];
-  //    }
+    /**
+     * //     * @return array
+     * //     */
+    //    public static function middleware(): array
+    //    {
+    //        return [
+    //            new Middleware('abilities:ver roles', only: ['index', 'show']),
+    //            new Middleware('abilities:crear roles', only: ['store']),
+    //            new Middleware('abilities:editar roles', only: ['update']),
+    //            new Middleware('abilities:eliminar roles', only: ['destroy']),
+    //        ];
+    //    }
 
     /**
      * Display a listing of the Roles.
@@ -39,15 +39,17 @@ class RolApiController extends AppbaseController
     public function index(Request $request): JsonResponse
     {
         $roles = QueryBuilder::for(Rol::class)
-            ->with([])
+            ->allowedIncludes([
+                'permissions',
+            ])
             ->allowedFilters([
-    'name',
-    'guard_name'
-])
+                'name',
+                'guard_name'
+            ])
             ->allowedSorts([
-    'name',
-    'guard_name'
-])
+                'id',
+                'name',
+            ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
@@ -63,9 +65,17 @@ class RolApiController extends AppbaseController
     {
         $input = $request->all();
 
-        $roles = Rol::create($input);
+        $input['guard_name'] = 'web';
 
-        return $this->sendResponse($roles->toArray(), 'Rol creado con éxito.');
+        $rol = Rol::create($input);
+
+        if($input['permisos']) {
+
+            $rol->syncPermissions($input['permisos']);
+
+        }
+
+        return $this->sendResponse($rol->toArray(), 'Rol creado con éxito.');
     }
 
 
@@ -79,22 +89,28 @@ class RolApiController extends AppbaseController
     }
 
 
-
     /**
-    * Update the specified Rol in storage.
-    * PUT/PATCH /roles/{id}
-    */
+     * Update the specified Rol in storage.
+     * PUT/PATCH /roles/{id}
+     */
     public function update(UpdateRolApiRequest $request, $id): JsonResponse
     {
         $rol = Rol::findOrFail($id);
         $rol->update($request->validated());
+
+        if($request->get('permisos')) {
+
+            $rol->syncPermissions($request->get('permisos'));
+
+        }
+
         return $this->sendResponse($rol, 'Rol actualizado con éxito.');
     }
 
     /**
-    * Remove the specified Rol from storage.
-    * DELETE /roles/{id}
-    */
+     * Remove the specified Rol from storage.
+     * DELETE /roles/{id}
+     */
     public function destroy(Rol $rol): JsonResponse
     {
         $rol->delete();
