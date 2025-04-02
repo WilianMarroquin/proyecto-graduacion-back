@@ -35,7 +35,7 @@ class Rol extends SpatieRole
 
     protected $table = 'roles';
 
-
+    const GUARD_NAME_ACTUAL = 'web';
     protected $fillable = [
         'name',
         'guard_name'
@@ -62,6 +62,12 @@ class Rol extends SpatieRole
     public static $rules = [
         'name' => 'required|string|max:255|unique:roles,name',
     ];
+
+    public static $rulesUpdated = [
+        'name' => 'required|string|max:255',
+    ];
+
+
 
     /**
      * Custom messages for validation

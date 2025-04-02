@@ -15,7 +15,7 @@ class UpdatePermissionApiRequest extends FormRequest
     public function rules()
     {
 
-            return Permission::$rules;
+        return Permission::$rulesUpdated;
 
     }
 }

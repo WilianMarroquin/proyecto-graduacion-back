@@ -65,6 +65,8 @@ class PermissionApiController extends AppbaseController
     {
         $input = $request->all();
 
+        $input['guard_name'] = Permission::GUARD_NAME_ACTUAL;
+
         $permissions = Permission::create($input);
 
         return $this->sendResponse($permissions->toArray(), 'Permission creado con éxito.');

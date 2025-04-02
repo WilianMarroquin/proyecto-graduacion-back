@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Permission;
 
 
-
 class CreatePermissionApiRequest extends FormRequest
 {
     public function authorize()
@@ -17,7 +16,7 @@ class CreatePermissionApiRequest extends FormRequest
     public function rules()
     {
 
-           return Permission::$rules;
+        return Permission::$rules;
 
     }
 }

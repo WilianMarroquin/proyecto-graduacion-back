@@ -27,11 +27,15 @@ class PruebasCommand extends Command
      */
     public function handle()
     {
-        $user = User::find(1);
 
-        $rol = Rol::find(4);
 
-        $user->assignRole($rol);
+        $rol = Rol::find(5);
+
+        $rol->update([
+            'name' => 'Super Administrador',
+        ]);
+
+        $this->info('Rol actualizado correctamente');
 
     }
 }

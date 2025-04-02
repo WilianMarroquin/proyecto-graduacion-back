@@ -15,7 +15,7 @@ class UpdateRolApiRequest extends FormRequest
     public function rules()
     {
 
-            return Rol::$rules;
+            return Rol::$rulesUpdated;
 
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Spatie\QueryBuilder\QueryBuilder;
+use Symfony\Component\VarDumper\Caster\FFICaster;
 
 /**
  * Class RolApiController
@@ -65,7 +66,7 @@ class RolApiController extends AppbaseController
     {
         $input = $request->all();
 
-        $input['guard_name'] = 'web';
+        $input['guard_name'] = Rol::GUARD_NAME_ACTUAL;
 
         $rol = Rol::create($input);
 

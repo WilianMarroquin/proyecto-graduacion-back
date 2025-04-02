@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -30,7 +30,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Permission extends Model
 {
 
-    
+    const GUARD_NAME_ACTUAL = 'web';
+
     use HasFactory;
 
     protected $table = 'permissions';
@@ -38,10 +39,10 @@ class Permission extends Model
 
     protected $fillable =
         [
-    'name',
-    'subject',
-    'guard_name'
-];
+            'name',
+            'subject',
+            'guard_name'
+        ];
 
 
     /**
@@ -49,8 +50,7 @@ class Permission extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'name' => 'string',
         'subject' => 'string',
@@ -60,18 +60,25 @@ class Permission extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'name' => 'required|string|max:255|unique:permissions,name',
-    'subject' => 'required|string|max:255',
-    'guard_name' => 'required|string|max:255|unique:permissions,guard_name',
-];
+    public static $rules = [
+        'name' => 'required|string|max:255|unique:permissions,name',
+        'subject' => 'required|string|max:255',
+    ];
+
+    /**
+     * Validation rules updated
+     *
+     * @var array
+     */
+    public static $rulesUpdated = [
+        'name' => 'required|string|max:255',
+        'subject' => 'required|string|max:255',
+    ];
 
 
     /**
@@ -79,7 +86,7 @@ class Permission extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -89,6 +96,6 @@ class Permission extends Model
      *
      * @var array
      */
-    
+
 
 }
