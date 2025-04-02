@@ -52,6 +52,7 @@ class UserApiController extends AppbaseController
                 'email',
             ])
             ->allowedSorts([
+                'id',
                 'primer_nombre',
                 'segundo_nombre',
                 'primer_apellido',

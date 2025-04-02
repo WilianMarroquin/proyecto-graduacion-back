@@ -19,18 +19,18 @@ use Spatie\QueryBuilder\QueryBuilder;
 class PermissionApiController extends AppbaseController
 {
 
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver permissions', only: ['index', 'show']),
-  //            new Middleware('abilities:crear permissions', only: ['store']),
-  //            new Middleware('abilities:editar permissions', only: ['update']),
-  //            new Middleware('abilities:eliminar permissions', only: ['destroy']),
-  //        ];
-  //    }
+    /**
+     * //     * @return array
+     * //     */
+    //    public static function middleware(): array
+    //    {
+    //        return [
+    //            new Middleware('abilities:ver permissions', only: ['index', 'show']),
+    //            new Middleware('abilities:crear permissions', only: ['store']),
+    //            new Middleware('abilities:editar permissions', only: ['update']),
+    //            new Middleware('abilities:eliminar permissions', only: ['destroy']),
+    //        ];
+    //    }
 
     /**
      * Display a listing of the Permissions.
@@ -41,15 +41,14 @@ class PermissionApiController extends AppbaseController
         $permissions = QueryBuilder::for(Permission::class)
             ->with([])
             ->allowedFilters([
-    'name',
-    'subject',
-    'guard_name'
-])
+                'name',
+                'subject',
+            ])
             ->allowedSorts([
-    'name',
-    'subject',
-    'guard_name'
-])
+                'id',
+                'name',
+                'subject',
+            ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
@@ -83,11 +82,10 @@ class PermissionApiController extends AppbaseController
     }
 
 
-
     /**
-    * Update the specified Permission in storage.
-    * PUT/PATCH /permissions/{id}
-    */
+     * Update the specified Permission in storage.
+     * PUT/PATCH /permissions/{id}
+     */
     public function update(UpdatePermissionApiRequest $request, $id): JsonResponse
     {
         $permission = Permission::findOrFail($id);
@@ -96,9 +94,9 @@ class PermissionApiController extends AppbaseController
     }
 
     /**
-    * Remove the specified Permission from storage.
-    * DELETE /permissions/{id}
-    */
+     * Remove the specified Permission from storage.
+     * DELETE /permissions/{id}
+     */
     public function destroy(Permission $permission): JsonResponse
     {
         $permission->delete();
