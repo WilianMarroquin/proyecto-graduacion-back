@@ -23,6 +23,7 @@ class RolesTableSeeder extends Seeder
         Role::create(['name' => 'Super Admin', 'guard_name' => 'web']);
         Role::create(['name' => 'Administrador', 'guard_name' => 'web']);
         Role::create(['name' => 'Empleado', 'guard_name' => 'web']);
+        Role::create(['name' => 'Programador', 'guard_name' => 'web']);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 

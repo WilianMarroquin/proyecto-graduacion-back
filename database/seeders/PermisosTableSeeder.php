@@ -21,7 +21,6 @@ class PermisosTableSeeder extends Seeder
 
         Permission::truncate();
 
-        // Permisos de las opciones del menu.
         Permission::create([
             'name' => 'Listar Menu Opcion',
             'subject' => 'Menu Opcion',
