@@ -2,13 +2,8 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\bases\MenuOpcionesTableSeeder;
-use Database\Seeders\bases\PermisosTableSeeder;
-use Database\Seeders\bases\RolesTableSeeder;
-use Database\Seeders\bases\UserSeeder;
+use Database\Seeders\bases\IndexTableSeeder;
 use Illuminate\Database\Seeder;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,10 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call(UserSeeder::class);
-        $this->call(PermisosTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
-        $this->call(MenuOpcionesTableSeeder::class);
+        $this->call(IndexTableSeeder::class);
 
     }
 }
