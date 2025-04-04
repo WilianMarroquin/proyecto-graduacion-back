@@ -46,17 +46,16 @@ class MenuOpcion extends Model
     protected $table = 'menu_opciones';
 
 
-    protected $fillable =
-        [
-    'titulo',
-    'titulo_seccion',
-    'icono',
-    'ruta',
-    'orden',
-    'action',
-    'subject',
-    'parent_id'
-];
+    protected $fillable = [
+        'titulo',
+        'titulo_seccion',
+        'icono',
+        'ruta',
+        'orden',
+        'action',
+        'subject',
+        'parent_id'
+    ];
 
 
     /**
@@ -64,8 +63,7 @@ class MenuOpcion extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'titulo' => 'string',
         'titulo_seccion' => 'string',
@@ -80,23 +78,21 @@ class MenuOpcion extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'titulo' => 'string|max:255|nullable',
-    'titulo_seccion' => 'string|max:255|nullable',
-    'icono' => 'string|max:255|nullable',
-    'ruta' => 'string|max:255|nullable',
-    'orden' => 'nullable|integer|nullable',
-    'action' => 'required|string|max:255',
-    'subject' => 'required|string|max:255',
-    'parent_id' => 'nullable|integer',
-];
+    public static $rules = [
+        'titulo' => 'string|max:255|nullable',
+        'titulo_seccion' => 'string|max:255|nullable',
+        'icono' => 'string|max:255|nullable',
+        'ruta' => 'string|max:255|nullable',
+        'orden' => 'nullable|integer|nullable',
+        'action' => 'required|string|max:255',
+        'subject' => 'required|string|max:255',
+        'parent_id' => 'nullable|integer',
+    ];
 
 
     /**
@@ -104,7 +100,7 @@ class MenuOpcion extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -116,9 +112,9 @@ class MenuOpcion extends Model
      */
     public function children()
     {
-     return $this->hasMany(MenuOpcion::class,'parent_id','id')
-         ->with('children')
-         ->orderBy('orden','asc');
+        return $this->hasMany(MenuOpcion::class, 'parent_id', 'id')
+            ->with('children')
+            ->orderBy('orden', 'asc');
     }
 
     public function scopePadres()

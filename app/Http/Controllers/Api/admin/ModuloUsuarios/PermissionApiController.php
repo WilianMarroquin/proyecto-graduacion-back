@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin\ModuloUsuarios;
 
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use App\Http\Requests\Api\CreatePermissionApiRequest;
-use App\Http\Requests\Api\UpdatePermissionApiRequest;
+use App\Http\Requests\Api\admin\ModuloUsuarios\CreatePermissionApiRequest;
+use App\Http\Requests\Api\admin\ModuloUsuarios\UpdatePermissionApiRequest;
 use App\Models\Permission;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -22,15 +20,15 @@ class PermissionApiController extends AppbaseController
     /**
      * //     * @return array
      * //     */
-    //    public static function middleware(): array
-    //    {
-    //        return [
-    //            new Middleware('abilities:ver permissions', only: ['index', 'show']),
-    //            new Middleware('abilities:crear permissions', only: ['store']),
-    //            new Middleware('abilities:editar permissions', only: ['update']),
-    //            new Middleware('abilities:eliminar permissions', only: ['destroy']),
-    //        ];
-    //    }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('abilities:ver permisos', only: ['index', 'show']),
+            new Middleware('abilities:crear permisos', only: ['store']),
+            new Middleware('abilities:editar permisos', only: ['update']),
+            new Middleware('abilities:eliminar permisos', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the Permissions.

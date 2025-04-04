@@ -90,12 +90,27 @@ class Permission extends Model
 
     ];
 
+    /**
+     * Custom messages for validation updated
+     *
+     * @var array
+     */
+    protected $appends = [
+        'name_y_subject'
+    ];
 
     /**
      * Accessor for relationships
      *
      * @var array
      */
+
+    public function getNameYSubjectAttribute()
+    {
+
+        return $this->name . ' - ' . $this->subject;
+
+    }
 
 
 }

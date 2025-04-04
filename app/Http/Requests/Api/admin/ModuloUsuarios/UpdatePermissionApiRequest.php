@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\admin\ModuloUsuarios;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Permission;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePermissionApiRequest extends FormRequest
 {

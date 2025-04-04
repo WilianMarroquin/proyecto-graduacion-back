@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\admin\ModuloUsuarios;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Rol;
 
-
-
-class CreateRolApiRequest extends FormRequest
+class UpdateUserApiRequest extends FormRequest
 {
     public function authorize()
     {
@@ -17,7 +15,7 @@ class CreateRolApiRequest extends FormRequest
     public function rules()
     {
 
-           return Rol::$rules;
+            return User::$rules;
 
     }
 }

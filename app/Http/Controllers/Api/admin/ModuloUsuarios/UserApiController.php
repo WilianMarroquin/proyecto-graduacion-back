@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin\ModuloUsuarios;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\admin\ModuloUsuarios\CreateUserApiRequest;
+use App\Http\Requests\Api\admin\ModuloUsuarios\UpdateUserApiRequest;
 use App\Models\Rol;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use App\Http\Requests\Api\CreateUserApiRequest;
-use App\Http\Requests\Api\UpdateUserApiRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -23,15 +21,15 @@ class UserApiController extends AppbaseController
     /**
      * //     * @return array
      * //     */
-    //    public static function middleware(): array
-    //    {
-    //        return [
-    //            new Middleware('abilities:ver users', only: ['index', 'show']),
-    //            new Middleware('abilities:crear users', only: ['store']),
-    //            new Middleware('abilities:editar users', only: ['update']),
-    //            new Middleware('abilities:eliminar users', only: ['destroy']),
-    //        ];
-    //    }
+        public static function middleware(): array
+        {
+            return [
+                new Middleware('abilities:Ver usuarios', only: ['index', 'show']),
+                new Middleware('abilities:Crear usuarios', only: ['store']),
+                new Middleware('abilities:Editar usuarios', only: ['update']),
+                new Middleware('abilities:Eliminar usuarios', only: ['destroy']),
+            ];
+        }
 
     /**
      * Display a listing of the Users.

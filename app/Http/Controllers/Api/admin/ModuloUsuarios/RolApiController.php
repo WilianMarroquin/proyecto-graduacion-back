@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin\ModuloUsuarios;
 
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use App\Http\Requests\Api\CreateRolApiRequest;
-use App\Http\Requests\Api\UpdateRolApiRequest;
+use App\Http\Requests\Api\admin\ModuloUsuarios\CreateRolApiRequest;
+use App\Http\Requests\Api\admin\ModuloUsuarios\UpdateRolApiRequest;
 use App\Models\Rol;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
-use Symfony\Component\VarDumper\Caster\FFICaster;
 
 /**
  * Class RolApiController
@@ -23,15 +20,15 @@ class RolApiController extends AppbaseController
     /**
      * //     * @return array
      * //     */
-    //    public static function middleware(): array
-    //    {
-    //        return [
-    //            new Middleware('abilities:ver roles', only: ['index', 'show']),
-    //            new Middleware('abilities:crear roles', only: ['store']),
-    //            new Middleware('abilities:editar roles', only: ['update']),
-    //            new Middleware('abilities:eliminar roles', only: ['destroy']),
-    //        ];
-    //    }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('abilities:ver roles', only: ['index', 'show']),
+            new Middleware('abilities:crear roles', only: ['store']),
+            new Middleware('abilities:editar roles', only: ['update']),
+            new Middleware('abilities:eliminar roles', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the Roles.

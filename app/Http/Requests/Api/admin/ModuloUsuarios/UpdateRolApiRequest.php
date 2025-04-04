@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\admin\ModuloUsuarios;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Rol;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRolApiRequest extends FormRequest
 {
