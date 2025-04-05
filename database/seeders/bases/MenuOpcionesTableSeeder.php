@@ -22,8 +22,8 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-home-8-line",
             "ruta" => "index",
             "orden" => 0,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Listar inicio',
+            "subject" => 'Inicio',
             "parent_id" => null
         ]);
 
@@ -33,8 +33,8 @@ class MenuOpcionesTableSeeder extends Seeder
             "ruta" => null,
             'titulo_seccion' => 'Administración',
             "orden" => 1,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Ver modulo configuracion',
+            "subject" => 'Configuracion',
             "parent_id" => null
         ]);
 
@@ -43,18 +43,18 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-tools-fill",
             "ruta" => "second-page",
             "orden" => 8,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Ver modulo desarrollo',
+            "subject" => 'Desarrollo',
             "parent_id" => null
         ]);
 
         MenuOpcion::create([
-            "titulo" => "Configuraciones",
+            "titulo" => "Componentes",
             "icono" => "ri-settings-5-fill",
             "ruta" => "second-page",
             "orden" => 9,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Ver ejemplos',
+            "subject" => 'Desarrollo',
             "parent_id" => 3
         ]);
 
@@ -63,8 +63,8 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-settings-5-fill",
             "ruta" => null,
             "orden" => 6,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Ver modulo configuracion',
+            "subject" => 'Configuracion',
             "parent_id" => null
         ]);
 
@@ -73,7 +73,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-apps-2-add-line",
             "ruta" => "admin-menu",
             "orden" => 7,
-            "action" => 'Listar Menu Opcion',
+            "action" => 'Listar Menu Opciones',
             "subject" => 'Menu Opcion',
             "parent_id" => 5
         ]);
@@ -83,38 +83,38 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-group-line",
             "ruta" => "second-page",
             "orden" => 2,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Ver modulo usuarios',
+            "subject" => 'User',
             "parent_id" => null
         ]);
 
         MenuOpcion::create([
             "titulo" => "Usuarios",
             "icono" => "ri-list-ordered-2",
-            "ruta" => "second-page",
+            "ruta" => "admin-modulo-usuarios-usuarios",
             "orden" => 3,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Listar usuarios',
+            "subject" => 'User',
             "parent_id" => 7
         ]);
 
         MenuOpcion::create([
             "titulo" => "Roles",
             "icono" => "ri-folder-shield-2-line",
-            "ruta" => "second-page",
+            "ruta" => "admin-modulo-usuarios-roles",
             "orden" => 4,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Listar roles',
+            "subject" => 'Rol',
             "parent_id" => 7
         ]);
 
         MenuOpcion::create([
             "titulo" => "Permisos",
             "icono" => "ri-file-shield-2-fill",
-            "ruta" => "permisos",
+            "ruta" => "admin-modulo-usuarios-permisos",
             "orden" => 5,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Listar permisos',
+            "subject" => 'Permission',
             "parent_id" => 7
         ]);
 
@@ -123,8 +123,8 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-multi-image-fill",
             "ruta" => "second-page",
             "orden" => 10,
-            "action" => 'Listar Menu Opcion',
-            "subject" => 'Menu Opcion',
+            "action" => 'Listar configuraciones',
+            "subject" => 'Configuracion',
             "parent_id" => 5
         ]);
 
