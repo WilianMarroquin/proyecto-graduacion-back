@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('menu_opciones', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->unsigned();
             $table->string('titulo')->nullable();
             $table->string('titulo_seccion')->nullable();
             $table->string('icono')->nullable();
