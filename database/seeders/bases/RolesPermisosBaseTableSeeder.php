@@ -55,6 +55,7 @@ class RolesPermisosBaseTableSeeder extends Seeder
         Permission::create(['name' => 'Ver menu preferencias', 'subject' => 'Preferencias', 'guard_name' => 'web']);
         Permission::create(['name' => 'Ver modulo desarrollo', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
         Permission::create(['name' => 'Ver ejemplos', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Configuraciones Developer', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
 
         // Permisos para los Modulos.
         Permission::create(['name' => 'Ver modulo usuarios', 'subject' => 'User', 'guard_name' => 'web']);
