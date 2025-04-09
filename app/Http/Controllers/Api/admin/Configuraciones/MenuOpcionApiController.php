@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin\Configuraciones;
 
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use App\Http\Requests\Api\CreateMenuOpcionApiRequest;
-use App\Http\Requests\Api\UpdateMenuOpcionApiRequest;
+use App\Http\Requests\Api\admin\Configuraciones\CreateMenuOpcionApiRequest;
+use App\Http\Requests\Api\admin\Configuraciones\UpdateMenuOpcionApiRequest;
 use App\Models\MenuOpcion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Schema;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -98,9 +97,9 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
      * Display the specified MenuOpcion.
      * GET|HEAD /menu-opcions/{id}
      */
-    public function show(MenuOpcion $menu_opcione)
+    public function show(MenuOpcion $menuOpcion)
     {
-        return $this->sendResponse($menu_opcione->toArray(), 'MenuOpcion recuperado con éxito.');
+        return $this->sendResponse($menuOpcion->toArray(), 'MenuOpcion recuperado con éxito.');
     }
 
 
@@ -125,9 +124,9 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
      * Remove the specified MenuOpcion from storage.
      * DELETE /menu-opcions/{id}
      */
-    public function destroy(MenuOpcion $menu_opcione): JsonResponse
+    public function destroy(MenuOpcion $menuOpcion): JsonResponse
     {
-        $menu_opcione->delete();
+        $menuOpcion->delete();
         return $this->sendResponse(null, 'MenuOpcion eliminado con éxito.');
     }
 

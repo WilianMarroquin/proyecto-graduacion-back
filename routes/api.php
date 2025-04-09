@@ -16,11 +16,9 @@ Route::middleware('auth:sanctum')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::post('menu-opcions/actualizar/orden', [App\Http\Controllers\Api\MenuOpcionApiController::class, 'actualizarOrden'])->name('menu-opcions.getColumnas');
 
-Route::apiResource('menu-opciones', App\Http\Controllers\Api\MenuOpcionApiController::class);
 
-Route::get('get/menu-opciones/', [App\Http\Controllers\Api\MenuOpcionApiController::class, 'getOpcionesMenu']);
+
 
 
 

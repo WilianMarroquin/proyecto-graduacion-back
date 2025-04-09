@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\admin\Configuraciones;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\MenuOpcion;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMenuOpcionApiRequest extends FormRequest
 {
