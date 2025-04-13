@@ -8,7 +8,6 @@ use App\Http\Requests\Api\admin\Configuraciones\UpdateConfiguracionApiRequest;
 use App\Models\Configuracion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -17,18 +16,18 @@ use Spatie\QueryBuilder\QueryBuilder;
 class ConfiguracionApiController extends AppbaseController
 {
 
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver configuraciones', only: ['index', 'show']),
-  //            new Middleware('abilities:crear configuraciones', only: ['store']),
-  //            new Middleware('abilities:editar configuraciones', only: ['update']),
-  //            new Middleware('abilities:eliminar configuraciones', only: ['destroy']),
-  //        ];
-  //    }
+    /**
+     * //     * @return array
+     * //     */
+    //    public static function middleware(): array
+    //    {
+    //        return [
+    //            new Middleware('abilities:ver configuraciones', only: ['index', 'show']),
+    //            new Middleware('abilities:crear configuraciones', only: ['store']),
+    //            new Middleware('abilities:editar configuraciones', only: ['update']),
+    //            new Middleware('abilities:eliminar configuraciones', only: ['destroy']),
+    //        ];
+    //    }
 
     /**
      * Display a listing of the Configuraciones.
@@ -39,15 +38,15 @@ class ConfiguracionApiController extends AppbaseController
         $configuraciones = QueryBuilder::for(Configuracion::class)
             ->with([])
             ->allowedFilters([
-    'key',
-    'value',
-    'descripcion'
-])
+                'key',
+                'value',
+                'descripcion'
+            ])
             ->allowedSorts([
-    'key',
-    'value',
-    'descripcion'
-])
+                'key',
+                'value',
+                'descripcion'
+            ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
@@ -79,11 +78,10 @@ class ConfiguracionApiController extends AppbaseController
     }
 
 
-
     /**
-    * Update the specified Configuracion in storage.
-    * PUT/PATCH /configuraciones/{id}
-    */
+     * Update the specified Configuracion in storage.
+     * PUT/PATCH /configuraciones/{id}
+     */
     public function update(UpdateConfiguracionApiRequest $request, $id): JsonResponse
     {
         $configuracion = Configuracion::findOrFail($id);
@@ -92,9 +90,9 @@ class ConfiguracionApiController extends AppbaseController
     }
 
     /**
-    * Remove the specified Configuracion from storage.
-    * DELETE /configuraciones/{id}
-    */
+     * Remove the specified Configuracion from storage.
+     * DELETE /configuraciones/{id}
+     */
     public function destroy(Configuracion $configuracion): JsonResponse
     {
         $configuracion->delete();
@@ -102,26 +100,58 @@ class ConfiguracionApiController extends AppbaseController
     }
 
     /**
-    * Get columns of the table
-    * GET /configuraciones/columns
-    */
-    public function getColumnas(): JsonResponse
+     * @param  Request  $request
+     * @return JsonResponse
+     */
+    public function guardarGenerales(Request $request)
     {
 
-        $columns = Schema::getColumnListing((new Configuracion)->getTable());
+        $configuraciones = $request->all();
 
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
+        foreach ($configuraciones as $configuracionRequest) {
+            $configuracion = Configuracion::where('key', $configuracionRequest['key'])->first();
+            if ($configuracion) {
+                $configuracion->update([
+                    'value' => $configuracionRequest['value'],
+                    'descripcion' => $configuracionRequest['descripcion'],
+                ]);
+            } else {
+                Configuracion::create([
+                    'key' => $configuracionRequest['key'],
+                    'value' => $configuracionRequest['value'],
+                    'descripcion' => $configuracionRequest['descripcion'],
+                ]);
+            }
+        }
 
-        $nombreDeTabla = (new Configuracion)->getTable();
+        return $this->sendResponse($configuraciones, 'Configuraciones generales guardadas con éxito.');
 
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'Configuracion',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getConfiguracionesGenerales()
+    {
+        $configuraciones = Configuracion::whereIn('id', [
+            Configuracion::NOMBRE_APLICACION,
+            Configuracion::EMAIL_APLICACION,
+            Configuracion::TELEFONO_APLICACION,
+            Configuracion::FONDO_LOGIN_TEMA_CLARO,
+            Configuracion::FONDO_LOGIN_TEMA_OSCURO,
+        ])->get();
+
+        $configuracionesGenerales = [
+            'nombre_aplicacion' => $configuraciones->where('id', Configuracion::NOMBRE_APLICACION)->first()->value,
+            'email_aplicacion' => $configuraciones->where('id', Configuracion::EMAIL_APLICACION)->first()->value,
+            'telefono_aplicacion' => $configuraciones->where('id', Configuracion::TELEFONO_APLICACION)->first()->value,
+            'fondo_login_tema_claro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_CLARO)->first(),
+            'fondo_login_tema_oscuro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_OSCURO)->first(),
         ];
 
-        return $this->sendResponse($data, 'Columnas de la tabla configuraciones recuperadas con éxito.');
+
+        return $this->sendResponse($configuracionesGenerales, 'Configuraciones generales recuperadas con éxito.');
+
     }
 
 }

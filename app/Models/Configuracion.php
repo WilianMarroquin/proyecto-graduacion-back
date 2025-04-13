@@ -3,9 +3,9 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  *
@@ -75,6 +75,11 @@ class Configuracion extends Model
         'descripcion' => 'required|string',
     ];
 
+    const NOMBRE_APLICACION = 1;
+    const EMAIL_APLICACION = 2;
+    const TELEFONO_APLICACION = 3;
+    const FONDO_LOGIN_TEMA_CLARO = 4;
+    const FONDO_LOGIN_TEMA_OSCURO = 5;
 
     /**
      * Custom messages for validation
