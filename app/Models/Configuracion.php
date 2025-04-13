@@ -77,12 +77,12 @@ class Configuracion extends Model implements HasMedia
         'descripcion' => 'required|string',
     ];
 
-    const NOMBRE_APLICACION = 'Nombre Aplicacion';
-    const EMAIL_APLICACION = 'Email Aplicacion';
-    const TELEFONO_APLICACION = 'Telefono Aplicacion';
-    const ESLOGAN = 'Eslogan Aplicacion';
-    const FONDO_LOGIN_TEMA_CLARO = 'Fondo Login Tema Claro';
-    const FONDO_LOGIN_TEMA_OSCURO = 'Fondo Login Tema Oscuro';
+    const NOMBRE_APLICACION = 1;
+    const EMAIL_APLICACION = 2;
+    const TELEFONO_APLICACION = 3;
+    const ESLOGAN = 4;
+    const FONDO_LOGIN_TEMA_CLARO = 5;
+    const FONDO_LOGIN_TEMA_OSCURO = 6;
 
     /**
      * Custom messages for validation

@@ -27,9 +27,8 @@ class PruebasCommand extends Command
     public function handle()
     {
 
-
-        $configuracion = Configuracion::find(1);
-
+        Configuracion::find(Configuracion::NOMBRE_APLICACION)
+            ->update(['value' => 'Pruebas']);
 
 
     }

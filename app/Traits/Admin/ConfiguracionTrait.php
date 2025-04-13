@@ -8,7 +8,7 @@ trait ConfiguracionTrait
 {
     public function getConfiguracionesGenerales()
     {
-        $configuraciones = $this->whereIn('key', [
+        $configuraciones = $this->whereIn('id', [
             Configuracion::NOMBRE_APLICACION,
             Configuracion::EMAIL_APLICACION,
             Configuracion::TELEFONO_APLICACION,
@@ -20,7 +20,9 @@ trait ConfiguracionTrait
         $data = [];
 
         foreach ($configuraciones as $configuracion) {
-            if($configuracion->key == Configuracion::FONDO_LOGIN_TEMA_CLARO || $configuracion->key == Configuracion::FONDO_LOGIN_TEMA_OSCURO) {
+            if($configuracion->key == Configuracion::FONDO_LOGIN_TEMA_CLARO ||
+                $configuracion->key == Configuracion::FONDO_LOGIN_TEMA_OSCURO)
+            {
                 $data[$configuracion->key] = $configuracion->getFirstMediaUrl($configuracion->key);
             }
             $data[$configuracion->key] = $configuracion->value;

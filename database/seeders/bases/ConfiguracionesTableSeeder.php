@@ -20,37 +20,37 @@ class ConfiguracionesTableSeeder extends Seeder
         Configuracion::truncate();
 
         Configuracion::firstOrCreate([
-            'key' => 'Nombre Aplicacion',
+            'key' => 'nombre_aplicacion',
             'value' => 'Mi App',
             'descripcion' => 'Nombre de la empresa'
         ]);
 
         Configuracion::firstOrCreate([
-            'key' => 'Email Aplicacion',
+            'key' => 'email_aplicacion',
             'value' => 'example@gmail.com',
             'descripcion' => 'Email de la empresa'
         ]);
 
         Configuracion::firstOrCreate([
-            'key' => 'Telefono Aplicacion',
+            'key' => 'telefono_aplicacion',
             'value' => '12345678',
             'descripcion' => 'Telefono de la empresa'
         ]);
 
         Configuracion::firstOrCreate([
-            'key' => 'Eslogan Aplicacion',
+            'key' => 'eslogan_aplicacion',
             'value' => 'Mi App es genial',
             'descripcion' => 'Eslogan de la empresa'
         ]);
 
         Configuracion::firstOrCreate([
-            'key' => 'Fondo Login Tema Claro',
+            'key' => 'fondo_login_tema_claro',
             'value' => '12345678',
             'descripcion' => 'Imagen de fondo del login tema claro'
         ]);
 
         Configuracion::firstOrCreate([
-            'key' => 'Fondo Login Tema Oscuro',
+            'key' => 'fondo_login_tema_oscuro',
             'value' => '12345678',
             'descripcion' => 'Imagen de fondo del login tema oscuro'
         ]);

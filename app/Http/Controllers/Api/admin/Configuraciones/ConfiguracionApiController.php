@@ -106,28 +106,28 @@ class ConfiguracionApiController extends AppbaseController
     public function guardarGenerales(Request $request)
     {
 
-        $nombreApp = Configuracion::find(Configuracion::NOMBRE_APLICACION)
-            ->update(['value' => $request->input('nombreApp')]);
+        Configuracion::find(Configuracion::NOMBRE_APLICACION)
+            ->update(['value' => $request->input('nombre_aplicacion')]);
 
-        $emailApp = Configuracion::find(Configuracion::EMAIL_APLICACION)
-            ->update(['value' => $request->input('emailApp')]);
+        Configuracion::find(Configuracion::EMAIL_APLICACION)
+            ->update(['value' => $request->input('email_aplicacion')]);
 
-        $telefonoApp = Configuracion::find(Configuracion::TELEFONO_APLICACION)
-            ->update(['value' => $request->input('telefonoApp')]);
+        Configuracion::find(Configuracion::TELEFONO_APLICACION)
+            ->update(['value' => $request->input('telefono_aplicacion')]);
 
-        $esloganApp = Configuracion::find(Configuracion::ESLOGAN)
-            ->update(['value' => $request->input('esloganApp')]);
+        Configuracion::find(Configuracion::ESLOGAN)
+            ->update(['value' => $request->input('eslogan_aplicacion')]);
 
-        if($request->hasFile('fondoLoginTemaOscuro')) {
-            $fondoLoginTemaOscuro = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_OSCURO)
-                ->addMedia($request->file('fondoLoginTemaOscuro'))
+        if($request->hasFile('fondoLoginOscuro')) {
+            Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_OSCURO)
+                ->addMedia($request->file('fondoLoginOscuro'))
                 ->preservingOriginal()
                 ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_OSCURO);
         }
 
-        if($request->hasFile('fondoLoginTemaClaro')) {
-            $fondoLoginTemaClaro = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_CLARO)
-                ->addMedia($request->file('fondoLoginTemaClaro'))
+        if($request->hasFile('fondoLoginClaro')) {
+            Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_CLARO)
+                ->addMedia($request->file('fondoLoginClaro'))
                 ->preservingOriginal()
                 ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_CLARO);
         }
