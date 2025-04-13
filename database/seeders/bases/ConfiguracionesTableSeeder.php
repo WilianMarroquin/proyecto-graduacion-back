@@ -38,6 +38,12 @@ class ConfiguracionesTableSeeder extends Seeder
         ]);
 
         Configuracion::firstOrCreate([
+            'key' => 'Eslogan Aplicacion',
+            'value' => 'Mi App es genial',
+            'descripcion' => 'Eslogan de la empresa'
+        ]);
+
+        Configuracion::firstOrCreate([
             'key' => 'Fondo Login Tema Claro',
             'value' => '12345678',
             'descripcion' => 'Imagen de fondo del login tema claro'

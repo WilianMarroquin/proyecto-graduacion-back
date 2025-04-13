@@ -2,8 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Rol;
-use App\Models\User;
+use App\Models\Configuracion;
 use Illuminate\Console\Command;
 
 class PruebasCommand extends Command
@@ -29,13 +28,9 @@ class PruebasCommand extends Command
     {
 
 
-        $rol = Rol::find(5);
+        $configuracion = Configuracion::find(1);
 
-        $rol->update([
-            'name' => 'Super Administrador',
-        ]);
 
-        $this->info('Rol actualizado correctamente');
 
     }
 }

@@ -106,25 +106,35 @@ class ConfiguracionApiController extends AppbaseController
     public function guardarGenerales(Request $request)
     {
 
-        $configuraciones = $request->all();
+        $nombreApp = Configuracion::find(Configuracion::NOMBRE_APLICACION)
+            ->update(['value' => $request->input('nombreApp')]);
 
-        foreach ($configuraciones as $configuracionRequest) {
-            $configuracion = Configuracion::where('key', $configuracionRequest['key'])->first();
-            if ($configuracion) {
-                $configuracion->update([
-                    'value' => $configuracionRequest['value'],
-                    'descripcion' => $configuracionRequest['descripcion'],
-                ]);
-            } else {
-                Configuracion::create([
-                    'key' => $configuracionRequest['key'],
-                    'value' => $configuracionRequest['value'],
-                    'descripcion' => $configuracionRequest['descripcion'],
-                ]);
-            }
+        $emailApp = Configuracion::find(Configuracion::EMAIL_APLICACION)
+            ->update(['value' => $request->input('emailApp')]);
+
+        $telefonoApp = Configuracion::find(Configuracion::TELEFONO_APLICACION)
+            ->update(['value' => $request->input('telefonoApp')]);
+
+        $esloganApp = Configuracion::find(Configuracion::ESLOGAN)
+            ->update(['value' => $request->input('esloganApp')]);
+
+        if($request->hasFile('fondoLoginTemaOscuro')) {
+            $fondoLoginTemaOscuro = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_OSCURO)
+                ->addMedia($request->file('fondoLoginTemaOscuro'))
+                ->preservingOriginal()
+                ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_OSCURO);
         }
 
-        return $this->sendResponse($configuraciones, 'Configuraciones generales guardadas con éxito.');
+        if($request->hasFile('fondoLoginTemaClaro')) {
+            $fondoLoginTemaClaro = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_CLARO)
+                ->addMedia($request->file('fondoLoginTemaClaro'))
+                ->preservingOriginal()
+                ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_CLARO);
+        }
+
+        $configuracion = new Configuracion();
+
+        return $this->sendResponse($configuracion->getConfiguracionesGenerales(), 'Configuraciones generales guardadas con éxito.');
 
     }
 
@@ -133,24 +143,21 @@ class ConfiguracionApiController extends AppbaseController
      */
     public function getConfiguracionesGenerales()
     {
-        $configuraciones = Configuracion::whereIn('id', [
-            Configuracion::NOMBRE_APLICACION,
-            Configuracion::EMAIL_APLICACION,
-            Configuracion::TELEFONO_APLICACION,
-            Configuracion::FONDO_LOGIN_TEMA_CLARO,
-            Configuracion::FONDO_LOGIN_TEMA_OSCURO,
-        ])->get();
+        $configuraciones = new Configuracion();
 
-        $configuracionesGenerales = [
-            'nombre_aplicacion' => $configuraciones->where('id', Configuracion::NOMBRE_APLICACION)->first()->value,
-            'email_aplicacion' => $configuraciones->where('id', Configuracion::EMAIL_APLICACION)->first()->value,
-            'telefono_aplicacion' => $configuraciones->where('id', Configuracion::TELEFONO_APLICACION)->first()->value,
-            'fondo_login_tema_claro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_CLARO)->first(),
-            'fondo_login_tema_oscuro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_OSCURO)->first(),
-        ];
+        $generales = $configuraciones->getConfiguracionesGenerales();
+
+//        $configuracionesGenerales = [
+//            'nombre_aplicacion' => $configuraciones->where('id', Configuracion::NOMBRE_APLICACION)->first()->value,
+//            'email_aplicacion' => $configuraciones->where('id', Configuracion::EMAIL_APLICACION)->first()->value,
+//            'telefono_aplicacion' => $configuraciones->where('id', Configuracion::TELEFONO_APLICACION)->first()->value,
+//            'eslogan_aplicacion' => $configuraciones->where('id', Configuracion::ESLOGAN)->first()->value,
+//            'fondo_login_tema_claro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_CLARO)->first(),
+//            'fondo_login_tema_oscuro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_OSCURO)->first(),
+//        ];
 
 
-        return $this->sendResponse($configuracionesGenerales, 'Configuraciones generales recuperadas con éxito.');
+        return $this->sendResponse($generales, 'Configuraciones generales recuperadas con éxito.');
 
     }
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Traits\Admin\ConfiguracionTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,8 +11,6 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- *
- *
  * @property int $id
  * @property string $key
  * @property string $value
@@ -36,7 +35,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  */
 class Configuracion extends Model implements HasMedia
 {
-
+    use ConfiguracionTrait;
     use SoftDeletes;
     use HasFactory;
     use InteractsWithMedia;
@@ -78,11 +77,12 @@ class Configuracion extends Model implements HasMedia
         'descripcion' => 'required|string',
     ];
 
-    const NOMBRE_APLICACION = 1;
-    const EMAIL_APLICACION = 2;
-    const TELEFONO_APLICACION = 3;
-    const FONDO_LOGIN_TEMA_CLARO = 4;
-    const FONDO_LOGIN_TEMA_OSCURO = 5;
+    const NOMBRE_APLICACION = 'Nombre Aplicacion';
+    const EMAIL_APLICACION = 'Email Aplicacion';
+    const TELEFONO_APLICACION = 'Telefono Aplicacion';
+    const ESLOGAN = 'Eslogan Aplicacion';
+    const FONDO_LOGIN_TEMA_CLARO = 'Fondo Login Tema Claro';
+    const FONDO_LOGIN_TEMA_OSCURO = 'Fondo Login Tema Oscuro';
 
     /**
      * Custom messages for validation
