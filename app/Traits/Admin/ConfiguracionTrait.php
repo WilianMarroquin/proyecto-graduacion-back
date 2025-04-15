@@ -28,7 +28,7 @@ trait ConfiguracionTrait
             ) {
                 // Verifica si tiene media antes de acceder
                 if ($configuracion->media->isNotEmpty()) {
-                    $data[$configuracion->key] = $configuracion->media->get()->last()->getUrl();
+                    $data[$configuracion->key] = $configuracion->media->last()->getUrl();
                     continue; // Si se asignó desde media, omitir la asignación por value
                 }
             }

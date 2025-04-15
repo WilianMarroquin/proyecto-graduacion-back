@@ -118,16 +118,16 @@ class ConfiguracionApiController extends AppbaseController
         Configuracion::find(Configuracion::ESLOGAN)
             ->update(['value' => $request->input('eslogan_aplicacion')]);
 
-        if($request->hasFile('fondoLoginOscuro')) {
+        if($request->hasFile('fondo_login_tema_oscuro')) {
             Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_OSCURO)
-                ->addMedia($request->file('fondoLoginOscuro'))
+                ->addMedia($request->file('fondo_login_tema_oscuro'))
                 ->preservingOriginal()
                 ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_OSCURO);
         }
 
-        if($request->hasFile('fondoLoginClaro')) {
+        if($request->hasFile('fondo_login_tema_claro')) {
             Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_CLARO)
-                ->addMedia($request->file('fondoLoginClaro'))
+                ->addMedia($request->file('fondo_login_tema_claro'))
                 ->preservingOriginal()
                 ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_CLARO);
         }
