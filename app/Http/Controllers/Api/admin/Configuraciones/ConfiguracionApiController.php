@@ -122,14 +122,21 @@ class ConfiguracionApiController extends AppbaseController
             Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_OSCURO)
                 ->addMedia($request->file('fondo_login_tema_oscuro'))
                 ->preservingOriginal()
-                ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_OSCURO);
+                ->toMediaCollection('fondo_login_tema_oscuro');
         }
 
         if($request->hasFile('fondo_login_tema_claro')) {
             Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_CLARO)
                 ->addMedia($request->file('fondo_login_tema_claro'))
                 ->preservingOriginal()
-                ->toMediaCollection(Configuracion::FONDO_LOGIN_TEMA_CLARO);
+                ->toMediaCollection('fondo_login_tema_claro');
+        }
+
+        if($request->hasFile('logo')) {
+            Configuracion::find(Configuracion::LOGO)
+                ->addMedia($request->file('logo'))
+                ->preservingOriginal()
+                ->toMediaCollection('logo');
         }
 
         $configuracion = new Configuracion();

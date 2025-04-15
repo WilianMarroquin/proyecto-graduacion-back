@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -101,8 +100,13 @@ class User extends Authenticatable
     {
         return [
             'id' => $this->id,
-            'name' => $this->primer_nombre,
-            'email' => $this->primer_apellido,
+            'primer_nombre' => $this->primer_nombre,
+            'segundo_nombre' => $this->segundo_nombre,
+            'primer_apellido' => $this->primer_apellido,
+            'segundo_apellido' => $this->segundo_apellido,
+            'nombre_completo' => $this->nombre_completo, // Asegúrate que este sea un atributo del modelo o un accesor
+            'usuario' => $this->usuario, // También conocido como username en algunos casos
+            'email' => $this->email,
             'roles' => $this->getRoleNames(),
             'permisos' => $this->getAllPermissions()->map(function ($permission) {
                 return [

@@ -15,6 +15,7 @@ trait ConfiguracionTrait
             Configuracion::ESLOGAN,
             Configuracion::FONDO_LOGIN_TEMA_CLARO,
             Configuracion::FONDO_LOGIN_TEMA_OSCURO,
+            Configuracion::LOGO
         ])->get();
 
         $data = [];
@@ -23,13 +24,13 @@ trait ConfiguracionTrait
             if (
                 in_array($configuracion->id, [
                     Configuracion::FONDO_LOGIN_TEMA_CLARO,
-                    Configuracion::FONDO_LOGIN_TEMA_OSCURO
+                    Configuracion::FONDO_LOGIN_TEMA_OSCURO,
+                    Configuracion::LOGO
                 ])
             ) {
-                // Verifica si tiene media antes de acceder
                 if ($configuracion->media->isNotEmpty()) {
                     $data[$configuracion->key] = $configuracion->media->last()->getUrl();
-                    continue; // Si se asignó desde media, omitir la asignación por value
+                    continue;
                 }
             }
 

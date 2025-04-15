@@ -45,14 +45,19 @@ class ConfiguracionesTableSeeder extends Seeder
 
         Configuracion::firstOrCreate([
             'key' => 'fondo_login_tema_claro',
-            'value' => '12345678',
+            'value' => '',
             'descripcion' => 'Imagen de fondo del login tema claro'
         ]);
 
         Configuracion::firstOrCreate([
             'key' => 'fondo_login_tema_oscuro',
-            'value' => '12345678',
+            'value' => '',
             'descripcion' => 'Imagen de fondo del login tema oscuro'
+        ]);
+        Configuracion::firstOrCreate([
+            'key' => 'logo',
+            'value' => '',
+            'descripcion' => 'Logo de la App'
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

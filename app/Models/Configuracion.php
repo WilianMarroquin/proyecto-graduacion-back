@@ -83,6 +83,7 @@ class Configuracion extends Model implements HasMedia
     const ESLOGAN = 4;
     const FONDO_LOGIN_TEMA_CLARO = 5;
     const FONDO_LOGIN_TEMA_OSCURO = 6;
+    const LOGO = 7;
 
     /**
      * Custom messages for validation
