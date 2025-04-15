@@ -91,10 +91,19 @@ class MenuOpcionesTableSeeder extends Seeder
             "parent_id" => 7
         ]);
         MenuOpcion::create([
+            "titulo" => "Generales",
+            "icono" => "ri-apps-2-add-line",
+            "ruta" => "admin-configuraciones-menu",
+            "orden" => 8,
+            "action" => "Listar Menu Opciones",
+            "subject" => "Menu Opcion",
+            "parent_id" => 7
+        ]);
+        MenuOpcion::create([
             "titulo" => null,
             "icono" => null,
             "ruta" => null,
-            "orden" => 8,
+            "orden" => 9,
             "titulo_seccion" => "Modulo Programación",
             "action" => "Ver modulo desarrollo",
             "subject" => "Desarrollo",
@@ -104,7 +113,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "titulo" => "Developers",
             "icono" => "ri-tools-fill",
             "ruta" => "second-page",
-            "orden" => 9,
+            "orden" => 10,
             "action" => "Ver modulo desarrollo",
             "subject" => "Desarrollo",
             "parent_id" => null
@@ -113,19 +122,19 @@ class MenuOpcionesTableSeeder extends Seeder
             "titulo" => "Configuraciones",
             "icono" => "ri-settings-5-fill",
             "ruta" => "dev-configuraciones",
-            "orden" => 10,
+            "orden" => 11,
             "action" => "Ver Configuraciones Developer",
             "subject" => "Desarrollo",
-            "parent_id" => 10
+            "parent_id" => 11
         ]);
         MenuOpcion::create([
             "titulo" => "Componentes",
             "icono" => "ri-settings-5-fill",
             "ruta" => "second-page",
-            "orden" => 11,
+            "orden" => 12,
             "action" => "Ver ejemplos",
             "subject" => "Desarrollo",
-            "parent_id" => 10
+            "parent_id" => 11
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

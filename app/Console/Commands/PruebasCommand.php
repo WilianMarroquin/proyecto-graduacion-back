@@ -27,9 +27,13 @@ class PruebasCommand extends Command
     public function handle()
     {
 
-        Configuracion::find(Configuracion::NOMBRE_APLICACION)
-            ->update(['value' => 'Pruebas']);
+        $confi = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_CLARO);
 
+        dd($confi);
+
+        $media = $confi->getMedia();
+
+        dd($media);
 
     }
 }

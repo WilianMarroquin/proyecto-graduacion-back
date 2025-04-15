@@ -147,16 +147,6 @@ class ConfiguracionApiController extends AppbaseController
 
         $generales = $configuraciones->getConfiguracionesGenerales();
 
-//        $configuracionesGenerales = [
-//            'nombre_aplicacion' => $configuraciones->where('id', Configuracion::NOMBRE_APLICACION)->first()->value,
-//            'email_aplicacion' => $configuraciones->where('id', Configuracion::EMAIL_APLICACION)->first()->value,
-//            'telefono_aplicacion' => $configuraciones->where('id', Configuracion::TELEFONO_APLICACION)->first()->value,
-//            'eslogan_aplicacion' => $configuraciones->where('id', Configuracion::ESLOGAN)->first()->value,
-//            'fondo_login_tema_claro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_CLARO)->first(),
-//            'fondo_login_tema_oscuro' => $configuraciones->where('id', Configuracion::FONDO_LOGIN_TEMA_OSCURO)->first(),
-//        ];
-
-
         return $this->sendResponse($generales, 'Configuraciones generales recuperadas con éxito.');
 
     }
