@@ -8,6 +8,7 @@ use App\Http\Requests\Api\admin\Configuraciones\UpdateConfiguracionApiRequest;
 use App\Models\Configuracion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -19,15 +20,16 @@ class ConfiguracionApiController extends AppbaseController
     /**
      * //     * @return array
      * //     */
-    //    public static function middleware(): array
-    //    {
-    //        return [
-    //            new Middleware('abilities:ver configuraciones', only: ['index', 'show']),
-    //            new Middleware('abilities:crear configuraciones', only: ['store']),
-    //            new Middleware('abilities:editar configuraciones', only: ['update']),
-    //            new Middleware('abilities:eliminar configuraciones', only: ['destroy']),
-    //        ];
-    //    }
+        public static function middleware(): array
+        {
+            return [
+                new Middleware('abilities:Ver configuraciones', only: ['index', 'show']),
+                new Middleware('abilities:Crear configuraciones', only: ['store']),
+                new Middleware('abilities:Editar configuraciones', only: ['update']),
+                new Middleware('abilities:Actualizar configuraciones generales', only: ['guardarGenerales']),
+                new Middleware('abilities:Eliminar configuraciones', only: ['destroy']),
+            ];
+        }
 
     /**
      * Display a listing of the Configuraciones.

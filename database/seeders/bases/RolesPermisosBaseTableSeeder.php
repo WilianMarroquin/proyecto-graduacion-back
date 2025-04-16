@@ -50,26 +50,35 @@ class RolesPermisosBaseTableSeeder extends Seeder
         Permission::create(['name' => 'Editar roles', 'subject' => 'Rol', 'guard_name' => 'web']);
         Permission::create(['name' => 'Eliminar roles', 'subject' => 'Rol', 'guard_name' => 'web']);
 
-        // Permisos Basicos
+        // Permisos para configuraciones
+        Permission::create(['name' => 'Ver configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Crear configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Editar configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Eliminar configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Actualizar configuraciones generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+
+        // Permisos Básicos
         Permission::create(['name' => 'Listar inicio', 'subject' => 'Inicio', 'guard_name' => 'web']);
         Permission::create(['name' => 'Ver menu preferencias', 'subject' => 'Preferencias', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Ver modulo desarrollo', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Ver ejemplos', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Ver Configuraciones Developer', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
 
-        // Permisos para los Modulos.
+        // Permisos para modulo usuarios.
         Permission::create(['name' => 'Ver modulo usuarios', 'subject' => 'User', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar usuarios', 'subject' => 'User', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar roles', 'subject' => 'Rol', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
 
-        // Permisos para Modulo de configuracion.
+        // Permisos para Módulo de configuración.
         Permission::create(['name' => 'Ver modulo configuracion', 'subject' => 'Configuracion', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar Menu Opciones', 'subject' => 'Menu Opcion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar configuraciones generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+
+        // Permisos para Modulo de desarrollo.
+        Permission::create(['name' => 'Ver modulo desarrollo', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar Componentes', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
 
         // Asignar todos los permisos al rol Administrador.
-        $rolAdministrador->givePermissionTo([
+        $rolAdministrador->syncPermissions([
             'Ver Menu Opciones',      // Permite ver el menú de opciones
             'Crear Menu Opciones',    // Permite crear opciones en el menú
             'Editar Menu Opciones',   // Permite editar las opciones del menú
@@ -94,11 +103,12 @@ class RolesPermisosBaseTableSeeder extends Seeder
             'Listar permisos',        // Permite listar permisos
             'Ver modulo configuracion',// Permite ver el módulo de configuración
             'Listar Menu Opciones',   // Permite listar el menú de opciones
-            'Listar configuraciones', // Permite listar configuraciones
+            'Listar configuraciones generales', // Permite listar configuraciones
+            'Actualizar configuraciones generales', // Permite listar configuraciones
         ]);
 
         // Asignación de permisos al rol Empleado.
-        $rolEmpleado->givePermissionTo([
+        $rolEmpleado->syncPermissions([
             'Ver menu preferencias', // Solo permisos básicos para el menú de preferencias
             'Listar inicio',          // Solo permisos básicos para la página de inicio
             'Ver Menu Opciones',      // Permite ver el menú de opciones
@@ -106,11 +116,16 @@ class RolesPermisosBaseTableSeeder extends Seeder
         ]);
 
         // Asignación de permisos al rol Programador.
-        $rolProgramador->givePermissionTo([
+        $rolProgramador->syncPermissions([
             'Ver menu preferencias', // Solo permisos básicos para el menú de preferencias
             'Ver Menu Opciones',      // Permite ver el menú de opciones
             'Ver modulo desarrollo', // Permite ver el módulo de desarrollo
-            'Ver ejemplos' ,        // Permite ver ejemplos
+            'Listar configuraciones' ,        // Permite ver ejemplos
+            'Listar Componentes' ,        // Permite ver ejemplos
+            'Ver configuraciones' ,        // Permite ver ejemplos
+            'Crear configuraciones' ,        // Permite ver ejemplos
+            'Editar configuraciones' ,        // Permite ver ejemplos
+            'Eliminar configuraciones' ,        // Permite ver ejemplos
         ]);
 
         // El super admin obtiene todos los permisos por defecto.
