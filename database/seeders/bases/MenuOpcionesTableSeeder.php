@@ -22,7 +22,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-home-8-line",
             "ruta" => "index",
             "orden" => 0,
-            "action" => "Listar inicio",
+            "action" => "Listar Inicio",
             "subject" => "Inicio",
             "parent_id" => null
         ]);
@@ -105,7 +105,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "ruta" => null,
             "orden" => 9,
             "titulo_seccion" => "Modulo Programación",
-            "action" => "Ver modulo desarrollo",
+            "action" => "Ver Modulo Desarrollo",
             "subject" => "Desarrollo",
             "parent_id" => null
         ]);
@@ -114,7 +114,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-tools-fill",
             "ruta" => "second-page",
             "orden" => 10,
-            "action" => "Ver modulo desarrollo",
+            "action" => "Ver Modulo Desarrollo",
             "subject" => "Desarrollo",
             "parent_id" => null
         ]);
@@ -123,7 +123,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-settings-5-fill",
             "ruta" => "dev-configuraciones",
             "orden" => 11,
-            "action" => "Listar configuraciones",
+            "action" => "Listar Configuraciones",
             "subject" => "Configuracion",
             "parent_id" => 11
         ]);

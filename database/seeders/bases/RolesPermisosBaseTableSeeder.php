@@ -55,7 +55,7 @@ class RolesPermisosBaseTableSeeder extends Seeder
         Permission::create(['name' => 'Crear Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
         Permission::create(['name' => 'Editar Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
         Permission::create(['name' => 'Eliminar Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Actualizar Configuraciones generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Actualizar Configuraciones Generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
 
         // Permisos Básicos
         Permission::create(['name' => 'Listar Inicio', 'subject' => 'Inicio', 'guard_name' => 'web']);
@@ -73,8 +73,8 @@ class RolesPermisosBaseTableSeeder extends Seeder
         Permission::create(['name' => 'Listar Configuraciones Generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
 
         // Permisos para Modulo de desarrollo.
-        Permission::create(['name' => 'Ver modulo desarrollo', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Listar configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Modulo Desarrollo', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar Componentes', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
 
         // Asignar todos los permisos al rol Administrador.
@@ -117,6 +117,7 @@ class RolesPermisosBaseTableSeeder extends Seeder
 
         // Asignación de permisos al rol Programador.
         $rolProgramador->syncPermissions([
+            'Listar Inicio', // Solo permisos básicos para la página de inicio
             'Ver Menu Preferencias', // Solo permisos básicos para el menú de preferencias
             'Ver Menu Opciones',      // Permite ver el menú de opciones
             'Ver Modulo Desarrollo', // Permite ver el módulo de desarrollo
