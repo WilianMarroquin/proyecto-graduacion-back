@@ -33,44 +33,44 @@ class RolesPermisosBaseTableSeeder extends Seeder
         Permission::create(['name' => 'Eliminar Menu Opciones', 'subject' => 'Menu Opcion', 'guard_name' => 'web']);
 
         // Permisos para los Usuarios.
-        Permission::create(['name' => 'Ver usuarios', 'subject' => 'User', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Crear usuarios', 'subject' => 'User', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Editar usuarios', 'subject' => 'User', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Eliminar usuarios', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Crear Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Editar Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Eliminar Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
 
         // Permisos para los Permisos.
-        Permission::create(['name' => 'Ver permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Crear permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Editar permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Eliminar permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Crear Permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Editar Permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Eliminar Permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
 
         // Permisos para los Roles.
-        Permission::create(['name' => 'Ver roles', 'subject' => 'Rol', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Crear roles', 'subject' => 'Rol', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Editar roles', 'subject' => 'Rol', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Eliminar roles', 'subject' => 'Rol', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Roles', 'subject' => 'Rol', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Crear Roles', 'subject' => 'Rol', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Editar Roles', 'subject' => 'Rol', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Eliminar Roles', 'subject' => 'Rol', 'guard_name' => 'web']);
 
         // Permisos para configuraciones
-        Permission::create(['name' => 'Ver configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Crear configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Editar configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Eliminar configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Actualizar configuraciones generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Crear Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Editar Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Eliminar Configuraciones', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Actualizar Configuraciones generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
 
         // Permisos Básicos
-        Permission::create(['name' => 'Listar inicio', 'subject' => 'Inicio', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Ver menu preferencias', 'subject' => 'Preferencias', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar Inicio', 'subject' => 'Inicio', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Menu Preferencias', 'subject' => 'Preferencias', 'guard_name' => 'web']);
 
         // Permisos para modulo usuarios.
-        Permission::create(['name' => 'Ver modulo usuarios', 'subject' => 'User', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Listar usuarios', 'subject' => 'User', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Listar roles', 'subject' => 'Rol', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Listar permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Modulo Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar Roles', 'subject' => 'Rol', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar Permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
 
         // Permisos para Módulo de configuración.
-        Permission::create(['name' => 'Ver modulo configuracion', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Modulo Configuracion', 'subject' => 'Configuracion', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar Menu Opciones', 'subject' => 'Menu Opcion', 'guard_name' => 'web']);
-        Permission::create(['name' => 'Listar configuraciones generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Listar Configuraciones Generales', 'subject' => 'Configuracion', 'guard_name' => 'web']);
 
         // Permisos para Modulo de desarrollo.
         Permission::create(['name' => 'Ver modulo desarrollo', 'subject' => 'Desarrollo', 'guard_name' => 'web']);
@@ -83,53 +83,53 @@ class RolesPermisosBaseTableSeeder extends Seeder
             'Crear Menu Opciones',    // Permite crear opciones en el menú
             'Editar Menu Opciones',   // Permite editar las opciones del menú
             'Eliminar Menu Opciones', // Permite eliminar opciones del menú
-            'Ver usuarios',           // Permite ver usuarios
-            'Crear usuarios',         // Permite crear usuarios
-            'Editar usuarios',        // Permite editar usuarios
-            'Eliminar usuarios',      // Permite eliminar usuarios
-            'Ver permisos',           // Permite ver permisos
-            'Crear permisos',         // Permite crear permisos
-            'Editar permisos',        // Permite editar permisos
-            'Eliminar permisos',      // Permite eliminar permisos
-            'Ver roles',              // Permite ver roles
-            'Crear roles',            // Permite crear roles
-            'Editar roles',           // Permite editar roles
-            'Eliminar roles',         // Permite eliminar roles
-            'Listar inicio',          // Solo permisos básicos para la página de inicio
-            'Ver menu preferencias',  // Solo permisos básicos para el menú de preferencias
-            'Ver modulo usuarios',    // Permite ver el módulo de usuarios
-            'Listar usuarios',        // Permite listar usuarios
-            'Listar roles',           // Permite listar roles
-            'Listar permisos',        // Permite listar permisos
-            'Ver modulo configuracion',// Permite ver el módulo de configuración
+            'Ver Usuarios',           // Permite ver Usuarios
+            'Crear Usuarios',         // Permite crear Usuarios
+            'Editar Usuarios',        // Permite editar Usuarios
+            'Eliminar Usuarios',      // Permite eliminar usuarios
+            'Ver Permisos',           // Permite ver Permisos
+            'Crear Permisos',         // Permite crear Permisos
+            'Editar Permisos',        // Permite editar Permisos
+            'Eliminar Permisos',      // Permite eliminar permisos
+            'Ver Roles',              // Permite ver Roles
+            'Crear Roles',            // Permite crear Roles
+            'Editar Roles',           // Permite editar Roles
+            'Eliminar Roles',         // Permite eliminar roles
+            'Listar Inicio',          // Solo permisos básicos para la página de inicio
+            'Ver Menu Preferencias',  // Solo permisos básicos para el menú de preferencias
+            'Ver Modulo Usuarios',    // Permite ver el módulo de usuarios
+            'Listar Usuarios',        // Permite listar usuarios
+            'Listar Roles',           // Permite listar roles
+            'Listar Permisos',        // Permite listar permisos
+            'Ver Modulo Configuracion',// Permite ver el módulo de configuración
             'Listar Menu Opciones',   // Permite listar el menú de opciones
-            'Listar configuraciones generales', // Permite listar configuraciones
-            'Actualizar configuraciones generales', // Permite listar configuraciones
+            'Listar Configuraciones Generales', // Permite listar configuraciones
+            'Actualizar Configuraciones Generales', // Permite listar configuraciones
         ]);
 
         // Asignación de permisos al rol Empleado.
         $rolEmpleado->syncPermissions([
-            'Ver menu preferencias', // Solo permisos básicos para el menú de preferencias
-            'Listar inicio',          // Solo permisos básicos para la página de inicio
+            'Ver Menu Preferencias', // Solo permisos básicos para el menú de preferencias
+            'Listar Inicio',          // Solo permisos básicos para la página de inicio
             'Ver Menu Opciones',      // Permite ver el menú de opciones
             'Ver Menu Opciones',      // Permite ver el menú de opciones
         ]);
 
         // Asignación de permisos al rol Programador.
         $rolProgramador->syncPermissions([
-            'Ver menu preferencias', // Solo permisos básicos para el menú de preferencias
+            'Ver Menu Preferencias', // Solo permisos básicos para el menú de preferencias
             'Ver Menu Opciones',      // Permite ver el menú de opciones
-            'Ver modulo desarrollo', // Permite ver el módulo de desarrollo
-            'Listar configuraciones' ,        // Permite ver ejemplos
+            'Ver Modulo Desarrollo', // Permite ver el módulo de desarrollo
+            'Listar Configuraciones' ,        // Permite ver ejemplos
             'Listar Componentes' ,        // Permite ver ejemplos
-            'Ver configuraciones' ,        // Permite ver ejemplos
-            'Crear configuraciones' ,        // Permite ver ejemplos
-            'Editar configuraciones' ,        // Permite ver ejemplos
-            'Eliminar configuraciones' ,        // Permite ver ejemplos
+            'Ver Configuraciones' ,        // Permite ver ejemplos
+            'Crear Configuraciones' ,        // Permite ver ejemplos
+            'Editar Configuraciones' ,        // Permite ver ejemplos
+            'Eliminar Configuraciones' ,        // Permite ver ejemplos
         ]);
 
         // El super admin obtiene todos los permisos por defecto.
-        $superAdmin = Role::create(['name' => 'Super Admin', 'guard_name' => 'web']);
+        Role::create(['name' => 'Super Admin', 'guard_name' => 'web']);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

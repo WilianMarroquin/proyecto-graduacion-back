@@ -9,13 +9,14 @@ use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class UserApiController
  */
-class UserApiController extends AppbaseController
+class UserApiController extends AppbaseController implements HasMiddleware
 {
 
     /**
@@ -24,10 +25,11 @@ class UserApiController extends AppbaseController
         public static function middleware(): array
         {
             return [
-                new Middleware('abilities:Ver usuarios', only: ['index', 'show']),
-                new Middleware('abilities:Crear usuarios', only: ['store']),
-                new Middleware('abilities:Editar usuarios', only: ['update']),
-                new Middleware('abilities:Eliminar usuarios', only: ['destroy']),
+                new Middleware('permission:Listar Usuarios', only: ['index']),
+                new Middleware('permission:Ver Usuarios', only: ['show', 'obtenerRolesDeUser']),
+                new Middleware('permission:Crear Usuarios', only: ['store']),
+                new Middleware('permission:Editar Usuarios', only: ['update', 'asignarRolAUser', 'quitarRolAUser']),
+                new Middleware('permission:Eliminar Usuarios', only: ['destroy']),
             ];
         }
 

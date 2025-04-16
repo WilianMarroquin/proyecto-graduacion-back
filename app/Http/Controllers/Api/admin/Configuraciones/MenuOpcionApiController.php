@@ -9,7 +9,7 @@ use App\Models\MenuOpcion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -21,16 +21,16 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
     /**
      * //     * @return array
      * //     */
-        public static function middleware(): array
-        {
-            return [
-//                new Middleware('role:Empleado', only: ['index']),
-//                new Middleware('role:Administrador', only: ['show']),
-//                new Middleware('role:Administrador', only: ['store']),
-//                new Middleware('role:Administrador', only: ['update']),
-//                new Middleware('role:Administrador', only: ['destroy']),
-            ];
-        }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:Listar Menu Opciones', only: ['index']),
+            new Middleware('permission:Ver Menu Opciones', only: ['show', 'index', 'getOpcionesMenu']),
+            new Middleware('permission:Crear Menu Opciones', only: ['store']),
+            new Middleware('permission:Editar Menu Opciones', only: ['update', 'actualizarOrden']),
+            new Middleware('permission:Eliminar Menu Opciones', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the Menu_opciones.
@@ -61,14 +61,13 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
                 'parent_id'
             ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
-                ->Padres()
+            ->Padres()
             ->with('children')
             ->orderBy('orden', 'asc')
             ->paginate($request->get('per_page', 10));
 
         return $this->sendResponse($menuOpcions->toArray(), 'menu-opcions recuperados con éxito.');
     }
-
 
     /**
      * Store a newly created MenuOpcion in storage.
@@ -92,7 +91,6 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
         return $this->sendResponse($opcionesMenu->toArray(), 'MenuOpcion creado con éxito.');
     }
 
-
     /**
      * Display the specified MenuOpcion.
      * GET|HEAD /menu-opcions/{id}
@@ -101,7 +99,6 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
     {
         return $this->sendResponse($menuOpcion->toArray(), 'MenuOpcion recuperado con éxito.');
     }
-
 
     /**
      * Update the specified MenuOpcion in storage.
@@ -128,29 +125,6 @@ class MenuOpcionApiController extends AppbaseController implements HasMiddleware
     {
         $menuOpcion->delete();
         return $this->sendResponse(null, 'MenuOpcion eliminado con éxito.');
-    }
-
-    /**
-     * Get columns of the table
-     * GET /menu-opcions/columns
-     */
-    public function getColumnas(): JsonResponse
-    {
-
-        $columns = Schema::getColumnListing((new MenuOpcion)->getTable());
-
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
-
-        $nombreDeTabla = (new MenuOpcion)->getTable();
-
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'MenuOpcion',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/' . $nombreDeTabla,
-        ];
-
-        return $this->sendResponse($data, 'Columnas de la tabla menu_opciones recuperadas con éxito.');
     }
 
     public function actualizarOrden(Request $request)

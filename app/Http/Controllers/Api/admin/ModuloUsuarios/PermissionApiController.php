@@ -8,13 +8,14 @@ use App\Http\Requests\Api\admin\ModuloUsuarios\UpdatePermissionApiRequest;
 use App\Models\Permission;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class PermissionApiController
  */
-class PermissionApiController extends AppbaseController
+class PermissionApiController extends AppbaseController implements HasMiddleware
 {
 
     /**
@@ -23,10 +24,11 @@ class PermissionApiController extends AppbaseController
     public static function middleware(): array
     {
         return [
-            new Middleware('abilities:ver permisos', only: ['index', 'show']),
-            new Middleware('abilities:crear permisos', only: ['store']),
-            new Middleware('abilities:editar permisos', only: ['update']),
-            new Middleware('abilities:eliminar permisos', only: ['destroy']),
+            new Middleware('permission:Listar Permisos', only: ['index']),
+            new Middleware('permission:Ver permisos', only: ['show', 'obtenerTodos']),
+            new Middleware('permission:Crear permisos', only: ['store']),
+            new Middleware('permission:Editar permisos', only: ['update']),
+            new Middleware('permission:Eliminar permisos', only: ['destroy']),
         ];
     }
 

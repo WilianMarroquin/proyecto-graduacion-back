@@ -8,13 +8,14 @@ use App\Http\Requests\Api\admin\ModuloUsuarios\UpdateRolApiRequest;
 use App\Models\Rol;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class RolApiController
  */
-class RolApiController extends AppbaseController
+class RolApiController extends AppbaseController implements HasMiddleware
 {
 
     /**
@@ -23,10 +24,11 @@ class RolApiController extends AppbaseController
     public static function middleware(): array
     {
         return [
-            new Middleware('abilities:ver roles', only: ['index', 'show']),
-            new Middleware('abilities:crear roles', only: ['store']),
-            new Middleware('abilities:editar roles', only: ['update']),
-            new Middleware('abilities:eliminar roles', only: ['destroy']),
+            new Middleware('permission:Listar Roles', only: ['index']),
+            new Middleware('permission:Ver Roles', only: ['index', 'show']),
+            new Middleware('permission:Crear Roles', only: ['store']),
+            new Middleware('permission:Editar Roles', only: ['update']),
+            new Middleware('permission:Eliminar Roles', only: ['destroy']),
         ];
     }
 
