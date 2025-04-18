@@ -41,7 +41,7 @@ Route::prefix('modulo-usuarios')->group(function () {
 
         Route::get('get/data/perfil/{user}', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'getDataPerfil']);
 
-        Route::put('actualizar/foto/perfil/{user}', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'actualizarFotoPerfil']);
+        Route::post('actualizar/foto/perfil/{user}', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'actualizarFotoPerfil']);
 
     });
 

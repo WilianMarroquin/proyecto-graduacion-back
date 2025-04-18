@@ -137,9 +137,8 @@ class User extends Authenticatable implements HasMedia
     {
         if ($media?->collection_name === 'avatars') {
             $this->addMediaConversion('thumb24')
-                ->width(24)
-                ->height(24)
-                ->sharpen(10)
+                ->width(75)
+                ->height(75)
                 ->nonQueued();
         }
     }

@@ -220,7 +220,6 @@ class UserApiController extends AppbaseController implements HasMiddleware
     public function actualizarFotoPerfil(User $user, Request $request)
     {
 
-        logger($request->all());
         if (!$request->hasFile('avatar')) {
             return $this->sendError('No se ha enviado ninguna imagen.', 400);
         }
