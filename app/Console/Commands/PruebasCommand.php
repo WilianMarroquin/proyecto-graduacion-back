@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Configuracion;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class PruebasCommand extends Command
@@ -27,11 +27,14 @@ class PruebasCommand extends Command
     public function handle()
     {
 
-        $confi = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_OSCURO);
+        $user = User::find(1);
 
-        $media = $confi->getMedia();
+        $media = $user->addMedia(public_path('tipos_inteligencias.png'))
+            ->preservingOriginal()
+            ->toMediaCollection('avatars');
 
-        dd($media);
+
+        dd($user->getMedia('avatars')->last()->getUrl('thumb24'));
 
     }
 }

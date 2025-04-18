@@ -6,12 +6,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
     protected $guard_name = 'web';
     /**
@@ -114,6 +117,7 @@ class User extends Authenticatable
                     'recurso' => $permission->subject // Puedes cambiar esto por el recurso correcto
                 ];
             })->toArray(),
+            'avatar' => optional($this->getMedia('avatars')->last())->getUrl('thumb24'),
         ];
     }
 
@@ -128,6 +132,18 @@ class User extends Authenticatable
         return $this->primer_nombre . ' ' . $this->segundo_nombre . ' ' . $this->primer_apellido . ' ' . $this->segundo_apellido;
 
     }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        if ($media?->collection_name === 'avatars') {
+            $this->addMediaConversion('thumb24')
+                ->width(24)
+                ->height(24)
+                ->sharpen(10)
+                ->nonQueued();
+        }
+    }
+
 
 
 }
