@@ -37,6 +37,8 @@ class RolesPermisosBaseTableSeeder extends Seeder
         Permission::create(['name' => 'Crear Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
         Permission::create(['name' => 'Editar Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
         Permission::create(['name' => 'Eliminar Usuarios', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Perfil Usuario', 'subject' => 'User', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Actualizar Perfil Usuario', 'subject' => 'User', 'guard_name' => 'web']);
 
         // Permisos para los Permisos.
         Permission::create(['name' => 'Ver Permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
@@ -105,6 +107,8 @@ class RolesPermisosBaseTableSeeder extends Seeder
             'Listar Menu Opciones',   // Permite listar el menú de opciones
             'Listar Configuraciones Generales', // Permite listar configuraciones
             'Actualizar Configuraciones Generales', // Permite listar configuraciones
+            'Actualizar Perfil Usuario' , // Permite actualizar el perfil del usuario
+            'Ver Perfil Usuario' , // Permite ver el perfil del usuario
         ]);
 
         // Asignación de permisos al rol Empleado.
@@ -113,6 +117,8 @@ class RolesPermisosBaseTableSeeder extends Seeder
             'Listar Inicio',          // Solo permisos básicos para la página de inicio
             'Ver Menu Opciones',      // Permite ver el menú de opciones
             'Ver Menu Opciones',      // Permite ver el menú de opciones
+            'Actualizar Perfil Usuario' , // Permite actualizar el perfil del usuario
+            'Ver Perfil Usuario' , // Permite ver el perfil del usuario
         ]);
 
         // Asignación de permisos al rol Programador.
@@ -127,6 +133,8 @@ class RolesPermisosBaseTableSeeder extends Seeder
             'Crear Configuraciones' ,        // Permite ver ejemplos
             'Editar Configuraciones' ,        // Permite ver ejemplos
             'Eliminar Configuraciones' ,        // Permite ver ejemplos
+            'Actualizar Perfil Usuario' , // Permite actualizar el perfil del usuario
+            'Ver Perfil Usuario' , // Permite ver el perfil del usuario
         ]);
 
         // El super admin obtiene todos los permisos por defecto.

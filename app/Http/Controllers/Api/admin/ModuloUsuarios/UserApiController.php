@@ -26,10 +26,12 @@ class UserApiController extends AppbaseController implements HasMiddleware
     {
         return [
             new Middleware('permission:Listar Usuarios', only: ['index']),
-            new Middleware('permission:Ver Usuarios', only: ['show', 'obtenerRolesDeUser', 'getDataPerfil']),
+            new Middleware('permission:Ver Usuarios', only: ['show', 'obtenerRolesDeUser']),
             new Middleware('permission:Crear Usuarios', only: ['store']),
             new Middleware('permission:Editar Usuarios', only: ['update', 'asignarRolAUser', 'quitarRolAUser']),
             new Middleware('permission:Eliminar Usuarios', only: ['destroy']),
+            new Middleware('permission:Actualizar Perfil Usuario', only: ['actualizarFotoPerfil']),
+            new Middleware('permission:Ver Perfil Usuario', only: ['getDataPerfil']),
         ];
     }
 
@@ -215,4 +217,23 @@ class UserApiController extends AppbaseController implements HasMiddleware
 
     }
 
+    public function actualizarFotoPerfil(User $user, Request $request)
+    {
+
+        logger($request->all());
+        if (!$request->hasFile('avatar')) {
+            return $this->sendError('No se ha enviado ninguna imagen.', 400);
+        }
+
+        $media = $user->addMedia($request->file('avatar'))
+            ->preservingOriginal()
+            ->toMediaCollection('avatars');
+
+        if (!$media) {
+            return $this->sendError('Error al subir la imagen.', 500);
+        }
+
+        return $this->sendResponse($media->getUrl(), 'Foto de perfil actualizada con éxito.');
+
+    }
 }
