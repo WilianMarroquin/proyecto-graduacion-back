@@ -29,9 +29,7 @@ class PruebasCommand extends Command
 
         $user = User::find(1);
 
-        $media = $user->addMedia(public_path('tipos_inteligencias.png'))
-            ->preservingOriginal()
-            ->toMediaCollection('avatars');
+        dd($user->toArray());
 
 
         dd($user->getMedia('avatars')->last()->getUrl('thumb24'));

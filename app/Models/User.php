@@ -117,7 +117,7 @@ class User extends Authenticatable implements HasMedia
                     'recurso' => $permission->subject // Puedes cambiar esto por el recurso correcto
                 ];
             })->toArray(),
-            'avatar' => optional($this->getMedia('avatars')->last())->getUrl('thumb24'),
+            'avatar_thumb24' => optional($this->getMedia('avatars')->last())->getUrl('thumb24'),
         ];
     }
 

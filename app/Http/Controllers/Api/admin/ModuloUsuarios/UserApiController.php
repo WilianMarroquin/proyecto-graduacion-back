@@ -202,9 +202,14 @@ class UserApiController extends AppbaseController implements HasMiddleware
         ]);
 
         $data = [
-            'datos_usuario' => $user,
-            //Agregar los demas datos cuando sea necesario!
+            'datos_usuario' => array_merge(
+                $user->toArray(),
+                [
+                    'avatar' => optional($user->getMedia('avatars')->last())->getUrl(),
+                ]
+            ),
         ];
+
 
         return $this->sendResponse($data, 'Datos del perfil del usuario recuperados con éxito.');
 
