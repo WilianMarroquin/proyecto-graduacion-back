@@ -22,16 +22,16 @@ class UserApiController extends AppbaseController implements HasMiddleware
     /**
      * //     * @return array
      * //     */
-        public static function middleware(): array
-        {
-            return [
-                new Middleware('permission:Listar Usuarios', only: ['index']),
-                new Middleware('permission:Ver Usuarios', only: ['show', 'obtenerRolesDeUser']),
-                new Middleware('permission:Crear Usuarios', only: ['store']),
-                new Middleware('permission:Editar Usuarios', only: ['update', 'asignarRolAUser', 'quitarRolAUser']),
-                new Middleware('permission:Eliminar Usuarios', only: ['destroy']),
-            ];
-        }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:Listar Usuarios', only: ['index']),
+            new Middleware('permission:Ver Usuarios', only: ['show', 'obtenerRolesDeUser', 'getDataPerfil']),
+            new Middleware('permission:Crear Usuarios', only: ['store']),
+            new Middleware('permission:Editar Usuarios', only: ['update', 'asignarRolAUser', 'quitarRolAUser']),
+            new Middleware('permission:Eliminar Usuarios', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the Users.
@@ -126,7 +126,7 @@ class UserApiController extends AppbaseController implements HasMiddleware
 
     /**
      * Obtiene los roles asignados a un usuario.
-     * @param User $user
+     * @param  User  $user
      * @return JsonResponse
      */
     public function obtenerRolesDeUser(User $user)
@@ -142,14 +142,14 @@ class UserApiController extends AppbaseController implements HasMiddleware
 
     /**
      * Asigna un rol a un usuario.
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function asignarRolAUser(Request $request)
     {
         $validated = $request->validate([
             'user_id' => ['required', 'exists:users,id'],
-            'rol_id'  => ['required', 'exists:roles,id'],
+            'rol_id' => ['required', 'exists:roles,id'],
         ]);
 
         $user = User::find($validated['user_id']);
@@ -166,14 +166,14 @@ class UserApiController extends AppbaseController implements HasMiddleware
 
     /**
      * Quita un rol a un usuario.
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function quitarRolAUser(Request $request)
     {
         $validated = $request->validate([
             'user_id' => ['required', 'exists:users,id'],
-            'rol_id'  => ['required', 'exists:roles,id'],
+            'rol_id' => ['required', 'exists:roles,id'],
         ]);
 
         $user = User::find($validated['user_id']);
@@ -188,5 +188,26 @@ class UserApiController extends AppbaseController implements HasMiddleware
         return $this->sendResponse(null, 'Se ha quitado el rol con éxito.');
     }
 
+    /**
+     * Obtiene los datos del perfil de un usuario.
+     * @param  User  $user
+     * @return JsonResponse
+     */
+    public function getDataPerfil(User $user)
+    {
+        $user->load([
+            'roles' => function ($query) {
+                $query->select('id', 'name');
+            },
+        ]);
+
+        $data = [
+            'datos_usuario' => $user,
+            //Agregar los demas datos cuando sea necesario!
+        ];
+
+        return $this->sendResponse($data, 'Datos del perfil del usuario recuperados con éxito.');
+
+    }
 
 }

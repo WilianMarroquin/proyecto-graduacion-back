@@ -27,9 +27,7 @@ class PruebasCommand extends Command
     public function handle()
     {
 
-        $confi = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_CLARO);
-
-        dd($confi);
+        $confi = Configuracion::find(Configuracion::FONDO_LOGIN_TEMA_OSCURO);
 
         $media = $confi->getMedia();
 

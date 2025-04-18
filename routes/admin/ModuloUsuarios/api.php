@@ -39,6 +39,8 @@ Route::prefix('modulo-usuarios')->group(function () {
 
         Route::post('quitar/rol/aUser', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'quitarRolAUser']);
 
+        Route::get('get/data/perfil/{id}', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'getDataPerfil']);
+
     });
 
 });
