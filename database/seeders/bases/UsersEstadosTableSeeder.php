@@ -21,7 +21,7 @@ class UsersEstadosTableSeeder extends Seeder
             'nombre' => 'Inactivo',
         ]);
         UserEstado::firstOrCreate([
-            'nombre' => 'Desvinculado',
+            'nombre' => 'Bloqueado',
         ]);
 
     }

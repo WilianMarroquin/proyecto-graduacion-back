@@ -3,6 +3,7 @@
 namespace Database\Seeders\bases;
 
 use App\Models\User;
+use App\Models\UserEstado;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -21,6 +22,7 @@ class UserSeeder extends Seeder
                 'primer_apellido' => 'Admin',
                 'segundo_apellido' => '',
                 'usuario' => 'Admin',
+                'estado_id' => UserEstado::ACTIVO,
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('12345'),
             ]);

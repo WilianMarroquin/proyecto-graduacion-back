@@ -3,6 +3,7 @@
 namespace Database\Seeders\bases;
 
 use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -139,6 +140,8 @@ class RolesPermisosBaseTableSeeder extends Seeder
 
         // El super admin obtiene todos los permisos por defecto.
         Role::create(['name' => 'Super Admin', 'guard_name' => 'web']);
+
+        User::find(1)->assignRole('Super Admin');
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
