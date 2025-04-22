@@ -70,6 +70,13 @@ class RolesPermisosBaseTableSeeder extends Seeder
         Permission::create(['name' => 'Listar Roles', 'subject' => 'Rol', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar Permisos', 'subject' => 'Permission', 'guard_name' => 'web']);
 
+        //Permisos para Estados de los usuarios
+        Permission::create(['name' => 'Listar Usuario Estados', 'subject' => 'UserEstado', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Ver Usuario Estados', 'subject' => 'UserEstado', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Crear Usuario Estados', 'subject' => 'UserEstado', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Editar Usuario Estados', 'subject' => 'UserEstado', 'guard_name' => 'web']);
+        Permission::create(['name' => 'Eliminar Usuario Estados', 'subject' => 'UserEstado', 'guard_name' => 'web']);
+
         // Permisos para Módulo de configuración.
         Permission::create(['name' => 'Ver Modulo Configuracion', 'subject' => 'Configuracion', 'guard_name' => 'web']);
         Permission::create(['name' => 'Listar Menu Opciones', 'subject' => 'Menu Opcion', 'guard_name' => 'web']);
@@ -110,13 +117,17 @@ class RolesPermisosBaseTableSeeder extends Seeder
             'Actualizar Configuraciones Generales', // Permite listar configuraciones
             'Actualizar Perfil Usuario' , // Permite actualizar el perfil del usuario
             'Ver Perfil Usuario' , // Permite ver el perfil del usuario
+            'Listar Usuario Estados' , // Permite ver el modulo de estados de usuario
+            'Ver Usuario Estados' , // Permite ver un usuario especifico
+            'Crear Usuario Estados' , // Permite crear un nuevo usuario
+            'Editar Usuario Estados' , // Permite editar un usuario
+            'Eliminar Usuario Estados' , // Permite eliminar un usuario
         ]);
 
         // Asignación de permisos al rol Empleado.
         $rolEmpleado->syncPermissions([
             'Ver Menu Preferencias', // Solo permisos básicos para el menú de preferencias
             'Listar Inicio',          // Solo permisos básicos para la página de inicio
-            'Ver Menu Opciones',      // Permite ver el menú de opciones
             'Ver Menu Opciones',      // Permite ver el menú de opciones
             'Actualizar Perfil Usuario' , // Permite actualizar el perfil del usuario
             'Ver Perfil Usuario' , // Permite ver el perfil del usuario

@@ -8,27 +8,30 @@ use App\Http\Requests\Api\admin\ModuloUsuarios\UpdateUserEstadoApiRequest;
 use App\Models\UserEstado;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Schema;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class UserEstadoApiController
  */
-class UserEstadoApiController extends AppbaseController
+class UserEstadoApiController extends AppbaseController implements HasMiddleware
 {
 
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver users_estados', only: ['index', 'show']),
-  //            new Middleware('abilities:crear users_estados', only: ['store']),
-  //            new Middleware('abilities:editar users_estados', only: ['update']),
-  //            new Middleware('abilities:eliminar users_estados', only: ['destroy']),
-  //        ];
-  //    }
+    /**
+     * //     * @return array
+     * //     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:Listar Usuario Estados', only: ['index']),
+            new Middleware('permission:Ver Usuario Estados', only: ['show']),
+            new Middleware('permission:Crear Usuario Estados', only: ['store']),
+            new Middleware('permission:Editar Usuario Estados', only: ['update']),
+            new Middleware('permission:Eliminar Usuario Estados', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the Users_estados.
@@ -39,15 +42,15 @@ class UserEstadoApiController extends AppbaseController
         $users_estados = QueryBuilder::for(UserEstado::class)
             ->with([])
             ->allowedFilters([
-    'nombre'
-])
+                'nombre'
+            ])
             ->allowedSorts([
-    'nombre'
-])
+                'nombre'
+            ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
-        return $this->sendResponse($users_estados->toArray(), 'users_estados recuperados con éxito.');
+        return $this->sendResponse($users_estados->toArray(), 'Estados recuperados con éxito.');
     }
 
 
@@ -75,11 +78,10 @@ class UserEstadoApiController extends AppbaseController
     }
 
 
-
     /**
-    * Update the specified UserEstado in storage.
-    * PUT/PATCH /users_estados/{id}
-    */
+     * Update the specified UserEstado in storage.
+     * PUT/PATCH /users_estados/{id}
+     */
     public function update(UpdateUserEstadoApiRequest $request, $id): JsonResponse
     {
         $userestado = UserEstado::findOrFail($id);
@@ -88,9 +90,9 @@ class UserEstadoApiController extends AppbaseController
     }
 
     /**
-    * Remove the specified UserEstado from storage.
-    * DELETE /users_estados/{id}
-    */
+     * Remove the specified UserEstado from storage.
+     * DELETE /users_estados/{id}
+     */
     public function destroy(UserEstado $userestado): JsonResponse
     {
         $userestado->delete();
@@ -98,9 +100,9 @@ class UserEstadoApiController extends AppbaseController
     }
 
     /**
-    * Get columns of the table
-    * GET /users_estados/columns
-    */
+     * Get columns of the table
+     * GET /users_estados/columns
+     */
     public function getColumnas(): JsonResponse
     {
 

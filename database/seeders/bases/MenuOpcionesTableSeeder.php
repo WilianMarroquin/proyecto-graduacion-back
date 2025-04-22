@@ -51,6 +51,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "parent_id" => null
         ]);
 
+// Submenús del Modulo Usuarios
         MenuOpcion::create([
             "id" => 4,
             "titulo" => "Usuarios",
@@ -75,39 +76,28 @@ class MenuOpcionesTableSeeder extends Seeder
 
         MenuOpcion::create([
             "id" => 6,
-            "titulo" => "Catálogos",
-            "icono" => "ri-folder-open-fill",
-            "ruta" => null,
+            "titulo" => "Estados de usuarios",
+            "icono" => "ri-folder-user-fill",
+            "ruta" => "admin-modulo-usuarios-usuario-estados",
             "orden" => 2,
-            "action" => "Ver catálogos de usuario",
-            "subject" => "User",
+            "action" => "Listar estados de usuario",
+            "subject" => "Estado",
             "parent_id" => 3
         ]);
 
         MenuOpcion::create([
             "id" => 7,
-            "titulo" => "Usuarios Estados",
-            "icono" => "ri-folder-user-fill",
-            "ruta" => "admin-modulo-usuarios-usuario-estados",
-            "orden" => 0,
-            "action" => "Listar estados de usuario",
-            "subject" => "Estado",
-            "parent_id" => 6
+            "titulo" => "Permisos",
+            "icono" => "ri-file-shield-2-fill",
+            "ruta" => "admin-modulo-usuarios-permisos",
+            "orden" => 3,
+            "action" => "Listar permisos",
+            "subject" => "Permission",
+            "parent_id" => 3
         ]);
 
         MenuOpcion::create([
             "id" => 8,
-            "titulo" => "Permisos",
-            "icono" => "ri-file-shield-2-fill",
-            "ruta" => "admin-modulo-usuarios-permisos",
-            "orden" => 1,
-            "action" => "Listar permisos",
-            "subject" => "Permission",
-            "parent_id" => 6
-        ]);
-
-        MenuOpcion::create([
-            "id" => 9,
             "titulo" => "Configuraciones",
             "icono" => "ri-folder-settings-fill",
             "ruta" => null,
@@ -118,29 +108,29 @@ class MenuOpcionesTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 10,
+            "id" => 9,
             "titulo" => "Opciones Menu",
             "icono" => "ri-apps-2-add-line",
             "ruta" => "admin-configuraciones-menu",
             "orden" => 0,
             "action" => "Listar Menu Opciones",
             "subject" => "Menu Opcion",
-            "parent_id" => 9
+            "parent_id" => 8
         ]);
 
         MenuOpcion::create([
-            "id" => 11,
+            "id" => 10,
             "titulo" => "Generales",
             "icono" => "ri-settings-3-fill",
             "ruta" => "admin-configuraciones-generales",
             "orden" => 1,
             "action" => "Listar configuraciones generales",
             "subject" => "Configuracion",
-            "parent_id" => 9
+            "parent_id" => 8
         ]);
 
         MenuOpcion::create([
-            "id" => 12,
+            "id" => 11,
             "titulo" => null,
             "icono" => null,
             "ruta" => null,
@@ -152,7 +142,7 @@ class MenuOpcionesTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 13,
+            "id" => 12,
             "titulo" => "Developers",
             "icono" => "ri-tools-fill",
             "ruta" => "second-page",
@@ -163,26 +153,27 @@ class MenuOpcionesTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 14,
+            "id" => 13,
             "titulo" => "Configuraciones",
             "icono" => "ri-settings-5-fill",
             "ruta" => "dev-configuraciones",
             "orden" => 0,
             "action" => "Listar Configuraciones",
             "subject" => "Configuracion",
-            "parent_id" => 13
+            "parent_id" => 12
         ]);
 
         MenuOpcion::create([
-            "id" => 15,
+            "id" => 14,
             "titulo" => "Componentes",
             "icono" => "ri-code-box-line",
             "ruta" => "dev-componentes",
             "orden" => 1,
             "action" => "Listar Componentes",
             "subject" => "Desarrollo",
-            "parent_id" => 13
+            "parent_id" => 12
         ]);
+
 
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
