@@ -43,6 +43,8 @@ Route::prefix('modulo-usuarios')->group(function () {
 
         Route::post('actualizar/foto/perfil/{user}', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'actualizarFotoPerfil']);
 
+        Route::resource('estados', \App\Http\Controllers\Api\admin\ModuloUsuarios\UserEstadoApiController::class);
+
     });
 
 });
