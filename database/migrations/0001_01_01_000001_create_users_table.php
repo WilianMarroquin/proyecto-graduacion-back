@@ -19,10 +19,18 @@ return new class extends Migration
             $table->string('segundo_apellido')->nullable();
             $table->string('usuario')->unique();
             $table->string('email')->unique()->nullable();
+            $table->unsignedBigInteger('estado_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('estado_id')
+                ->references('id')
+                ->on('users_estados')
+                ->onDelete('cascade');
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -39,6 +47,7 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
     }
 
     /**
@@ -46,6 +55,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+//        Schema::table('users', function (Blueprint $table) {
+//            $table->dropForeign(['estado_id']);
+//        });
+
+
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
