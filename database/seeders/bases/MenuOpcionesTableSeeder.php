@@ -75,24 +75,24 @@ class MenuOpcionesTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 6,
-            "titulo" => "Estados de usuarios",
-            "icono" => "ri-folder-user-fill",
-            "ruta" => "admin-modulo-usuarios-usuario-estados",
-            "orden" => 2,
-            "action" => "Listar estados de usuario",
-            "subject" => "Estado",
-            "parent_id" => 3
-        ]);
-
-        MenuOpcion::create([
             "id" => 7,
             "titulo" => "Permisos",
             "icono" => "ri-file-shield-2-fill",
             "ruta" => "admin-modulo-usuarios-permisos",
-            "orden" => 3,
+            "orden" => 2,
             "action" => "Listar permisos",
             "subject" => "Permission",
+            "parent_id" => 3
+        ]);
+
+        MenuOpcion::create([
+            "id" => 6,
+            "titulo" => "Estados de usuarios",
+            "icono" => "ri-folder-user-fill",
+            "ruta" => "admin-modulo-usuarios-usuario-estados",
+            "orden" => 3,
+            "action" => "Listar Usuario Estados",
+            "subject" => "UserEstado",
             "parent_id" => 3
         ]);
 

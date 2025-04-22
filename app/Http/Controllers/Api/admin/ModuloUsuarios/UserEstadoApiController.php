@@ -10,7 +10,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\Schema;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -72,9 +71,9 @@ class UserEstadoApiController extends AppbaseController implements HasMiddleware
      * Display the specified UserEstado.
      * GET|HEAD /users_estados/{id}
      */
-    public function show(UserEstado $userestado)
+    public function show(UserEstado $estado)
     {
-        return $this->sendResponse($userestado->toArray(), 'UserEstado recuperado con éxito.');
+        return $this->sendResponse($estado->toArray(), 'UserEstado recuperado con éxito.');
     }
 
 
@@ -93,33 +92,10 @@ class UserEstadoApiController extends AppbaseController implements HasMiddleware
      * Remove the specified UserEstado from storage.
      * DELETE /users_estados/{id}
      */
-    public function destroy(UserEstado $userestado): JsonResponse
+    public function destroy(UserEstado $estado): JsonResponse
     {
-        $userestado->delete();
+        $estado->delete();
         return $this->sendResponse(null, 'UserEstado eliminado con éxito.');
-    }
-
-    /**
-     * Get columns of the table
-     * GET /users_estados/columns
-     */
-    public function getColumnas(): JsonResponse
-    {
-
-        $columns = Schema::getColumnListing((new UserEstado)->getTable());
-
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
-
-        $nombreDeTabla = (new UserEstado)->getTable();
-
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'UserEstado',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
-        ];
-
-        return $this->sendResponse($data, 'Columnas de la tabla users_estados recuperadas con éxito.');
     }
 
 }

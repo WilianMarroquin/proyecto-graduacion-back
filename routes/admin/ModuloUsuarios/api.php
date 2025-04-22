@@ -29,9 +29,9 @@ Route::prefix('modulo-usuarios')->group(function () {
     Route::apiResource('permissions', \App\Http\Controllers\Api\admin\ModuloUsuarios\PermissionApiController::class)
         ->parameters(['permissions' => 'permission']);
 
-    Route::apiResource('users', \App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class);
-
     Route::prefix('users')->group(function () {
+
+        Route::resource('estados', \App\Http\Controllers\Api\admin\ModuloUsuarios\UserEstadoApiController::class);
 
         Route::get('obtener/roles/deUser/{user}', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'obtenerRolesDeUser']);
 
@@ -43,9 +43,9 @@ Route::prefix('modulo-usuarios')->group(function () {
 
         Route::post('actualizar/foto/perfil/{user}', [\App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class, 'actualizarFotoPerfil']);
 
-        Route::resource('estados', \App\Http\Controllers\Api\admin\ModuloUsuarios\UserEstadoApiController::class);
-
     });
+
+    Route::apiResource('users', \App\Http\Controllers\Api\admin\ModuloUsuarios\UserApiController::class);
 
 });
 
