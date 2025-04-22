@@ -36,11 +36,9 @@ class UserEstado extends Model
 
     protected $table = 'users_estados';
 
-
-    protected $fillable =
-        [
-    'nombre'
-];
+    protected $fillable = [
+        'nombre'
+    ];
 
 
     /**
@@ -48,8 +46,7 @@ class UserEstado extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'nombre' => 'string',
         'created_at' => 'timestamp',
@@ -58,16 +55,14 @@ class UserEstado extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'nombre' => 'required|string|max:255',
-];
+    public static $rules = [
+        'nombre' => 'required|string|max:255',
+    ];
 
 
     /**
@@ -75,16 +70,13 @@ class UserEstado extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
-
-    /**
-     * Accessor for relationships
-     *
-     * @var array
-     */
+    CONST ACTIVO = 1;
+    CONST INACTIVO = 2;
+    CONST BLOQUEADO = 3;
 
 
 }
