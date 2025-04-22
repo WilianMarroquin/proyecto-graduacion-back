@@ -35,8 +35,8 @@ class MenuOpcionesTableSeeder extends Seeder
             "ruta" => null,
             "orden" => 1,
             "titulo_seccion" => "Administración",
-            "action" => "Ver modulo configuracion",
-            "subject" => "Configuracion",
+            "action" => "Ver Modulo Usuarios",
+            "subject" => "User",
             "parent_id" => null
         ]);
 
@@ -46,7 +46,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-group-line",
             "ruta" => "second-page",
             "orden" => 2,
-            "action" => "Ver modulo usuarios",
+            "action" => "Ver Modulo Usuarios",
             "subject" => "User",
             "parent_id" => null
         ]);
@@ -58,7 +58,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-list-ordered-2",
             "ruta" => "admin-modulo-usuarios-usuarios",
             "orden" => 0,
-            "action" => "Listar usuarios",
+            "action" => "Listar Usuarios",
             "subject" => "User",
             "parent_id" => 3
         ]);
@@ -69,7 +69,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-folder-shield-2-line",
             "ruta" => "admin-modulo-usuarios-roles",
             "orden" => 1,
-            "action" => "Listar roles",
+            "action" => "Listar Roles",
             "subject" => "Rol",
             "parent_id" => 3
         ]);
@@ -80,7 +80,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-file-shield-2-fill",
             "ruta" => "admin-modulo-usuarios-permisos",
             "orden" => 2,
-            "action" => "Listar permisos",
+            "action" => "Listar Permisos",
             "subject" => "Permission",
             "parent_id" => 3
         ]);
@@ -102,7 +102,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-folder-settings-fill",
             "ruta" => null,
             "orden" => 3,
-            "action" => "Ver modulo configuracion",
+            "action" => "Ver Modulo Configuracion",
             "subject" => "Configuracion",
             "parent_id" => null
         ]);
@@ -124,7 +124,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "icono" => "ri-settings-3-fill",
             "ruta" => "admin-configuraciones-generales",
             "orden" => 1,
-            "action" => "Listar configuraciones generales",
+            "action" => "Listar Configuraciones Generales",
             "subject" => "Configuracion",
             "parent_id" => 8
         ]);
