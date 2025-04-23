@@ -44,7 +44,7 @@ class MenuOpcionesTableSeeder extends Seeder
             "id" => 3,
             "titulo" => "Modulo Usuarios",
             "icono" => "ri-group-line",
-            "ruta" => "second-page",
+            "ruta" => null,
             "orden" => 2,
             "action" => "Ver Modulo Usuarios",
             "subject" => "User",

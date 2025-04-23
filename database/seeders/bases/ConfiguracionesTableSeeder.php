@@ -21,7 +21,7 @@ class ConfiguracionesTableSeeder extends Seeder
 
         Configuracion::firstOrCreate([
             'key' => 'nombre_aplicacion',
-            'value' => 'Mi App',
+            'value' => 'SYSBASE',
             'descripcion' => 'Nombre de la empresa'
         ]);
 
@@ -39,7 +39,7 @@ class ConfiguracionesTableSeeder extends Seeder
 
         Configuracion::firstOrCreate([
             'key' => 'eslogan_aplicacion',
-            'value' => 'Mi App es genial',
+            'value' => 'El mejor sistema del mundo!',
             'descripcion' => 'Eslogan de la empresa'
         ]);
 
