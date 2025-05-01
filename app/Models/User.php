@@ -107,14 +107,15 @@ class User extends Authenticatable implements HasMedia
             'segundo_nombre' => $this->segundo_nombre,
             'primer_apellido' => $this->primer_apellido,
             'segundo_apellido' => $this->segundo_apellido,
-            'nombre_completo' => $this->nombre_completo, // Asegúrate que este sea un atributo del modelo o un accesor
-            'usuario' => $this->usuario, // También conocido como username en algunos casos
+            'nombre_completo' => $this->nombre_completo,
+            'usuario' => $this->usuario,
             'email' => $this->email,
+            'estado' => $this->estado()->select('id', 'nombre')->first(),
             'roles' => $this->getRoleNames(),
             'permisos' => $this->getAllPermissions()->map(function ($permission) {
                 return [
-                    'accion' => $permission->name, // Acción que el usuario puede realizar
-                    'recurso' => $permission->subject // Puedes cambiar esto por el recurso correcto
+                    'accion' => $permission->name,
+                    'recurso' => $permission->subject
                 ];
             })->toArray(),
             'avatar_thumb24' => optional($this->getMedia('avatars')->last())->getUrl('thumb24'),
@@ -141,6 +142,12 @@ class User extends Authenticatable implements HasMedia
                 ->height(75)
                 ->nonQueued();
         }
+    }
+
+    public function estado()
+    {
+        return $this->hasOne(UserEstado::class, 'id', 'estado_id');
+
     }
 
 

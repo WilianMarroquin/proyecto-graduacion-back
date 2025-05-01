@@ -201,6 +201,9 @@ class UserApiController extends AppbaseController implements HasMiddleware
             'roles' => function ($query) {
                 $query->select('id', 'name');
             },
+            'estado' => function ($query) {
+                $query->select('id', 'nombre');
+            }
         ]);
 
         $data = [
