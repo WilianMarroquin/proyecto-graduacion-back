@@ -36,6 +36,12 @@ class Rol extends SpatieRole
     protected $table = 'roles';
 
     const GUARD_NAME_ACTUAL = 'web';
+
+    CONST ADMINISTRADOR = 1;
+    CONST EMPLEADO = 2;
+    CONST PROGRAMADOR = 3;
+    CONST SUPER_ADMIN = 4;
+
     protected $fillable = [
         'name',
         'guard_name'
