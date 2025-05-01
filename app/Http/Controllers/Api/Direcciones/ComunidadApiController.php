@@ -18,19 +18,19 @@ use Spatie\QueryBuilder\QueryBuilder;
 class ComunidadApiController extends AppbaseController
 {
 
-      /**
-  //     * @return array
-  //     */
-      public static function middleware(): array
-      {
-          return [
+    /**
+     * //     * @return array
+     * //     */
+    public static function middleware(): array
+    {
+        return [
 //              new Middleware('permission:Listar Comunidades', only: ['index']),
-              new Middleware('permission:Ver Comunidades', only: ['show']),
-              new Middleware('permission:Crear Comunidades', only: ['store']),
-              new Middleware('permission:Editar Comunidades', only: ['update']),
-              new Middleware('permission:Eliminar Comunidades', only: ['destroy']),
-          ];
-      }
+            new Middleware('permission:Ver Comunidades', only: ['show']),
+            new Middleware('permission:Crear Comunidades', only: ['store']),
+            new Middleware('permission:Editar Comunidades', only: ['update']),
+            new Middleware('permission:Eliminar Comunidades', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the Comunidades.
@@ -41,11 +41,12 @@ class ComunidadApiController extends AppbaseController
         $comunidades = QueryBuilder::for(Comunidad::class)
             ->with([])
             ->allowedFilters([
-    'nombre'
-])
+                'nombre'
+            ])
             ->allowedSorts([
-    'nombre'
-])
+                'id',
+                'nombre',
+            ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
@@ -75,9 +76,9 @@ class ComunidadApiController extends AppbaseController
     }
 
     /**
-    * Update the specified Comunidad in storage.
-    * PUT/PATCH /comunidades/{id}
-    */
+     * Update the specified Comunidad in storage.
+     * PUT/PATCH /comunidades/{id}
+     */
     public function update(UpdateComunidadApiRequest $request, $id): JsonResponse
     {
         $comunidad = Comunidad::findOrFail($id);
@@ -86,9 +87,9 @@ class ComunidadApiController extends AppbaseController
     }
 
     /**
-    * Remove the specified Comunidad from storage.
-    * DELETE /comunidades/{id}
-    */
+     * Remove the specified Comunidad from storage.
+     * DELETE /comunidades/{id}
+     */
     public function destroy(Comunidad $comunidad): JsonResponse
     {
         $comunidad->delete();
@@ -96,9 +97,9 @@ class ComunidadApiController extends AppbaseController
     }
 
     /**
-    * Get columns of the table
-    * GET /comunidades/columns
-    */
+     * Get columns of the table
+     * GET /comunidades/columns
+     */
     public function getColumnas(): JsonResponse
     {
 
