@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('paja_aguas', function (Blueprint $table) {
-            $table->foreign(['residente_id'], 'fk_pajas_aguas_residentes1')
+        Schema::table('servicio_aguas', function (Blueprint $table) {
+            $table->foreign(['residente_id'], 'fk_seervicio_aguas_residentes1')
                 ->references(['id'])
                 ->on('residentes')
                 ->onUpdate('no action')
                 ->onDelete('no action');
 
-            $table->foreign(['estado_id'], 'fk_pajas_aguas_estados1')
+            $table->foreign(['estado_id'], 'fk_servicio_aguas_estados1')
                 ->references(['id'])
                 ->on('servicio_agua_estados')
                 ->onUpdate('no action')
@@ -31,9 +31,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('paja_aguas', function (Blueprint $table) {
-            $table->dropForeign('fk_pajas_aguas_residentes1');
-            $table->dropForeign('fk_pajas_aguas_estados1');
+        Schema::table('servicio_aguas', function (Blueprint $table) {
+            $table->dropForeign('fk_seervicio_aguas_residentes1');
+            $table->dropForeign('fk_servicio_aguas_estados1');
         });
     }
 };

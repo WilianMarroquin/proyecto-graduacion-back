@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paja_agua_bitacoras', function (Blueprint $table) {
+        Schema::create('servicio_agua_bitacoras', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->dateTime('fecha_registro');
             $table->unsignedBigInteger('residente_id');
-            $table->unsignedBigInteger('paja_agua_id');
+            $table->unsignedBigInteger('servicio_agua_id');
             $table->unsignedBigInteger('transaccion_id');
             $table->unsignedBigInteger('direccion_id');
             $table->unsignedBigInteger('user_transacciona_id');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paja_agua_bitacoras');
+        Schema::dropIfExists('servicio_agua_bitacoras');
     }
 };

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paja_agua_bitacora_tipo_transacciones', function (Blueprint $table) {
+        Schema::create('servicio_agua_bitacora_tipo_transacciones', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('nombre', 100);
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paja_agua_bitacora_tipo_transacciones');
+        Schema::dropIfExists('servicio_agua_bitacora_tipo_transacciones');
     }
 };
