@@ -77,7 +77,7 @@ class GeneradorCrudCommand extends Command
 
     private function generateFiles($fillable, $validationRules, $relationships, $casts)
     {
-        $tableNameM = ucfirst($this->nombreTabla); // Nombre de la tabla en mayúsculas
+        $tableNameM = ucfirst($this->nombreTabla);
 
         $pathSub = $this->subdirectorio ? $this->subdirectorio . DIRECTORY_SEPARATOR : '';
 
@@ -85,13 +85,7 @@ class GeneradorCrudCommand extends Command
         $controlador = "{$this->nombreModelo}ApiController";
         $createRequest = "Create{$this->nombreModelo}ApiRequest";
         $updateRequest = "Update{$this->nombreModelo}ApiRequest";
-        $seedername = "{$this->nombreTabla}TableSeeder";
-
-        // Paths
-//        $modelPath = app_path("Models/{$modelo}.php");
-//        $controllerPath = app_path("Http/Controllers/Api/{$controlador}.php");
-//        $createRequestPath = app_path("Http/Requests/Api/{$createRequest}.php");
-//        $updateRequestPath = app_path("Http/Requests/Api/{$updateRequest}.php");
+        $seedername = "{$this->nombreModelo}TableSeeder";
         $seederPath = "Database/seeders/{$seedername}.php";
 
         $modelPath = app_path("Models/{$pathSub}{$modelo}.php");
@@ -148,10 +142,10 @@ class GeneradorCrudCommand extends Command
         File::put($updateRequestPath, str_replace(array_keys($replacements), $replacements, $updateRequestStub));
         File::put($seederPath, str_replace(array_keys($replacements), $replacements, $seederStub));
 
-        $this->info($modelPath);
+
         // Ejecutar el comando ide-helper:models para agregar anotaciones
         $this->callSilent('ide-helper:models', [
-            'model' => [$modelPath],
+            'model' => [$this->namespace.'\\'.$modelo],
             '--reset' => true,
             '--write' => true,
             '--no-interaction' => true, // Evita cualquier interacción del usuario
@@ -345,7 +339,6 @@ class GeneradorCrudCommand extends Command
         return $formattedRules;
     }
 
-
     private function generateCasts(): string
     {
         $columns = $this->schema->getColumns($this->nombreTabla);
@@ -400,7 +393,6 @@ class GeneradorCrudCommand extends Command
         return $formattedCasts;
 
     }
-
 
     private function generateRelationships(): string
     {
@@ -467,7 +459,6 @@ class GeneradorCrudCommand extends Command
         return '';
     }
 
-
     private function isPivotTable(string $nombreTabla): bool
     {
         $foreignKeys = $this->schema->getForeignKeys($nombreTabla);
@@ -475,7 +466,6 @@ class GeneradorCrudCommand extends Command
         // Una tabla pivote generalmente tiene exactamente 2 claves foráneas
         return count($foreignKeys) === 2 && $this->schema->getColumnCount($nombreTabla) <= 3;
     }
-
 
     private function isUniqueForeignKey(string $nombreTabla, string $nombreColumna): bool
     {
@@ -489,7 +479,6 @@ class GeneradorCrudCommand extends Command
 
         return false;
     }
-
 
     private function isPolymorphic(array $columns): bool
     {
