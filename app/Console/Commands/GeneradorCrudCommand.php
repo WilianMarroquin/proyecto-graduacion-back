@@ -77,7 +77,7 @@ class GeneradorCrudCommand extends Command
 
     private function generateFiles($fillable, $validationRules, $relationships, $casts)
     {
-        $tableNameM = ucfirst($this->nombreTabla); // Nombre de la tabla en mayúsculas
+        $tableNameM = ucfirst($this->nombreTabla);
 
         $pathSub = $this->subdirectorio ? $this->subdirectorio . DIRECTORY_SEPARATOR : '';
 
@@ -85,13 +85,7 @@ class GeneradorCrudCommand extends Command
         $controlador = "{$this->nombreModelo}ApiController";
         $createRequest = "Create{$this->nombreModelo}ApiRequest";
         $updateRequest = "Update{$this->nombreModelo}ApiRequest";
-        $seedername = "{$this->nombreTabla}TableSeeder";
-
-        // Paths
-//        $modelPath = app_path("Models/{$modelo}.php");
-//        $controllerPath = app_path("Http/Controllers/Api/{$controlador}.php");
-//        $createRequestPath = app_path("Http/Requests/Api/{$createRequest}.php");
-//        $updateRequestPath = app_path("Http/Requests/Api/{$updateRequest}.php");
+        $seedername = "{$this->nombreModelo}TableSeeder";
         $seederPath = "Database/seeders/{$seedername}.php";
 
         $modelPath = app_path("Models/{$pathSub}{$modelo}.php");
@@ -121,7 +115,7 @@ class GeneradorCrudCommand extends Command
             '{{ model }}' => $this->nombreModelo,
             '{{ variable }}' => $this->variable,
             '{{ variable_plural }}' => $nombreTabla,
-            '{{ variableTitleCase }}' => $this->formatoTitleCase($this->nombreTabla),
+            '{{ variableTitleCase }}' => $this->convertirATitleCase($this->nombreModelo),
             '{{ tableNameM }}' => $tableNameM,
             '{{ createRequest }}' => $createRequest,
             '{{ updateRequest }}' => $updateRequest,
@@ -148,9 +142,10 @@ class GeneradorCrudCommand extends Command
         File::put($updateRequestPath, str_replace(array_keys($replacements), $replacements, $updateRequestStub));
         File::put($seederPath, str_replace(array_keys($replacements), $replacements, $seederStub));
 
+
         // Ejecutar el comando ide-helper:models para agregar anotaciones
         $this->callSilent('ide-helper:models', [
-            'model' => ['App\\Models\\'.$modelo],
+            'model' => [$this->namespace.'\\'.$modelo],
             '--reset' => true,
             '--write' => true,
             '--no-interaction' => true, // Evita cualquier interacción del usuario
@@ -344,7 +339,6 @@ class GeneradorCrudCommand extends Command
         return $formattedRules;
     }
 
-
     private function generateCasts(): string
     {
         $columns = $this->schema->getColumns($this->nombreTabla);
@@ -399,7 +393,6 @@ class GeneradorCrudCommand extends Command
         return $formattedCasts;
 
     }
-
 
     private function generateRelationships(): string
     {
@@ -466,7 +459,6 @@ class GeneradorCrudCommand extends Command
         return '';
     }
 
-
     private function isPivotTable(string $nombreTabla): bool
     {
         $foreignKeys = $this->schema->getForeignKeys($nombreTabla);
@@ -474,7 +466,6 @@ class GeneradorCrudCommand extends Command
         // Una tabla pivote generalmente tiene exactamente 2 claves foráneas
         return count($foreignKeys) === 2 && $this->schema->getColumnCount($nombreTabla) <= 3;
     }
-
 
     private function isUniqueForeignKey(string $nombreTabla, string $nombreColumna): bool
     {
@@ -488,7 +479,6 @@ class GeneradorCrudCommand extends Command
 
         return false;
     }
-
 
     private function isPolymorphic(array $columns): bool
     {
@@ -506,11 +496,48 @@ class GeneradorCrudCommand extends Command
 
     }
 
-    private function formatoTitleCase($texto) {
-        // Capitaliza cada palabra
-        $textoCapitalizado = ucwords(strtolower($texto));
+    function pluralizar(string $palabra): string
+    {
+        $vocales = ['a', 'e', 'i', 'o', 'u'];
+        $ultima = strtolower(substr($palabra, -1));
+        $penultima = strtolower(substr($palabra, -2, 1));
 
-        return $textoCapitalizado;
+        if (in_array($ultima, $vocales)) {
+            return $palabra . 's';
+        } elseif ($ultima === 'z') {
+            return substr($palabra, 0, -1) . 'ces';
+        } elseif ($ultima === 'n' || $ultima === 'r') {
+            return $palabra . 'es';
+        } elseif ($ultima === 'l' && $penultima === 'e') {
+            return $palabra . 'es';
+        } else {
+            return $palabra . 'es';
+        }
     }
+
+    function convertirATitleCase(string $texto): string
+    {
+        // Insertar espacios entre letras minúsculas seguidas de mayúsculas (Ej: "MiTexto" → "Mi Texto")
+        $textoSeparado = preg_replace('/([a-z])([A-Z])/', '$1 $2', $texto);
+
+        // Separar por espacio, guión, guión bajo, slash, etc.
+        $palabras = preg_split('/[\s\/_-]+/', $textoSeparado);
+
+        if (!$palabras || count($palabras) === 0) {
+            return $texto;
+        }
+
+        // Pluralizar la última palabra
+        $ultimaPalabra = array_pop($palabras);
+        $palabras[] = $this->pluralizar($ultimaPalabra);
+
+        // Capitalizar todas las palabras
+        $resultado = array_map(function ($palabra) {
+            return ucfirst(strtolower($palabra));
+        }, $palabras);
+
+        return implode(' ', $resultado);
+    }
+
 
 }
