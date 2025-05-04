@@ -3,6 +3,7 @@
 namespace Database\Seeders\ServicioAgua;
 
 use App\Models\Direcciones\Comunidad;
+use App\Models\Direcciones\ComunidadBarrio;
 use Illuminate\Database\Seeder;
 
 class IndexTableSeeder extends Seeder
@@ -17,6 +18,7 @@ class IndexTableSeeder extends Seeder
         $this->call([
             Permisos\PermisosComunidadTableSeeder::class,
             ComunidadesTableSeeder::class,
+            ComunidadBarriosTableSeeder::class
         ]);
     }
 }

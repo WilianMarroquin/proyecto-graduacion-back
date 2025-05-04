@@ -24,7 +24,7 @@ class ComunidadApiController extends AppbaseController
     public static function middleware(): array
     {
         return [
-//              new Middleware('permission:Listar Comunidades', only: ['index']),
+            new Middleware('permission:Listar Comunidades', only: ['index']),
             new Middleware('permission:Ver Comunidades', only: ['show']),
             new Middleware('permission:Crear Comunidades', only: ['store']),
             new Middleware('permission:Editar Comunidades', only: ['update']),
