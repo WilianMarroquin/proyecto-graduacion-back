@@ -1,12 +1,24 @@
 <?php
 
+use App\Http\Controllers\Api\Direcciones\ComunidadApiController;
+use App\Http\Controllers\Api\Direcciones\ComunidadBarrioApiController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/direccion')->group(function () {
 
-    Route::apiResource('comunidades', \App\Http\Controllers\Api\Direcciones\ComunidadApiController::class)
-        ->parameters(['comunidades' => 'comunidad']);
+    Route::prefix('/comunidades')->group(function () {
 
-    Route::apiResource('comunidad/barrios', App\Http\Controllers\Api\Direcciones\ComunidadBarrioApiController::class);
+        Route::get('obtener/todas', [ComunidadApiController::class, 'obtenerTodos']);
+
+        Route::apiResource('/', ComunidadApiController::class)->parameters(['' => 'comunidad']);
+
+    });
+
+    Route::prefix('/comunidad/barrios')->group(function () {
+
+        Route::apiResource('/', ComunidadBarrioApiController::class)->parameters(['' => 'barrio']);
+
+    });
 });
 

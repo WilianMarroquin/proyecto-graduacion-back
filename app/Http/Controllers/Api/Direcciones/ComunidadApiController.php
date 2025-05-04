@@ -100,23 +100,11 @@ class ComunidadApiController extends AppbaseController
      * Get columns of the table
      * GET /comunidades/columns
      */
-    public function getColumnas(): JsonResponse
+    public function obtenerTodos()
     {
+        $comunidades = Comunidad::all();
+        return $this->sendResponse($comunidades, 'Columnas recuperadas con éxito.');
 
-        $columns = Schema::getColumnListing((new Comunidad)->getTable());
-
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
-
-        $nombreDeTabla = (new Comunidad)->getTable();
-
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'Comunidad',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
-        ];
-
-        return $this->sendResponse($data, 'Columnas de la tabla comunidades recuperadas con éxito.');
     }
 
 }
