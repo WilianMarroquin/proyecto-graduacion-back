@@ -3,11 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Process;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class GeneradorCrudCommand extends Command
 {
@@ -107,6 +106,7 @@ class GeneradorCrudCommand extends Command
             '{{ model }}' => $this->nombreModelo,
             '{{ variable }}' => $this->variable,
             '{{ variable_plural }}' => $nombreTabla,
+            '{{ variableTitleCase }}' => $this->formatoTitleCase($this->nombreTabla),
             '{{ tableNameM }}' => $tableNameM,
             '{{ createRequest }}' => $createRequest,
             '{{ updateRequest }}' => $updateRequest,
@@ -481,6 +481,13 @@ class GeneradorCrudCommand extends Command
             return in_array($key, $camposSinTimestamp);
         }, ARRAY_FILTER_USE_KEY);
 
+    }
+
+    private function formatoTitleCase($texto) {
+        // Capitaliza cada palabra
+        $textoCapitalizado = ucwords(strtolower($texto));
+
+        return $textoCapitalizado;
     }
 
 }
