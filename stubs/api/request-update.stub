@@ -3,7 +3,7 @@
 namespace {{ requestNamespace }};
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\{{ model }};
+use {{ modelNamespace }}\{{ model }};
 
 class {{ updateRequest }} extends FormRequest
 {
@@ -15,7 +15,7 @@ class {{ updateRequest }} extends FormRequest
     public function rules()
     {
 
-            return {{ model }}::$rules;
+         return {{ model }}::$rules;
 
     }
 }

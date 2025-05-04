@@ -3,11 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Process;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class GeneradorCrudCommand extends Command
 {
@@ -27,6 +26,7 @@ class GeneradorCrudCommand extends Command
     private $castFormatoOriginal;
 
     private $columnasDeTabla;
+    private $subdirectorio;
 
     public function handle()
     {
@@ -35,9 +35,16 @@ class GeneradorCrudCommand extends Command
         $this->schema = Schema::connection($this->conexion);    // Esquema de la base de datos
         $this->nombreTabla = $this->argument('table');  // Nombre de la tabla
         $this->nombreModelo = Str::studly($this->argument('modelo')); // Nombre del modelo
+        $subdirectorio = $this->ask('¿Deseas generar los archivos dentro de un subdirectorio? (Ej: Admin/Usuarios, ENTER para usar la ubicación por defecto)');
+        $this->subdirectorio = trim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $subdirectorio));
         $this->variable = strtolower($this->nombreModelo); // Nombre de la variable en singular (ej: `user`)
         $this->variablePlural = Str::kebab(Str::pluralStudly($this->nombreModelo)); // Nombre de recurso en kebab-case (ej: `users`)
 
+        if($this->subdirectorio) {
+            $this->namespace .= '\\' . str_replace(DIRECTORY_SEPARATOR, '\\', $this->subdirectorio);
+            $this->controllerNamespace .= '\\' . str_replace(DIRECTORY_SEPARATOR, '\\', $this->subdirectorio);
+            $this->requestNamespace .= '\\' . str_replace(DIRECTORY_SEPARATOR, '\\', $this->subdirectorio);
+        }
 
         // Verificar si la tabla existe
         if (!$this->schema->hasTable($this->nombreTabla)) {
@@ -72,6 +79,8 @@ class GeneradorCrudCommand extends Command
     {
         $tableNameM = ucfirst($this->nombreTabla); // Nombre de la tabla en mayúsculas
 
+        $pathSub = $this->subdirectorio ? $this->subdirectorio . DIRECTORY_SEPARATOR : '';
+
         $modelo = "{$this->nombreModelo}";
         $controlador = "{$this->nombreModelo}ApiController";
         $createRequest = "Create{$this->nombreModelo}ApiRequest";
@@ -79,11 +88,16 @@ class GeneradorCrudCommand extends Command
         $seedername = "{$this->nombreTabla}TableSeeder";
 
         // Paths
-        $modelPath = app_path("Models/{$modelo}.php");
-        $controllerPath = app_path("Http/Controllers/Api/{$controlador}.php");
-        $createRequestPath = app_path("Http/Requests/Api/{$createRequest}.php");
-        $updateRequestPath = app_path("Http/Requests/Api/{$updateRequest}.php");
+//        $modelPath = app_path("Models/{$modelo}.php");
+//        $controllerPath = app_path("Http/Controllers/Api/{$controlador}.php");
+//        $createRequestPath = app_path("Http/Requests/Api/{$createRequest}.php");
+//        $updateRequestPath = app_path("Http/Requests/Api/{$updateRequest}.php");
         $seederPath = "Database/seeders/{$seedername}.php";
+
+        $modelPath = app_path("Models/{$pathSub}{$modelo}.php");
+        $controllerPath = app_path("Http/Controllers/Api/{$pathSub}{$controlador}.php");
+        $createRequestPath = app_path("Http/Requests/Api/{$pathSub}{$createRequest}.php");
+        $updateRequestPath = app_path("Http/Requests/Api/{$pathSub}{$updateRequest}.php");
 
         // Stubs
         $modelStub = File::get(base_path('stubs/api/model.stub'));
@@ -107,6 +121,7 @@ class GeneradorCrudCommand extends Command
             '{{ model }}' => $this->nombreModelo,
             '{{ variable }}' => $this->variable,
             '{{ variable_plural }}' => $nombreTabla,
+            '{{ variableTitleCase }}' => $this->formatoTitleCase($this->nombreTabla),
             '{{ tableNameM }}' => $tableNameM,
             '{{ createRequest }}' => $createRequest,
             '{{ updateRequest }}' => $updateRequest,
@@ -119,6 +134,12 @@ class GeneradorCrudCommand extends Command
             '{{ casts }}' => $casts,
             '{{ otro }}' => $fillable,
         ];
+
+        foreach ([$modelPath, $controllerPath, $createRequestPath, $updateRequestPath] as $path) {
+            if (!File::exists(dirname($path))) {
+                File::makeDirectory(dirname($path), 0755, true);
+            }
+        }
 
         // Generar archivos
         File::put($modelPath, str_replace(array_keys($replacements), $replacements, $modelStub));
@@ -185,11 +206,13 @@ class GeneradorCrudCommand extends Command
         $routePath = base_path('routes/api.php');
         $resourceName = $this->variablePlural; // Nombre de recurso en kebab-case (ej: `users`)
         $controllerName = "{$this->nombreModelo}ApiController";
-        $controllerNamespace = 'App\\Http\\Controllers\\Api\\';
         $nombreTabla = str_contains($this->nombreTabla, '.') ? explode('.', $this->nombreTabla)[1] : $this->nombreTabla;
 
-        $route = "Route::apiResource('{$nombreTabla}', $controllerNamespace{$controllerName}::class)
+        $controladorCompleto = $this->controllerNamespace . '\\' . $controllerName;
+
+        $route = "Route::apiResource('{$nombreTabla}', {$controladorCompleto}::class)
         ->parameters(['{$nombreTabla}' => '{$this->variable}']);";
+
 
         if (!File::exists($routePath)) {
             $this->error("El archivo de rutas 'routes/api.php' no existe.");
@@ -481,6 +504,13 @@ class GeneradorCrudCommand extends Command
             return in_array($key, $camposSinTimestamp);
         }, ARRAY_FILTER_USE_KEY);
 
+    }
+
+    private function formatoTitleCase($texto) {
+        // Capitaliza cada palabra
+        $textoCapitalizado = ucwords(strtolower($texto));
+
+        return $textoCapitalizado;
     }
 
 }
