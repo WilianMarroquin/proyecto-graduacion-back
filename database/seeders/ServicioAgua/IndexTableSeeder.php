@@ -19,7 +19,8 @@ class IndexTableSeeder extends Seeder
             Permisos\PermisosComunidadTableSeeder::class,
             ComunidadesTableSeeder::class,
             ComunidadBarriosTableSeeder::class,
-            ComunidadBarrioDireccionTableSeeder::class
+            ComunidadBarrioDireccionTableSeeder::class,
+            GenerosTableSeeder::class
         ]);
     }
 }

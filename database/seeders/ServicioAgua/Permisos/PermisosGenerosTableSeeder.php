@@ -7,16 +7,16 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class PermisosComunidadBarriosTableSeeder extends Seeder
+class PermisosGenerosTableSeeder extends Seeder
 {
     public function run(): void
     {
         $permisos = [
-            'Listar Comunidad Barrios',
-            'Ver Comunidad Barrios',
-            'Crear Comunidad Barrios',
-            'Editar Comunidad Barrios',
-            'Eliminar Comunidad Barrios',
+            'Listar Generos',
+            'Ver Generos',
+            'Crear Generos',
+            'Editar Generos',
+            'Eliminar Generos',
         ];
 
         $permisosCreados = [];
@@ -24,7 +24,7 @@ class PermisosComunidadBarriosTableSeeder extends Seeder
         foreach ($permisos as $permiso) {
             $permisoCreado = Permission::firstOrCreate([
                 'name' => $permiso,
-                'subject' => 'ComunidadBarrio',
+                'subject' => 'Genero',
                 'guard_name' => 'web',
             ]);
             $permisosCreados[] = $permisoCreado;

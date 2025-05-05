@@ -13,6 +13,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     require __DIR__.'/direcciones/api.php';
 
+    require __DIR__.'/residentes/api.php';
+
 });
 
 require __DIR__.'/auth.php';
