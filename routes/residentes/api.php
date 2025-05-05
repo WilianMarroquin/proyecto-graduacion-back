@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Residentes\GeneroApiController;
+use App\Http\Controllers\Api\Residentes\ResidenteApiController;
 use App\Http\Controllers\Api\Residentes\ResidenteTelefonoApiController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,7 @@ Route::prefix('/residentes')->group(function () {
             ->parameters(['' => 'telefono']);
 
     });
+
+    Route::apiResource('/', ResidenteApiController::class)
+        ->parameters(['' => 'residente']);
 });

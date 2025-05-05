@@ -74,9 +74,9 @@ class ResidenteTelefonoApiController extends AppbaseController implements HasMid
      * Display the specified ResidenteTelefono.
      * GET|HEAD /residente_telefonos/{id}
      */
-    public function show(ResidenteTelefono $residentetelefono)
+    public function show(ResidenteTelefono $telefono)
     {
-        return $this->sendResponse($residentetelefono->toArray(), 'Teléfono recuperado con éxito.');
+        return $this->sendResponse($telefono->toArray(), 'Teléfono recuperado con éxito.');
     }
 
     /**
@@ -94,9 +94,9 @@ class ResidenteTelefonoApiController extends AppbaseController implements HasMid
      * Remove the specified ResidenteTelefono from storage.
      * DELETE /residente_telefonos/{id}
      */
-    public function destroy(ResidenteTelefono $residentetelefono): JsonResponse
+    public function destroy(ResidenteTelefono $telefono): JsonResponse
     {
-        $residentetelefono->delete();
+        $telefono->delete();
         return $this->sendResponse(null, 'Teléfono eliminado con éxito.');
     }
 

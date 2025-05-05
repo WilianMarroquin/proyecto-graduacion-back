@@ -19,6 +19,7 @@ class IndexTableSeeder extends Seeder
             PermisosComunidadBarrioDireccionesTableSeeder::class,
             PermisosGenerosTableSeeder::class,
             PermisosResidenteTelefonosTableSeeder::class,
+            PermisosResidentesTableSeeder::class,
         ]);
     }
 }

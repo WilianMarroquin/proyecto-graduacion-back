@@ -24,3 +24,4 @@ Route::prefix('libres')->group(function () {
     require __DIR__.'/admin/Configuraciones/api_libres.php';
 
 });
+

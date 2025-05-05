@@ -202,7 +202,7 @@ class OpcionesMenuTableSeeder extends Seeder
             "id" => 17,
             "titulo" => "Listado Residentes",
             "icono" => "ri-folder-user-fill",
-            "ruta" => null,
+            "ruta" => 'residentes',
             "orden" => 16,
             "action" => "Listar Residentes",
             "subject" => "Residente",
