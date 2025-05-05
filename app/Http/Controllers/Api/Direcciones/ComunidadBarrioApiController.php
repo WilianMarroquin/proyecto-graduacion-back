@@ -40,7 +40,6 @@ class ComunidadBarrioApiController extends AppbaseController implements HasMiddl
     public function index(Request $request): JsonResponse
     {
         $comunidad_barrios = QueryBuilder::for(ComunidadBarrio::class)
-            ->with([])
             ->allowedFilters([
                 'nombre',
                 'comunidad_id'
@@ -49,7 +48,10 @@ class ComunidadBarrioApiController extends AppbaseController implements HasMiddl
                 'nombre',
                 'comunidad_id'
             ])
-            ->defaultSort('-id') // Ordenar por defecto por fecha descendente
+            ->allowedIncludes([
+                'comunidad'
+            ])
+            ->defaultSort('-id')
             ->paginate($request->get('per_page', 10));
 
         return $this->sendResponse($comunidad_barrios->toArray(), 'Barrios recuperados con éxito.');
@@ -76,6 +78,8 @@ class ComunidadBarrioApiController extends AppbaseController implements HasMiddl
      */
     public function show(ComunidadBarrio $barrio)
     {
+        $barrio->load('comunidad');
+
         return $this->sendResponse($barrio->toArray(), 'Barrio recuperado con éxito.');
     }
 
@@ -88,7 +92,7 @@ class ComunidadBarrioApiController extends AppbaseController implements HasMiddl
     {
         $comunidadbarrio = ComunidadBarrio::findOrFail($id);
         $comunidadbarrio->update($request->validated());
-        return $this->sendResponse($comunidadbarrio, 'ComunidadBarrio actualizado con éxito.');
+        return $this->sendResponse($comunidadbarrio, 'Barrio actualizado con éxito.');
     }
 
     /**
@@ -102,26 +106,14 @@ class ComunidadBarrioApiController extends AppbaseController implements HasMiddl
     }
 
     /**
-     * Get columns of the table
-     * GET /comunidad_barrios/columns
+     * Obtener todos los barrios
      */
-    public function getColumnas(): JsonResponse
+    public function obtenerTodos(): JsonResponse
     {
+        $barrio = ComunidadBarrio::all();
+        return $this->sendResponse($barrio->toArray(), 'Barrios recuperados con éxito.');
 
-        $columns = Schema::getColumnListing((new ComunidadBarrio)->getTable());
-
-        $columnasSinTimesTamps = array_diff($columns, ['id', 'created_at', 'updated_at', 'deleted_at']);
-
-        $nombreDeTabla = (new ComunidadBarrio)->getTable();
-
-        $data = [
-            'columns' => array_values($columnasSinTimesTamps),
-            'nombreDelModelo' => 'ComunidadBarrio',
-            'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
-        ];
-
-        return $this->sendResponse($data, 'Columnas de la tabla comunidad_barrios recuperadas con éxito.');
     }
+
 
 }

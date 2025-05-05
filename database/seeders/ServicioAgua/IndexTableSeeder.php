@@ -18,7 +18,8 @@ class IndexTableSeeder extends Seeder
         $this->call([
             Permisos\PermisosComunidadTableSeeder::class,
             ComunidadesTableSeeder::class,
-            ComunidadBarriosTableSeeder::class
+            ComunidadBarriosTableSeeder::class,
+            ComunidadBarrioDireccionTableSeeder::class
         ]);
     }
 }

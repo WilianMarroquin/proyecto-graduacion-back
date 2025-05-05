@@ -16,11 +16,10 @@ class ComunidadBarrio extends Model
     protected $table = 'comunidad_barrios';
 
 
-    protected $fillable =
-        [
-    'nombre',
-    'comunidad_id'
-];
+    protected $fillable = [
+        'nombre',
+        'comunidad_id'
+    ];
 
 
     /**
@@ -28,8 +27,7 @@ class ComunidadBarrio extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'nombre' => 'string',
         'comunidad_id' => 'integer',
@@ -39,17 +37,15 @@ class ComunidadBarrio extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'nombre' => 'required|string|max:255',
-    'comunidad_id' => 'required|integer',
-];
+    public static $rules = [
+        'nombre' => 'required|string|max:255',
+        'comunidad_id' => 'required|integer',
+    ];
 
 
     /**
@@ -57,7 +53,7 @@ class ComunidadBarrio extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -67,9 +63,9 @@ class ComunidadBarrio extends Model
      *
      * @var array
      */
-    public function comunidade()
+    public function comunidad()
     {
-    return $this->belongsTo(Comunidade::class,'comunidad_id','id');
+        return $this->belongsTo(Comunidad::class, 'comunidad_id', 'id');
     }
 
 }

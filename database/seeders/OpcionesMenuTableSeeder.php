@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Direcciones\Comunidad;
 use App\Models\MenuOpcion;
-use Database\Seeders\ServicioAgua\ComunidadesTableSeeder;
-use Database\Seeders\ServicioAgua\Permisos;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -125,6 +122,28 @@ class OpcionesMenuTableSeeder extends Seeder
 
         MenuOpcion::create([
             "id" => 10,
+            "titulo" => "Barrios",
+            "icono" => "ri-folder-user-fill",
+            "ruta" => 'catalogos-comunidad-barrios',
+            "orden" => 8,
+            "action" => "Listar Comunidad Barrios",
+            "subject" => "ComunidadBarrio",
+            "parent_id" => 8
+        ]);
+
+        MenuOpcion::create([
+            "id" => 11,
+            "titulo" => "Direcciones",
+            "icono" => "ri-folder-user-fill",
+            "ruta" => 'catalogos-comunidad-barrio-direcciones',
+            "orden" => 8,
+            "action" => "Listar Comunidad Barrio Direcciones",
+            "subject" => "ComunidadBarrioDireccion",
+            "parent_id" => 8
+        ]);
+
+        MenuOpcion::create([
+            "id" => 12,
             "titulo" => "Configuraciones",
             "icono" => "ri-folder-settings-fill",
             "ruta" => null,
@@ -135,29 +154,29 @@ class OpcionesMenuTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 11,
+            "id" => 13,
             "titulo" => "Opciones Menu",
             "icono" => "ri-apps-2-add-line",
             "ruta" => "admin-configuraciones-menu",
             "orden" => 10,
             "action" => "Listar Menu Opciones",
             "subject" => "Menu Opcion",
-            "parent_id" => 10
+            "parent_id" => 12
         ]);
 
         MenuOpcion::create([
-            "id" => 12,
+            "id" => 14,
             "titulo" => "Generales",
             "icono" => "ri-settings-3-fill",
             "ruta" => "admin-configuraciones-generales",
             "orden" => 11,
             "action" => "Listar Configuraciones Generales",
             "subject" => "Configuracion",
-            "parent_id" => 10
+            "parent_id" => 12
         ]);
 
         MenuOpcion::create([
-            "id" => 13,
+            "id" => 15,
             "titulo" => null,
             "icono" => null,
             "ruta" => null,
@@ -169,7 +188,7 @@ class OpcionesMenuTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 14,
+            "id" => 16,
             "titulo" => "Developers",
             "icono" => "ri-tools-fill",
             "ruta" => "second-page",
@@ -180,25 +199,25 @@ class OpcionesMenuTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 15,
+            "id" => 17,
             "titulo" => "Configuraciones",
             "icono" => "ri-settings-5-fill",
             "ruta" => "dev-configuraciones",
             "orden" => 14,
             "action" => "Listar Configuraciones",
             "subject" => "Configuracion",
-            "parent_id" => 14
+            "parent_id" => 16
         ]);
 
         MenuOpcion::create([
-            "id" => 16,
+            "id" => 18,
             "titulo" => "Componentes",
             "icono" => "ri-code-box-line",
             "ruta" => "dev-componentes",
             "orden" => 15,
             "action" => "Listar Componentes",
             "subject" => "Desarrollo",
-            "parent_id" => 14
+            "parent_id" => 16
         ]);
 
 
