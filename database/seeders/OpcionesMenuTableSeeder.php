@@ -144,6 +144,17 @@ class OpcionesMenuTableSeeder extends Seeder
 
         MenuOpcion::create([
             "id" => 12,
+            "titulo" => "Géneros",
+            "icono" => "ri-folder-user-fill",
+            "ruta" => 'catalogos-generos',
+            "orden" => 8,
+            "action" => "Listar Generos",
+            "subject" => "Genero",
+            "parent_id" => 8
+        ]);
+
+        MenuOpcion::create([
+            "id" => 13,
             "titulo" => "Configuraciones",
             "icono" => "ri-folder-settings-fill",
             "ruta" => null,
@@ -154,29 +165,29 @@ class OpcionesMenuTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 13,
+            "id" => 14,
             "titulo" => "Opciones Menu",
             "icono" => "ri-apps-2-add-line",
             "ruta" => "admin-configuraciones-menu",
             "orden" => 10,
             "action" => "Listar Menu Opciones",
             "subject" => "Menu Opcion",
-            "parent_id" => 12
+            "parent_id" => 13
         ]);
 
         MenuOpcion::create([
-            "id" => 14,
+            "id" => 15,
             "titulo" => "Generales",
             "icono" => "ri-settings-3-fill",
             "ruta" => "admin-configuraciones-generales",
             "orden" => 11,
             "action" => "Listar Configuraciones Generales",
             "subject" => "Configuracion",
-            "parent_id" => 12
+            "parent_id" => 13
         ]);
 
         MenuOpcion::create([
-            "id" => 15,
+            "id" => 16,
             "titulo" => null,
             "icono" => null,
             "ruta" => null,
@@ -188,7 +199,7 @@ class OpcionesMenuTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 16,
+            "id" => 17,
             "titulo" => "Developers",
             "icono" => "ri-tools-fill",
             "ruta" => "second-page",
@@ -199,7 +210,7 @@ class OpcionesMenuTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 17,
+            "id" => 18,
             "titulo" => "Configuraciones",
             "icono" => "ri-settings-5-fill",
             "ruta" => "dev-configuraciones",
@@ -210,7 +221,7 @@ class OpcionesMenuTableSeeder extends Seeder
         ]);
 
         MenuOpcion::create([
-            "id" => 18,
+            "id" => 19,
             "titulo" => "Componentes",
             "icono" => "ri-code-box-line",
             "ruta" => "dev-componentes",

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $nombre
@@ -41,12 +41,11 @@ class Genero extends Model
     protected $table = 'generos';
 
 
-    protected $fillable =
-        [
-    'nombre',
-    'descripcion',
-    'estado'
-];
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'estado'
+    ];
 
 
     /**
@@ -54,8 +53,7 @@ class Genero extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'nombre' => 'string',
         'descripcion' => 'string',
@@ -66,18 +64,15 @@ class Genero extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'nombre' => 'required|string|max:150',
-    'descripcion' => 'nullable|string|max:255',
-    'estado' => 'required|integer',
-];
+    public static $rules = [
+        'nombre' => 'required|string|max:150',
+        'descripcion' => 'nullable|string|max:255',
+    ];
 
 
     /**
@@ -85,7 +80,7 @@ class Genero extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -95,6 +90,6 @@ class Genero extends Model
      *
      * @var array
      */
-    
+
 
 }

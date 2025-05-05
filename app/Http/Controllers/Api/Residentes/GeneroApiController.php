@@ -65,6 +65,8 @@ class GeneroApiController extends AppbaseController implements HasMiddleware
     {
         $input = $request->all();
 
+        $input['estado'] = 1;
+
         $generos = Genero::create($input);
 
         return $this->sendResponse($generos->toArray(), 'Genero creado con éxito.');
