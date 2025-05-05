@@ -15,6 +15,10 @@ class IndexTableSeeder extends Seeder
     {
         $this->call([
             PermisosComunidadTableSeeder::class,
+            PermisosComunidadBarriosTableSeeder::class,
+            PermisosComunidadBarrioDireccionesTableSeeder::class,
+            PermisosGenerosTableSeeder::class,
+            PermisosResidenteTelefonosTableSeeder::class,
         ]);
     }
 }

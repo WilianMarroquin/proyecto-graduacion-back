@@ -2,17 +2,22 @@
 
 namespace Database\Seeders\ServicioAgua\Permisos;
 
+use App\Models\Direcciones\ComunidadBarrioDireccion;
 use App\Models\Rol;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class PermisosGeneralesTableSeeder extends Seeder
+class PermisosComunidadBarrioDireccionesTableSeeder extends Seeder
 {
     public function run(): void
     {
         $permisos = [
-            'Listar Catalogos',
+            'Listar Comunidad Barrio Direcciones',
+            'Ver Comunidad Barrio Direcciones',
+            'Crear Comunidad Barrio Direcciones',
+            'Editar Comunidad Barrio Direcciones',
+            'Eliminar Comunidad Barrio Direcciones',
         ];
 
         $permisosCreados = [];
@@ -20,7 +25,7 @@ class PermisosGeneralesTableSeeder extends Seeder
         foreach ($permisos as $permiso) {
             $permisoCreado = Permission::firstOrCreate([
                 'name' => $permiso,
-                'subject' => 'Comunidad',
+                'subject' => 'ComunidadBarrioDireccion',
                 'guard_name' => 'web',
             ]);
             $permisosCreados[] = $permisoCreado;

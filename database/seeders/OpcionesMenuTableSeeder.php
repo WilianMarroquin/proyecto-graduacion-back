@@ -212,9 +212,9 @@ class OpcionesMenuTableSeeder extends Seeder
             "id" => 18,
             "titulo" => "Teléfonos",
             "icono" => "ri-folder-user-fill",
-            "ruta" => null,
+            "ruta" => 'residentes-catalogos-telefonos',
             "orden" => 17,
-            "action" => "Listar Telefonos",
+            "action" => "Listar Residente Telefonos",
             "subject" => "ResidenteTelefono",
             "parent_id" => 16
         ]);
