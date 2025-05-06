@@ -2,7 +2,6 @@
 
 namespace Database\Seeders\ServicioAgua\Permisos;
 
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class IndexTableSeeder extends Seeder
@@ -20,6 +19,7 @@ class IndexTableSeeder extends Seeder
             PermisosGenerosTableSeeder::class,
             PermisosResidenteTelefonosTableSeeder::class,
             PermisosResidentesTableSeeder::class,
+            PermisosResidenteTelefonoTiposTableSeeder::class,
         ]);
     }
 }

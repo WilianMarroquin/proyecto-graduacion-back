@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Residentes\GeneroApiController;
 use App\Http\Controllers\Api\Residentes\ResidenteApiController;
 use App\Http\Controllers\Api\Residentes\ResidenteTelefonoApiController;
+use App\Http\Controllers\Api\Residentes\ResidenteTelefonoTipoApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/residentes')->group(function () {
@@ -12,6 +13,12 @@ Route::prefix('/residentes')->group(function () {
     Route::apiResource('generos', GeneroApiController::class);
 
     Route::prefix('/telefonos')->group(function () {
+
+        Route::prefix('/tipos')->group(function () {
+
+            Route::apiResource('/', ResidenteTelefonoTipoApiController::class)
+                ->parameters(['' => 'tipo']);
+        });
 
         Route::apiResource('/', ResidenteTelefonoApiController::class)
             ->parameters(['' => 'telefono']);
