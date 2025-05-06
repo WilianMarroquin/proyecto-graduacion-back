@@ -20,7 +20,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 class ResidenteApiController extends AppbaseController implements HasMiddleware
 {
 
-      /**
+    /**
      * @return array
      */
     public static function middleware(): array
@@ -41,31 +41,35 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
     public function index(Request $request): JsonResponse
     {
         $residentes = QueryBuilder::for(Residente::class)
-            ->with([])
             ->allowedFilters([
-    'primer_nombre',
-    'segundo_nombre',
-    'tercer_nombre',
-    'primer_apellido',
-    'segundo_apellido',
-    'apellido_casada',
-    'dpi',
-    'fecha_nacimiento',
-    'direccion_id',
-    'genero_id'
-])
+                'primer_nombre',
+                'segundo_nombre',
+                'tercer_nombre',
+                'primer_apellido',
+                'segundo_apellido',
+                'apellido_casada',
+                'dpi',
+                'fecha_nacimiento',
+                'direccion_id',
+                'genero_id'
+            ])
             ->allowedSorts([
-    'primer_nombre',
-    'segundo_nombre',
-    'tercer_nombre',
-    'primer_apellido',
-    'segundo_apellido',
-    'apellido_casada',
-    'dpi',
-    'fecha_nacimiento',
-    'direccion_id',
-    'genero_id'
-])
+                'id',
+                'primer_nombre',
+                'segundo_nombre',
+                'tercer_nombre',
+                'primer_apellido',
+                'segundo_apellido',
+                'apellido_casada',
+                'dpi',
+                'fecha_nacimiento',
+                'direccion_id',
+                'genero_id'
+            ])
+            ->allowedIncludes([
+                'direccion',
+                'genero'
+            ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
@@ -102,9 +106,9 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
     }
 
     /**
-    * Update the specified Residente in storage.
-    * PUT/PATCH /residentes/{id}
-    */
+     * Update the specified Residente in storage.
+     * PUT/PATCH /residentes/{id}
+     */
     public function update(UpdateResidenteApiRequest $request, $id): JsonResponse
     {
         $residente = Residente::findOrFail($id);
@@ -113,9 +117,9 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
     }
 
     /**
-    * Remove the specified Residente from storage.
-    * DELETE /residentes/{id}
-    */
+     * Remove the specified Residente from storage.
+     * DELETE /residentes/{id}
+     */
     public function destroy(Residente $residente): JsonResponse
     {
         $residente->delete();

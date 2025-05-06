@@ -93,6 +93,9 @@ class Residente extends Model
         'deleted_at' => 'timestamp',
     ];
 
+    protected $appends = [
+        'nombre_completo'
+    ];
 
     /**
      * Validation rules
@@ -135,6 +138,16 @@ class Residente extends Model
     public function genero()
     {
         return $this->belongsTo(Genero::class, 'genero_id', 'id');
+    }
+
+    public function getNombreCompletoAttribute()
+    {
+        return $this->primer_nombre . ' ' .
+            ($this->segundo_nombre ? $this->segundo_nombre . ' ' : '') .
+            ($this->tercer_nombre ? $this->tercer_nombre . ' ' : '') .
+            $this->primer_apellido . ' ' .
+            ($this->segundo_apellido ? $this->segundo_apellido . ' ' : '') .
+            ($this->apellido_casada ? $this->apellido_casada : '');
     }
 
 }
