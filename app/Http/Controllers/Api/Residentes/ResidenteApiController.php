@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Residentes;
 
 use App\Http\Controllers\AppBaseController;
+use App\Models\Direcciones\ComunidadBarrioDireccion;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\Api\Residentes\CreateResidenteApiRequest;
@@ -78,6 +79,13 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
     public function store(CreateResidenteApiRequest $request): JsonResponse
     {
         $input = $request->all();
+
+        $direccion = ComunidadBarrioDireccion::create([
+            'direccion' => $input['direccion']['direccion'],
+            'barrio_id' => $input['direccion']['barrio_id'],
+        ]);
+
+        $input['direccion_id'] = $direccion->id;
 
         $residentes = Residente::create($input);
 

@@ -3,12 +3,13 @@
 namespace App\Models\Residentes;
 
 
+use App\Models\Direcciones\ComunidadBarrioDireccion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $primer_nombre
@@ -56,19 +57,18 @@ class Residente extends Model
     protected $table = 'residentes';
 
 
-    protected $fillable =
-        [
-    'primer_nombre',
-    'segundo_nombre',
-    'tercer_nombre',
-    'primer_apellido',
-    'segundo_apellido',
-    'apellido_casada',
-    'dpi',
-    'fecha_nacimiento',
-    'direccion_id',
-    'genero_id'
-];
+    protected $fillable = [
+        'primer_nombre',
+        'segundo_nombre',
+        'tercer_nombre',
+        'primer_apellido',
+        'segundo_apellido',
+        'apellido_casada',
+        'dpi',
+        'fecha_nacimiento',
+        'direccion_id',
+        'genero_id'
+    ];
 
 
     /**
@@ -76,8 +76,7 @@ class Residente extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'primer_nombre' => 'string',
         'segundo_nombre' => 'string',
@@ -95,25 +94,22 @@ class Residente extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'primer_nombre' => 'required|string|max:100',
-    'segundo_nombre' => 'nullable|string|max:100',
-    'tercer_nombre' => 'nullable|string|max:100',
-    'primer_apellido' => 'required|string|max:100',
-    'segundo_apellido' => 'nullable|string|max:100',
-    'apellido_casada' => 'nullable|string|max:100',
-    'dpi' => 'required|string|max:14',
-    'fecha_nacimiento' => 'nullable|date',
-    'direccion_id' => 'required|integer',
-    'genero_id' => 'required|integer',
-];
+    public static $rules = [
+        'primer_nombre' => 'required|string|max:100',
+        'segundo_nombre' => 'nullable|string|max:100',
+        'tercer_nombre' => 'nullable|string|max:100',
+        'primer_apellido' => 'required|string|max:100',
+        'segundo_apellido' => 'nullable|string|max:100',
+        'apellido_casada' => 'nullable|string|max:100',
+        'dpi' => 'required|string|max:14',
+        'fecha_nacimiento' => 'nullable|date',
+        'genero_id' => 'required|integer',
+    ];
 
 
     /**
@@ -121,7 +117,7 @@ class Residente extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -131,14 +127,14 @@ class Residente extends Model
      *
      * @var array
      */
-    public function comunidadBarrioDireccione()
+    public function direccion()
     {
-    return $this->belongsTo(ComunidadBarrioDireccione::class,'direccion_id','id');
+        return $this->belongsTo(ComunidadBarrioDireccion::class, 'direccion_id', 'id');
     }
 
     public function genero()
     {
-    return $this->belongsTo(Genero::class,'genero_id','id');
+        return $this->belongsTo(Genero::class, 'genero_id', 'id');
     }
 
 }
