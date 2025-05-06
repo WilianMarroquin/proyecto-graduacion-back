@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/residentes')->group(function () {
 
+    Route::get('generos/obtener/todos', [GeneroApiController::class, 'obtenerTodos']);
+
     Route::apiResource('generos', GeneroApiController::class);
 
     Route::prefix('/telefonos')->group(function () {

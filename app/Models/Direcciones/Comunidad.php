@@ -5,6 +5,7 @@ namespace App\Models\Direcciones;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -36,7 +37,7 @@ class Comunidad extends Model
 
 
     protected $fillable = [
-    'nombre'
+        'nombre'
     ];
 
 
@@ -54,15 +55,14 @@ class Comunidad extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
     public static $rules = [
-    'nombre' => 'required|string|max:255',
-];
+        'nombre' => 'required|string|max:255',
+    ];
 
 
     /**
@@ -70,7 +70,7 @@ class Comunidad extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -81,5 +81,9 @@ class Comunidad extends Model
      * @var array
      */
 
+    public function barrios(): hasMany
+    {
+        return $this->hasMany(ComunidadBarrio::class, 'comunidad_id', 'id');
+    }
 
 }

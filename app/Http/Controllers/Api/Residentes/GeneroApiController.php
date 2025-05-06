@@ -102,4 +102,26 @@ class GeneroApiController extends AppbaseController implements HasMiddleware
         return $this->sendResponse(null, 'Genero eliminado con éxito.');
     }
 
+    /**
+     * Obtener todos los generos
+     */
+    public function obtenerTodos(Request $request): JsonResponse
+    {
+        $generos = QueryBuilder::for(Genero::class)
+            ->allowedFilters([
+                'nombre',
+                'descripcion',
+                'estado'
+            ])
+            ->allowedSorts([
+                'nombre',
+                'descripcion',
+                'estado'
+            ])
+            ->defaultSort('-id') // Ordenar por defecto por fecha descendente
+            ->get();
+
+        return $this->sendResponse($generos->toArray(), 'Generos recuperados con éxito.');
+    }
+
 }

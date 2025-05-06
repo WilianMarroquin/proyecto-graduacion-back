@@ -102,7 +102,8 @@ class ComunidadApiController extends AppbaseController
      */
     public function obtenerTodos()
     {
-        $comunidades = Comunidad::all();
+        $comunidades = Comunidad::with('barrios')
+            ->get();
         return $this->sendResponse($comunidades, 'Columnas recuperadas con éxito.');
 
     }
