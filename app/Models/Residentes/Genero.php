@@ -38,7 +38,7 @@ class Genero extends Model
     use SoftDeletes;
     use HasFactory;
 
-    protected $table = 'generos';
+    protected $table = 'catalogo_generos';
 
 
     protected $fillable = [
