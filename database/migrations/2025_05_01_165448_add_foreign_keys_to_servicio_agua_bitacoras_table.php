@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->foreign(['direccion_id'], 'fk_registros_propietarios_servicio_aguas_direcciones1')
                 ->references(['id'])
-                ->on('barrio_direcciones')
+                ->on('comunidad_barrio_direcciones')
                 ->onUpdate('no action')
                 ->onDelete('no action');
 

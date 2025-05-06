@@ -17,6 +17,12 @@ return new class extends Migration
                 ->on('residentes')
                 ->onUpdate('no action')
                 ->onDelete('no action');
+
+            $table->foreign(['tipo_id'], 'fk_telefonos_residentes_tipo')
+                ->references(['id'])
+                ->on('residente_telefono_tipos')
+                ->onUpdate('no action')
+                ->onDelete('no action');
         });
     }
 
@@ -27,6 +33,7 @@ return new class extends Migration
     {
         Schema::table('residente_telefonos', function (Blueprint $table) {
             $table->dropForeign('fk_telefonos_residentes');
+//            $table->dropForeign('fk_telefonos_residentes_tipo');
         });
     }
 };

@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('residente_telefonos', function (Blueprint $table) {
+        Schema::create('residente_telefono_tipos', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('numero', 13);
-            $table->unsignedBigInteger('tipo_id')->index('fk_telefonos_residentes_tipo_idx');
-            $table->unsignedBigInteger('residente_id')->index('fk_telefonos_residentes_idx');
+            $table->string('nombre', 150);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('residente_telefonos');
+        Schema::dropIfExists('residente_telefono_tipos');
     }
 };

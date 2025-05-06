@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('residentes', function (Blueprint $table) {
             $table->foreign(['direccion_id'], 'fk_residentes_direcciones1')
                 ->references(['id'])
-                ->on('barrio_direcciones')
+                ->on('comunidad_barrio_direcciones')
                 ->onUpdate('no action')
                 ->onDelete('no action');
             $table->foreign(['genero_id'], 'fk_residentes_generos1')
