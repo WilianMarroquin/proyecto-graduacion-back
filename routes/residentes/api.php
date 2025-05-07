@@ -16,6 +16,8 @@ Route::prefix('/residentes')->group(function () {
 
         Route::prefix('/tipos')->group(function () {
 
+            Route::get('obtener/todos', [ResidenteTelefonoTipoApiController::class, 'obtenerTodos']);
+
             Route::apiResource('/', ResidenteTelefonoTipoApiController::class)
                 ->parameters(['' => 'tipo']);
         });

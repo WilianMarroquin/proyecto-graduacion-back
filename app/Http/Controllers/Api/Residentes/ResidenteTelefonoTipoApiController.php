@@ -96,4 +96,13 @@ class ResidenteTelefonoTipoApiController extends AppbaseController implements Ha
         return $this->sendResponse(null, 'Tipo de teléfono eliminado con éxito.');
     }
 
+    /**
+     * @return JsonResponse
+     */
+    public function obtenerTodos(): JsonResponse
+    {
+        $tipos = ResidenteTelefonoTipo::all();
+        return $this->sendResponse($tipos->toArray(), 'Tipos de teléfono recuperados con éxito.');
+    }
+
 }
