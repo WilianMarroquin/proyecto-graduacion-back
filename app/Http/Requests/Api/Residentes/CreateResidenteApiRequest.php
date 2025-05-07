@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\Api\Residentes;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Residentes\Residente;
-
+use Illuminate\Foundation\Http\FormRequest;
 
 
 class CreateResidenteApiRequest extends FormRequest
@@ -16,9 +15,12 @@ class CreateResidenteApiRequest extends FormRequest
 
     public function rules()
     {
-
         return Residente::$rules;
+    }
 
+    public function messages()
+    {
+        return Residente::$messages;
     }
 }
 

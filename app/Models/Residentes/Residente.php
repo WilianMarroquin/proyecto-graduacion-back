@@ -4,9 +4,9 @@ namespace App\Models\Residentes;
 
 
 use App\Models\Direcciones\ComunidadBarrioDireccion;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  *
@@ -112,6 +112,7 @@ class Residente extends Model
         'dpi' => 'required|string|max:14',
         'fecha_nacimiento' => 'nullable|date',
         'genero_id' => 'required|integer',
+        'telefonos' => 'required|array|min:1',
     ];
 
 
@@ -121,6 +122,27 @@ class Residente extends Model
      * @var array
      */
     public static $messages = [
+        'primer_nombre.required' => 'El campo primer nombre es obligatorio.',
+        'primer_nombre.string' => 'El campo primer nombre debe ser una cadena de texto.',
+        'primer_nombre.max' => 'El campo primer nombre no puede tener más de 100 caracteres.',
+        'segundo_nombre.string' => 'El campo segundo nombre debe ser una cadena de texto.',
+        'segundo_nombre.max' => 'El campo segundo nombre no puede tener más de 100 caracteres.',
+        'tercer_nombre.string' => 'El campo tercer nombre debe ser una cadena de texto.',
+        'tercer_nombre.max' => 'El campo tercer nombre no puede tener más de 100 caracteres.',
+        'primer_apellido.required' => 'El campo primer apellido es obligatorio.',
+        'primer_apellido.string' => 'El campo primer apellido debe ser una cadena de texto.',
+        'primer_apellido.max' => 'El campo primer apellido no puede tener más de 100 caracteres.',
+        'segundo_apellido.string' => 'El campo segundo apellido debe ser una cadena de texto.',
+        'segundo_apellido.max' => 'El campo segundo apellido no puede tener más de 100 caracteres.',
+        'apellido_casada.string' => 'El campo apellido casada debe ser una cadena de texto.',
+        'apellido_casada.max' => 'El campo apellido casada no puede tener más de 100 caracteres.',
+        'dpi.required' => 'El campo DPI es obligatorio.',
+        'dpi.string' => 'El campo DPI debe ser una cadena de texto.',
+        'dpi.max' => 'El campo DPI no puede tener más de 14 caracteres.',
+        'fecha_nacimiento.date' => 'El campo fecha nacimiento debe ser una fecha válida.',
+        'direccion_id.required' => 'El campo dirección es obligatorio.',
+        'telefonos.required' => 'Debe proporcionar al menos un número de teléfono.',
+        'telefonos.array' => 'El campo teléfonos debe ser un arreglo.',
 
     ];
 

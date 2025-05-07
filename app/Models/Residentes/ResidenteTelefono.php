@@ -3,9 +3,9 @@
 namespace App\Models\Residentes;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  *
@@ -40,8 +40,9 @@ class ResidenteTelefono extends Model
 
 
     protected $fillable = [
-        'telefono',
-        'residente_id'
+        'numero',
+        'residente_id',
+        'tipo_id'
     ];
 
 
@@ -52,7 +53,8 @@ class ResidenteTelefono extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'telefono' => 'string',
+        'numero' => 'string',
+        'tipo_id' => 'integer',
         'residente_id' => 'integer',
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp',
@@ -66,8 +68,9 @@ class ResidenteTelefono extends Model
      * @var array
      */
     public static $rules = [
-        'telefono' => 'required|string|max:13',
+        'numero' => 'required|string|max:13',
         'residente_id' => 'required|integer',
+        'tipo_id' => 'required|integer',
     ];
 
 

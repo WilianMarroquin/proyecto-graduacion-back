@@ -3,9 +3,9 @@
 namespace App\Models\Direcciones;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ComunidadBarrio extends Model
 {
@@ -66,6 +66,16 @@ class ComunidadBarrio extends Model
     public function comunidad()
     {
         return $this->belongsTo(Comunidad::class, 'comunidad_id', 'id');
+    }
+
+    /**
+     * Accessor for relationships
+     *
+     * @var array
+     */
+    public function direcciones()
+    {
+        return $this->hasMany(ComunidadBarrioDireccion::class, 'barrio_id', 'id');
     }
 
 }

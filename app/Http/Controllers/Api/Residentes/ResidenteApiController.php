@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Api\Residentes;
 
+use App\Exceptions\ResidenteExeption;
 use App\Http\Controllers\AppBaseController;
-use App\Models\Direcciones\ComunidadBarrioDireccion;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\Api\Residentes\CreateResidenteApiRequest;
 use App\Http\Requests\Api\Residentes\UpdateResidenteApiRequest;
 use App\Models\Residentes\Residente;
+use App\Traits\Residentes\ResidenteTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -19,6 +20,7 @@ use Spatie\QueryBuilder\QueryBuilder;
  */
 class ResidenteApiController extends AppbaseController implements HasMiddleware
 {
+    use ResidenteTrait;
 
     /**
      * @return array
@@ -82,18 +84,22 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
      */
     public function store(CreateResidenteApiRequest $request): JsonResponse
     {
-        $input = $request->all();
+        try {
+            DB::beginTransaction();
+            $direccion = $this->guardarDireccion($request->direccion);
+            $request->merge([
+                'direccion_id' => $direccion->id,
+            ]);
+            $residente = $this->crearResidente($request);
+            $this->guardarNumerosTelefono($residente->id, $request->telefonos);
+            DB::commit();
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            throw new ResidenteExeption("Error al crear residente: " . $e->getMessage());
+        }
 
-        $direccion = ComunidadBarrioDireccion::create([
-            'direccion' => $input['direccion']['direccion'],
-            'barrio_id' => $input['direccion']['barrio_id'],
-        ]);
-
-        $input['direccion_id'] = $direccion->id;
-
-        $residentes = Residente::create($input);
-
-        return $this->sendResponse($residentes->toArray(), 'Residente creado con éxito.');
+        return $this->sendResponse($residente->toArray(), 'Residente creado con éxito.');
     }
 
     /**
