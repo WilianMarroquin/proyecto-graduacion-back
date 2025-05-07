@@ -172,4 +172,13 @@ class Residente extends Model
             ($this->apellido_casada ? $this->apellido_casada : '');
     }
 
+    /**
+     * Accessor for relationships
+     * @var array
+     */
+    public function telefonos()
+    {
+        return $this->hasMany(ResidenteTelefono::class, 'residente_id', 'id');
+    }
+
 }

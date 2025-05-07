@@ -70,7 +70,8 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
             ])
             ->allowedIncludes([
                 'direccion',
-                'genero'
+                'genero',
+                'telefonos',
             ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
