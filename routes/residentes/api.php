@@ -22,6 +22,8 @@ Route::prefix('/residentes')->group(function () {
                 ->parameters(['' => 'tipo']);
         });
 
+        Route::get('obtener/telefonos/de/residente/{residente}', [ResidenteTelefonoApiController::class, 'obtenerTelefonosDeResidente']);
+
         Route::apiResource('/', ResidenteTelefonoApiController::class)
             ->parameters(['' => 'telefono']);
 

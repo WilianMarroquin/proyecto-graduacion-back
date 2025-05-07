@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\Residentes;
 
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\Api\Residentes\CreateResidenteTelefonoApiRequest;
 use App\Http\Requests\Api\Residentes\UpdateResidenteTelefonoApiRequest;
+use App\Models\Residentes\Residente;
 use App\Models\Residentes\ResidenteTelefono;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -98,6 +98,16 @@ class ResidenteTelefonoApiController extends AppbaseController implements HasMid
     {
         $telefono->delete();
         return $this->sendResponse(null, 'Teléfono eliminado con éxito.');
+    }
+
+    public function obtenerTelefonosDeResidente(Residente $residente)
+    {
+        $telefonos = $residente->telefonos()
+            ->with('tipo')
+            ->get();
+
+        return $this->sendResponse($telefonos, 'Teléfonos recuperados con éxito.');
+
     }
 
 }

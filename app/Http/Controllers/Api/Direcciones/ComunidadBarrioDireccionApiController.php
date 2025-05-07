@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api\Direcciones;
 
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\Api\Direcciones\CreateComunidadBarrioDireccionApiRequest;
 use App\Http\Requests\Api\Direcciones\UpdateComunidadBarrioDireccionApiRequest;
 use App\Models\Direcciones\ComunidadBarrioDireccion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -79,9 +78,9 @@ class ComunidadBarrioDireccionApiController extends AppbaseController implements
      */
     public function show(ComunidadBarrioDireccion $direccion)
     {
-        $direccion->load(
-            'barrio'
-        );
+        $direccion->load([
+            'barrio.comunidad',
+        ]);
 
         return $this->sendResponse($direccion->toArray(),
             'Dirección recuperado con éxito.');

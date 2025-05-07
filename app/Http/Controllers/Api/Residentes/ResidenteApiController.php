@@ -116,11 +116,22 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
      * Update the specified Residente in storage.
      * PUT/PATCH /residentes/{id}
      */
-    public function update(UpdateResidenteApiRequest $request, $id): JsonResponse
+    public function update(UpdateResidenteApiRequest $request, int $id): JsonResponse
     {
-        $residente = Residente::findOrFail($id);
-        $residente->update($request->validated());
-        return $this->sendResponse($residente, 'Residente actualizado con éxito.');
+        DB::beginTransaction();
+
+        try {
+            $residente = Residente::findOrFail($id);
+            $this->actualizarDireccion($residente, $request->direccion);
+            $this->actualizarResidente($residente->id, $request);
+            $this->sincronizarNumerosTelefono($residente->id, $request->telefonos);
+            DB::commit();
+            return $this->sendResponse($residente->toArray(), 'Residente actualizado con éxito.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new ResidenteExeption("Error al actualizar residente: " . $e->getMessage());
+        }
     }
 
     /**

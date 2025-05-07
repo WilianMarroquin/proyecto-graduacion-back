@@ -94,4 +94,9 @@ class ResidenteTelefono extends Model
         return $this->belongsTo(Residente::class, 'residente_id', 'id');
     }
 
+    public function tipo()
+    {
+        return $this->belongsTo(ResidenteTelefonoTipo::class, 'tipo_id', 'id');
+    }
+
 }
