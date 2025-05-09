@@ -100,8 +100,8 @@ class OpcionesMenuTableSeeder extends Seeder
 
         MenuOpcion::create([
             "id" => 8,
-            "titulo" => "Catálogos",
-            "icono" => "ri-folder-user-fill",
+            "titulo" => "Direcciones",
+            "icono" => "ri-folder-open-fill",
             "ruta" => null,
             "orden" => 7,
             "action" => "Listar Catalogos",
@@ -112,7 +112,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 9,
             "titulo" => "Comunidades",
-            "icono" => "ri-folder-user-fill",
+            "icono" => "ri-draft-line",
             "ruta" => 'catalogos-comunidades',
             "orden" => 8,
             "action" => "Listar Comunidades",
@@ -123,7 +123,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 10,
             "titulo" => "Barrios",
-            "icono" => "ri-folder-user-fill",
+            "icono" => "ri-draft-line",
             "ruta" => 'catalogos-comunidad-barrios',
             "orden" => 9,
             "action" => "Listar Comunidad Barrios",
@@ -134,7 +134,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 11,
             "titulo" => "Direcciones",
-            "icono" => "ri-folder-user-fill",
+            "icono" => "ri-draft-line",
             "ruta" => 'catalogos-comunidad-barrio-direcciones',
             "orden" => 10,
             "action" => "Listar Comunidad Barrio Direcciones",
@@ -212,7 +212,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 18,
             "titulo" => "Catálogos",
-            "icono" => "ri-folder-user-fill",
+            "icono" => "ri-folder-open-fill",
             "ruta" => null,
             "orden" => 17,
             "action" => "Ver Catalogos Residentes",
@@ -223,7 +223,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 19,
             "titulo" => "Teléfonos",
-            "icono" => "ri-folder-user-fill",
+            "icono" => 'ri-draft-line',
             "ruta" => 'residentes-catalogos-telefonos',
             "orden" => 18,
             "action" => "Listar Residente Telefonos",
@@ -234,7 +234,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 20,
             "titulo" => "Tipos de Teléfonos",
-            "icono" => "ri-folder-user-fill",
+            "icono" => 'ri-draft-line',
             "ruta" => 'residentes-catalogos-telefono-tipos',
             "orden" => 19,
             "action" => "Listar Residente Telefono Tipos",
@@ -245,7 +245,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 21,
             "titulo" => "Géneros",
-            "icono" => "ri-folder-user-fill",
+            "icono" => 'ri-draft-line',
             "ruta" => 'residentes-catalogos-generos',
             "orden" => 20,
             "action" => "Listar Generos",
@@ -267,7 +267,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 23,
             "titulo" => 'Servicios',
-            "icono" => 'ri-menu-2-fill',
+            "icono" => 'ri-newspaper-line',
             "ruta" => null,
             "orden" => 22,
             "titulo_seccion" => null,
@@ -279,7 +279,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 24,
             "titulo" => 'Catálogos',
-            "icono" => null,
+            "icono" => "ri-folder-open-fill",
             "ruta" => null,
             "orden" => 23,
             "titulo_seccion" => null,
@@ -291,7 +291,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 25,
             "titulo" => 'Estados',
-            "icono" => null,
+            "icono" => 'ri-draft-line',
             "ruta" => 'servicio-agua-catalogos-estados',
             "orden" => 24,
             "titulo_seccion" => null,
@@ -303,7 +303,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 26,
             "titulo" => 'Tipo Transacciónes',
-            "icono" => null,
+            "icono" => 'ri-draft-line',
             "ruta" => 'servicio-agua-catalogos-bitacora-tipo-transacciones',
             "orden" => 25,
             "titulo_seccion" => null,
@@ -314,9 +314,10 @@ class OpcionesMenuTableSeeder extends Seeder
 
         MenuOpcion::create([
             "id" => 27,
-            "titulo" => "Developers",
-            "icono" => "ri-tools-fill",
-            "ruta" => "second-page",
+            "titulo" => null,
+            "titulo_seccion" => 'Modulo Dev',
+            "icono" => null,
+            "ruta" => null,
             "orden" => 26,
             "action" => "Ver Modulo Desarrollo",
             "subject" => "Desarrollo",
@@ -325,24 +326,35 @@ class OpcionesMenuTableSeeder extends Seeder
 
         MenuOpcion::create([
             "id" => 28,
-            "titulo" => "Configuraciones",
-            "icono" => "ri-settings-5-fill",
-            "ruta" => "dev-configuraciones",
-            "orden" => 22,
-            "action" => "Listar Configuraciones",
-            "subject" => "Configuracion",
-            "parent_id" => 27
+            "titulo" => "Developers",
+            "icono" => "ri-tools-fill",
+            "ruta" => "second-page",
+            "orden" => 27,
+            "action" => "Ver Modulo Desarrollo",
+            "subject" => "Desarrollo",
+            "parent_id" => null
         ]);
 
         MenuOpcion::create([
             "id" => 29,
+            "titulo" => "Configuraciones",
+            "icono" => "ri-settings-5-fill",
+            "ruta" => "dev-configuraciones",
+            "orden" => 28,
+            "action" => "Listar Configuraciones",
+            "subject" => "Configuracion",
+            "parent_id" => 28
+        ]);
+
+        MenuOpcion::create([
+            "id" => 30,
             "titulo" => "Componentes",
             "icono" => "ri-code-box-line",
             "ruta" => "dev-componentes",
-            "orden" => 27,
+            "orden" => 29,
             "action" => "Listar Componentes",
             "subject" => "Desarrollo",
-            "parent_id" => 27
+            "parent_id" => 28
         ]);
 
 
