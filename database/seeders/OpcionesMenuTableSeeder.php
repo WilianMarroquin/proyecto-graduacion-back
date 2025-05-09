@@ -190,7 +190,7 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 16,
             "titulo" => "Residentes",
-            "icono" => "ri-folder-user-fill",
+            "icono" => "ri-team-fill",
             "ruta" => null,
             "orden" => 15,
             "action" => "Ver Modulo Residentes",
@@ -201,89 +201,148 @@ class OpcionesMenuTableSeeder extends Seeder
         MenuOpcion::create([
             "id" => 17,
             "titulo" => "Listado Residentes",
-            "icono" => "ri-folder-user-fill",
+            "icono" => "ri-menu-2-fill",
             "ruta" => 'residentes',
             "orden" => 16,
             "action" => "Listar Residentes",
             "subject" => "Residente",
             "parent_id" => 16
         ]);
+
         MenuOpcion::create([
             "id" => 18,
-            "titulo" => "Teléfonos",
+            "titulo" => "Catálogos",
             "icono" => "ri-folder-user-fill",
-            "ruta" => 'residentes-catalogos-telefonos',
+            "ruta" => null,
             "orden" => 17,
-            "action" => "Listar Residente Telefonos",
-            "subject" => "ResidenteTelefono",
+            "action" => "Ver Catalogos Residentes",
+            "subject" => "Residente",
             "parent_id" => 16
         ]);
 
         MenuOpcion::create([
             "id" => 19,
-            "titulo" => "Tipos de Teléfonos",
+            "titulo" => "Teléfonos",
             "icono" => "ri-folder-user-fill",
-            "ruta" => 'residentes-catalogos-telefono-tipos',
+            "ruta" => 'residentes-catalogos-telefonos',
             "orden" => 18,
-            "action" => "Listar Residente Telefono Tipos",
-            "subject" => "ResidenteTelefonoTipo",
-            "parent_id" => 16
+            "action" => "Listar Residente Telefonos",
+            "subject" => "ResidenteTelefono",
+            "parent_id" => 18
         ]);
 
         MenuOpcion::create([
             "id" => 20,
-            "titulo" => "Géneros",
+            "titulo" => "Tipos de Teléfonos",
             "icono" => "ri-folder-user-fill",
-            "ruta" => 'residentes-catalogos-generos',
+            "ruta" => 'residentes-catalogos-telefono-tipos',
             "orden" => 19,
-            "action" => "Listar Generos",
-            "subject" => "Genero",
-            "parent_id" => 16
+            "action" => "Listar Residente Telefono Tipos",
+            "subject" => "ResidenteTelefonoTipo",
+            "parent_id" => 18
         ]);
 
         MenuOpcion::create([
             "id" => 21,
-            "titulo" => null,
-            "icono" => null,
-            "ruta" => null,
+            "titulo" => "Géneros",
+            "icono" => "ri-folder-user-fill",
+            "ruta" => 'residentes-catalogos-generos',
             "orden" => 20,
-            "titulo_seccion" => "Modulo Programación",
-            "action" => "Ver Modulo Desarrollo",
-            "subject" => "Desarrollo",
-            "parent_id" => null
+            "action" => "Listar Generos",
+            "subject" => "Genero",
+            "parent_id" => 18
         ]);
 
         MenuOpcion::create([
             "id" => 22,
+            "titulo" => "Servicios de Agua",
+            "icono" => "ri-drop-line",
+            "ruta" => null,
+            "orden" => 21,
+            "action" => "Pendiente",
+            "subject" => "Pendiente",
+            "parent_id" => null,
+        ]);
+
+        MenuOpcion::create([
+            "id" => 23,
+            "titulo" => 'Servicios',
+            "icono" => 'ri-menu-2-fill',
+            "ruta" => null,
+            "orden" => 22,
+            "titulo_seccion" => null,
+            "action" => "Pendiente",
+            "subject" => "Pendiente",
+            "parent_id" => 22
+        ]);
+
+        MenuOpcion::create([
+            "id" => 24,
+            "titulo" => 'Catálogos',
+            "icono" => null,
+            "ruta" => null,
+            "orden" => 23,
+            "titulo_seccion" => null,
+            "action" => "Pendiente",
+            "subject" => "Pendiente",
+            "parent_id" => 22
+        ]);
+
+        MenuOpcion::create([
+            "id" => 25,
+            "titulo" => 'Estados',
+            "icono" => null,
+            "ruta" => 'servicio-agua-catalogos-estados',
+            "orden" => 24,
+            "titulo_seccion" => null,
+            "action" => "Listar Servicio Agua Estados",
+            "subject" => "ServicioAguaEstado",
+            "parent_id" => 24
+        ]);
+
+        MenuOpcion::create([
+            "id" => 26,
+            "titulo" => 'Tipo Transacciónes',
+            "icono" => null,
+            "ruta" => 'servicio-agua-catalogos-bitacora-tipo-transacciones',
+            "orden" => 25,
+            "titulo_seccion" => null,
+            "action" => "Listar Servicio Agua Bitacora Tipo Transacciones",
+            "subject" => "ServicioAguaBitacoraTipoTransaccion",
+            "parent_id" => 24
+        ]);
+
+        MenuOpcion::create([
+            "id" => 27,
             "titulo" => "Developers",
             "icono" => "ri-tools-fill",
             "ruta" => "second-page",
-            "orden" => 21,
+            "orden" => 26,
             "action" => "Ver Modulo Desarrollo",
             "subject" => "Desarrollo",
             "parent_id" => null
         ]);
 
         MenuOpcion::create([
-            "id" => 23,
+            "id" => 28,
             "titulo" => "Configuraciones",
             "icono" => "ri-settings-5-fill",
             "ruta" => "dev-configuraciones",
             "orden" => 22,
             "action" => "Listar Configuraciones",
             "subject" => "Configuracion",
-            "parent_id" => 22
+            "parent_id" => 27
         ]);
 
         MenuOpcion::create([
-            "id" => 24,
+            "id" => 29,
             "titulo" => "Componentes",
             "icono" => "ri-code-box-line",
             "ruta" => "dev-componentes",
-            "orden" => 22,
+            "orden" => 27,
             "action" => "Listar Componentes",
             "subject" => "Desarrollo",
-            "parent_id" => 22
+            "parent_id" => 27
         ]);
 
 

@@ -13,6 +13,7 @@ class PermisosResidentesTableSeeder extends Seeder
     public function run(): void
     {
         $permisos = [
+            'Ver Catalogos Residentes',
             'Listar Residentes',
             'Ver Residentes',
             'Crear Residentes',
