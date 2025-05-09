@@ -20,6 +20,7 @@ class IndexTableSeeder extends Seeder
             ComunidadBarrioDireccionTableSeeder::class,
             GenerosTableSeeder::class,
             ResidenteTelefonoTiposTableSeeder::class,
+            ServicioAguaEstadosTableSeeder::class
         ]);
     }
 }
