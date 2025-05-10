@@ -27,3 +27,6 @@ Route::prefix('libres')->group(function () {
 
 });
 
+
+Route::apiResource('servicio_agua_bitacoras', App\Http\Controllers\Api\ServicioAgua\ServicioAguaBitacoraApiController::class)
+        ->parameters(['servicio_agua_bitacoras' => 'servicioaguabitacora']);

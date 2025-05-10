@@ -3,6 +3,9 @@
 namespace App\Models\ServicioAgua;
 
 
+use App\Models\Direcciones\ComunidadBarrioDireccion;
+use App\Models\Residentes\Residente;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -50,16 +53,15 @@ class ServicioAguaBitacora extends Model
     protected $table = 'servicio_agua_bitacoras';
 
 
-    protected $fillable =
-        [
-    'fecha_registro',
-    'residente_id',
-    'servicio_agua_id',
-    'transaccion_id',
-    'direccion_id',
-    'user_transacciona_id',
-    'observaciones'
-];
+    protected $fillable = [
+            'fecha_registro',
+            'residente_id',
+            'servicio_agua_id',
+            'transaccion_id',
+            'direccion_id',
+            'user_transacciona_id',
+            'observaciones',
+        ];
 
 
     /**
@@ -67,21 +69,19 @@ class ServicioAguaBitacora extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
-        'id' => 'integer',
-        'fecha_registro' => 'datetime',
-        'residente_id' => 'integer',
-        'servicio_agua_id' => 'integer',
-        'transaccion_id' => 'integer',
-        'direccion_id' => 'integer',
-        'user_transacciona_id' => 'integer',
-        'observaciones' => 'string',
-        'created_at' => 'timestamp',
-        'updated_at' => 'timestamp',
-        'deleted_at' => 'timestamp',
-    ];
-
+    protected $casts = [
+            'id' => 'integer',
+            'fecha_registro' => 'datetime',
+            'residente_id' => 'integer',
+            'servicio_agua_id' => 'integer',
+            'transaccion_id' => 'integer',
+            'direccion_id' => 'integer',
+            'user_transacciona_id' => 'integer',
+            'observaciones' => 'string',
+            'created_at' => 'timestamp',
+            'updated_at' => 'timestamp',
+            'deleted_at' => 'timestamp',
+        ];
 
 
     /**
@@ -89,16 +89,15 @@ class ServicioAguaBitacora extends Model
      *
      * @var array
      */
-    public static $rules =
-    [
-    'fecha_registro' => 'required|date',
-    'residente_id' => 'required|integer',
-    'servicio_agua_id' => 'required|integer',
-    'transaccion_id' => 'required|integer',
-    'direccion_id' => 'required|integer',
-    'user_transacciona_id' => 'required|integer',
-    'observaciones' => 'nullable|string',
-];
+    public static $rules = [
+            'fecha_registro' => 'required|date',
+            'residente_id' => 'required|integer',
+            'servicio_agua_id' => 'required|integer',
+            'transaccion_id' => 'required|integer',
+            'direccion_id' => 'required|integer',
+            'user_transacciona_id' => 'required|integer',
+            'observaciones' => 'nullable|string',
+        ];
 
 
     /**
@@ -106,7 +105,7 @@ class ServicioAguaBitacora extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -116,29 +115,29 @@ class ServicioAguaBitacora extends Model
      *
      * @var array
      */
-    public function comunidadBarrioDireccione()
+    public function direccion()
     {
-    return $this->belongsTo(ComunidadBarrioDireccione::class,'direccion_id','id');
+        return $this->belongsTo(ComunidadBarrioDireccion::class, 'direccion_id', 'id');
     }
 
     public function residente()
     {
-    return $this->belongsTo(Residente::class,'residente_id','id');
+        return $this->belongsTo(Residente::class, 'residente_id', 'id');
     }
 
     public function servicioAgua()
     {
-    return $this->belongsTo(ServicioAgua::class,'servicio_agua_id','id');
+        return $this->belongsTo(ServicioAgua::class, 'servicio_agua_id', 'id');
     }
 
     public function servicioAguaBitacoraTipoTransaccione()
     {
-    return $this->belongsTo(ServicioAguaBitacoraTipoTransaccione::class,'transaccion_id','id');
+        return $this->belongsTo(ServicioAguaBitacoraTipoTransaccion::class, 'transaccion_id', 'id');
     }
 
     public function user()
     {
-    return $this->belongsTo(User::class,'user_transacciona_id','id');
+        return $this->belongsTo(User::class, 'user_transacciona_id', 'id');
     }
 
 }

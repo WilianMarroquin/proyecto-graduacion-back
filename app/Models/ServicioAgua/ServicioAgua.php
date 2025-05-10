@@ -101,10 +101,10 @@ class ServicioAgua extends Model
         return $this->belongsTo(ServicioAguaEstado::class, 'estado_id', 'id');
     }
 
-//    public function bitacoras()
-//    {
-//        return $this->hasMany(ServicioAgua::class, 'servicio_agua_id', 'id');
-//
-//    }
+    public function bitacoras()
+    {
+        return $this->hasMany(ServicioAguaBitacora::class, 'servicio_agua_id', 'id');
+
+    }
 
 }

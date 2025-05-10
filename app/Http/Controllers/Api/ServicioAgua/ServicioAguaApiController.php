@@ -71,15 +71,10 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
     {
         try {
             DB::beginTransaction();
-
             $direccion = $this->crearDireccion($request->direccion);
-
             $servicioAgua = $this->crearServicioAgua($request->residente_id);
-
-            //Todo: Falta asociar una bitacora al servicio de agua creado.1
-
+            $this->guardarBitacoraCreacionServicio($servicioAgua, $request, $direccion);
             DB::commit();
-
         }catch (\Exception $e) {
             DB::rollBack();
             throw new ServicioAguaException("Error al crear el servicio de agua: " . $e->getMessage());
