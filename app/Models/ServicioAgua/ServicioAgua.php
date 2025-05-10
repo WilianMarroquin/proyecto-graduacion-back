@@ -85,6 +85,8 @@ class ServicioAgua extends Model
 
     ];
 
+    protected $appends = ['tipo_adquisicion', 'fecha_adquisicion', 'direccion_actual'];
+
 
     /**
      * Accessor for relationships
@@ -106,5 +108,42 @@ class ServicioAgua extends Model
         return $this->hasMany(ServicioAguaBitacora::class, 'servicio_agua_id', 'id');
 
     }
+
+    public function getTipoAdquisicionAttribute()
+    {
+        return $this->bitacoras()
+            ->get()
+            ->last()
+            ?->tipoTransaccion
+            ?->nombre;
+    }
+
+    public function getFechaAdquisicionAttribute()
+    {
+        return $this->bitacoras()
+            ->get()
+            ->last()
+            ?->fecha_registro;
+    }
+
+    public function getDireccionActualAttribute()
+    {
+        $direccionActual = $this->bitacoras()
+            ->latest()
+            ->first()
+            ?->direccion;
+
+        if (!$direccionActual) {
+            return null; // o puedes retornar "Sin dirección" si prefieres
+        }
+
+        $direccionActual->load('barrio.comunidad');
+
+        $barrio = $direccionActual->barrio->nombre ?? 'Sin barrio';
+        $comunidad = $direccionActual->barrio->comunidad->nombre ?? 'Sin comunidad';
+
+        return $comunidad . ', ' . $barrio . ', ' . $direccionActual->direccion;
+    }
+
 
 }

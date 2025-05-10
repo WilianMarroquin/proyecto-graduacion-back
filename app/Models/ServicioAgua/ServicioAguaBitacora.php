@@ -130,7 +130,7 @@ class ServicioAguaBitacora extends Model
         return $this->belongsTo(ServicioAgua::class, 'servicio_agua_id', 'id');
     }
 
-    public function servicioAguaBitacoraTipoTransaccione()
+    public function tipoTransaccion()
     {
         return $this->belongsTo(ServicioAguaBitacoraTipoTransaccion::class, 'transaccion_id', 'id');
     }

@@ -47,7 +47,6 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
     public function index(Request $request): JsonResponse
     {
         $servicio_aguas = QueryBuilder::for(ServicioAgua::class)
-            ->with([])
             ->allowedFilters([
                 'correlativo',
                 AllowedFilter::exact('residente_id'),
@@ -57,6 +56,9 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
                 'correlativo',
                 'residente_id',
                 'estado_id'
+            ])
+            ->allowedIncludes([
+                'residente'
             ])
             ->defaultSort('-id')
             ->paginate($request->get('per_page', 10));
@@ -90,6 +92,8 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
      */
     public function show(ServicioAgua $servicioAgua)
     {
+        $servicioAgua->load('residente');
+
         return $this->sendResponse($servicioAgua->toArray(), 'Servicio Agua recuperado con éxito.');
     }
 
