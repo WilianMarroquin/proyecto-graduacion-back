@@ -24,6 +24,7 @@ class IndexTableSeeder extends Seeder
             PermisosServicioAguaEstadosTableSeeder::class,
             PermisosServicioAguaBitacoraTipoTransaccionesTableSeeder::class,
             PermisosServicioAguasTableSeeder::class,
+            PermisosServicioAguaBitacorasTableSeeder::class,
         ]);
     }
 }
