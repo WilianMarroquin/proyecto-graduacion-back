@@ -76,7 +76,7 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
 
             $servicioAgua = $this->crearServicioAgua($request->residente_id);
 
-            //Todo: Falta asociar una bitacora al servicio de agua creado.
+            //Todo: Falta asociar una bitacora al servicio de agua creado.1
 
             DB::commit();
 

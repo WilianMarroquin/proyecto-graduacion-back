@@ -9,7 +9,7 @@ use App\Models\ServicioAgua\ServicioAguaEstado;
 trait ServicioAguaTrait
 {
 
-    public function crearServicioAgua($residenteId)
+    public function crearServicioAgua(int $residenteId)
     {
         try {
             $servicioAgua = ServicioAgua::create([
@@ -27,13 +27,14 @@ trait ServicioAguaTrait
         $ultimoServicioAgua = ServicioAgua::orderBy('id', 'desc')->first();
 
         $anioActual = date('Y');
-        if ($ultimoServicioAgua) {
-            $ultimoCorrelativo = $ultimoServicioAgua->correlativo;
+
+        if (!empty($ultimoServicioAgua)) {
+            $ultimoCorrelativo = (int) str_replace($anioActual . '-', '', $ultimoServicioAgua->correlativo);
             return $anioActual . '-' . str_pad($ultimoCorrelativo + 1, 4, '0', STR_PAD_LEFT);
         } else {
-            return $anioActual . '0001';
+            return $anioActual . '-0001';
         }
-
     }
+
 
 }

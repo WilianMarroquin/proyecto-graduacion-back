@@ -72,9 +72,7 @@ class ServicioAgua extends Model
      * @var array
      */
     public static $rules = [
-        'correlativo' => 'required|string|max:45',
         'residente_id' => 'required|integer',
-        'estado_id' => 'required|integer',
     ];
 
 
