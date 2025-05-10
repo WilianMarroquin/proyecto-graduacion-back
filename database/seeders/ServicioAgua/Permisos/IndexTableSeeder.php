@@ -22,6 +22,8 @@ class IndexTableSeeder extends Seeder
             PermisosResidenteTelefonoTiposTableSeeder::class,
             //Permisos de servicios de agua.
             PermisosServicioAguaEstadosTableSeeder::class,
+            PermisosServicioAguaBitacoraTipoTransaccionesTableSeeder::class,
+            PermisosServicioAguasTableSeeder::class,
         ]);
     }
 }

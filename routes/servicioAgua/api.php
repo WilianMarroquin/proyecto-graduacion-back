@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Api\ServicioAgua\ServicioAguaApiController;
 use App\Http\Controllers\Api\ServicioAgua\ServicioAguaBitacoraTipoTransaccionApiController;
 use App\Http\Controllers\Api\ServicioAgua\ServicioAguaEstadoApiController;
 use Illuminate\Support\Facades\Route;
@@ -23,5 +24,8 @@ Route::prefix('servicio/agua')->group(function () {
 
         });
     });
+
+    Route::apiResource('/', ServicioAguaApiController::class)
+        ->parameters(['' => 'servicioAgua']);
 
 });

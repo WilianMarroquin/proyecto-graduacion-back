@@ -23,6 +23,7 @@ class IndexTableSeeder extends Seeder
             //Catálogo de servicio de agua
             ServicioAguaEstadosTableSeeder::class,
             ServicioAguaBitacoraTipoTransaccionesTableSeeder::class,
+            ServicioAguaTableSeeder::class
         ]);
     }
 }

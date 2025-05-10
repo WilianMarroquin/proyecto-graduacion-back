@@ -268,7 +268,7 @@ class OpcionesMenuTableSeeder extends Seeder
             "id" => 23,
             "titulo" => 'Servicios',
             "icono" => 'ri-newspaper-line',
-            "ruta" => null,
+            "ruta" => 'servicio-agua',
             "orden" => 22,
             "titulo_seccion" => null,
             "action" => "Pendiente",

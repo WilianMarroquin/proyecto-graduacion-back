@@ -1,0 +1,102 @@
+<?php
+
+namespace App\Http\Controllers\Api\ServicioAgua;
+
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\Api\ServicioAgua\CreateServicioAguaApiRequest;
+use App\Http\Requests\Api\ServicioAgua\UpdateServicioAguaApiRequest;
+use App\Models\ServicioAgua\ServicioAgua;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Spatie\QueryBuilder\QueryBuilder;
+
+/**
+ * Class ServicioAguaApiController
+ */
+class ServicioAguaApiController extends AppbaseController implements HasMiddleware
+{
+
+    /**
+     * @return array
+     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:Listar Servicio Aguas', only: ['index']),
+            new Middleware('permission:Ver Servicio Aguas', only: ['show']),
+            new Middleware('permission:Crear Servicio Aguas', only: ['store']),
+            new Middleware('permission:Editar Servicio Aguas', only: ['update']),
+            new Middleware('permission:Eliminar Servicio Aguas', only: ['destroy']),
+        ];
+    }
+
+    /**
+     * Display a listing of the Servicio_aguas.
+     * GET|HEAD /servicio_aguas
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $servicio_aguas = QueryBuilder::for(ServicioAgua::class)
+            ->with([])
+            ->allowedFilters([
+                'correlativo',
+                'residente_id',
+                'estado_id'
+            ])
+            ->allowedSorts([
+                'correlativo',
+                'residente_id',
+                'estado_id'
+            ])
+            ->defaultSort('-id')
+            ->paginate($request->get('per_page', 10));
+
+        return $this->sendResponse($servicio_aguas->toArray(), 'Servicio Aguas recuperados con éxito.');
+    }
+
+    /**
+     * Store a newly created ServicioAgua in storage.
+     * POST /servicio_aguas
+     */
+    public function store(CreateServicioAguaApiRequest $request): JsonResponse
+    {
+        $input = $request->all();
+
+        $servicio_aguas = ServicioAgua::create($input);
+
+        return $this->sendResponse($servicio_aguas->toArray(), 'Servicio Agua creado con éxito.');
+    }
+
+    /**
+     * Display the specified ServicioAgua.
+     * GET|HEAD /servicio_aguas/{id}
+     */
+    public function show(ServicioAgua $servicioAgua)
+    {
+        return $this->sendResponse($servicioAgua->toArray(), 'Servicio Agua recuperado con éxito.');
+    }
+
+    /**
+     * Update the specified ServicioAgua in storage.
+     * PUT/PATCH /servicio_aguas/{id}
+     */
+    public function update(UpdateServicioAguaApiRequest $request, $id): JsonResponse
+    {
+        $servicioagua = ServicioAgua::findOrFail($id);
+        $servicioagua->update($request->validated());
+        return $this->sendResponse($servicioagua, 'Servicio Agua actualizado con éxito.');
+    }
+
+    /**
+     * Remove the specified ServicioAgua from storage.
+     * DELETE /servicio_aguas/{id}
+     */
+    public function destroy(ServicioAgua $servicioAgua): JsonResponse
+    {
+        $servicioAgua->delete();
+        return $this->sendResponse(null, 'Servicio Agua eliminado con éxito.');
+    }
+
+}

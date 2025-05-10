@@ -41,15 +41,16 @@ class ResidenteTelefonoApiController extends AppbaseController implements HasMid
     {
         $residente_telefonos = QueryBuilder::for(ResidenteTelefono::class)
             ->allowedFilters([
-                'telefono',
+                'numero',
                 'residente_id'
             ])
             ->allowedSorts([
-                'telefono',
+                'numero',
                 'residente_id'
             ])
             ->allowedIncludes([
-                'residente'
+                'residente',
+                'tipo',
             ])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
