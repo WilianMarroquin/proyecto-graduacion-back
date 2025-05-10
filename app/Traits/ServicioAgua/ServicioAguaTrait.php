@@ -12,11 +12,11 @@ use Illuminate\Http\Request;
 trait ServicioAguaTrait
 {
 
-    public function crearServicioAgua(int $residenteId)
+    public function crearServicioAgua(int $residenteId, ComunidadBarrioDireccion $direccion)
     {
         try {
             $servicioAgua = ServicioAgua::create([
-                'correlativo' => $this->generarCorrelativo(),
+                'correlativo' => $this->generarCorrelativo($direccion),
                 'residente_id' => $residenteId,
                 'estado_id' => ServicioAguaEstado::ACTIVA,
             ]);
@@ -25,19 +25,36 @@ trait ServicioAguaTrait
             throw new ServicioAguaException("Error al crear el servicio de Agua: " . $e->getMessage());
         }
     }
-    public function generarCorrelativo()
+    public function generarCorrelativo(ComunidadBarrioDireccion $direccion)
     {
-        $ultimoServicioAgua = ServicioAgua::orderBy('id', 'desc')->first();
+        $nombreComunidad = $direccion->barrio->comunidad->nombre;
 
-        $anioActual = date('Y');
-
-        if (!empty($ultimoServicioAgua)) {
-            $ultimoCorrelativo = (int) str_replace($anioActual . '-', '', $ultimoServicioAgua->correlativo);
-            return $anioActual . '-' . str_pad($ultimoCorrelativo + 1, 4, '0', STR_PAD_LEFT);
+        $palabras = explode(' ', trim($nombreComunidad));
+        if (strtolower($palabras[0]) === 'el' && count($palabras) > 1) {
+            $baseComunidad = substr($palabras[1], 0, 3);
         } else {
-            return $anioActual . '-0001';
+            $baseComunidad = substr($palabras[0], 0, 3);
         }
+
+        $baseComunidad = ucfirst(strtolower($baseComunidad));
+        $anioActual = date('Y');
+        $prefijo = $baseComunidad . '-' . $anioActual . '-';
+
+        $ultimoServicioAgua = ServicioAgua::where('correlativo', 'like', $prefijo . '%')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($ultimoServicioAgua) {
+            $ultimoCorrelativo = (int) str_replace($prefijo, '', $ultimoServicioAgua->correlativo);
+            $nuevoNumero = str_pad($ultimoCorrelativo + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $nuevoNumero = '0001';
+        }
+
+        return $prefijo . $nuevoNumero;
     }
+
+
 
     public function guardarBitacoraCreacionServicio(ServicioAgua $servicioAgua, Request $request, ComunidadBarrioDireccion $direccion)
     {

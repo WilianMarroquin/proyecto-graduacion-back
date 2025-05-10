@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -49,7 +50,7 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
             ->with([])
             ->allowedFilters([
                 'correlativo',
-                'residente_id',
+                AllowedFilter::exact('residente_id'),
                 'estado_id'
             ])
             ->allowedSorts([
@@ -72,7 +73,7 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
         try {
             DB::beginTransaction();
             $direccion = $this->crearDireccion($request->direccion);
-            $servicioAgua = $this->crearServicioAgua($request->residente_id);
+            $servicioAgua = $this->crearServicioAgua($request->residente_id, $direccion);
             $this->guardarBitacoraCreacionServicio($servicioAgua, $request, $direccion);
             DB::commit();
         }catch (\Exception $e) {
