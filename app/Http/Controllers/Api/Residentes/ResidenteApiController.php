@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -44,6 +45,7 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
     {
         $residentes = QueryBuilder::for(Residente::class)
             ->allowedFilters([
+                'id',
                 'primer_nombre',
                 'segundo_nombre',
                 'tercer_nombre',
@@ -53,7 +55,12 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
                 'dpi',
                 'fecha_nacimiento',
                 'direccion_id',
-                'genero_id'
+                'genero_id',
+                AllowedFilter::callback('conServicio', function ($query, $value) {
+                    if (filter_var($value, FILTER_VALIDATE_BOOLEAN)) {
+                        $query->whereHas('servicios');
+                    }
+                }),
             ])
             ->allowedSorts([
                 'id',
@@ -72,8 +79,9 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
                 'direccion',
                 'genero',
                 'telefonos',
+                'servicios',
             ])
-            ->defaultSort('-id') // Ordenar por defecto por fecha descendente
+            ->defaultSort('-id')
             ->paginate($request->get('per_page', 10));
 
         return $this->sendResponse($residentes->toArray(), 'residentes recuperados con éxito.');

@@ -4,6 +4,7 @@ namespace App\Models\Residentes;
 
 
 use App\Models\Direcciones\ComunidadBarrioDireccion;
+use App\Models\ServicioAgua\ServicioAgua;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -179,6 +180,11 @@ class Residente extends Model
     public function telefonos()
     {
         return $this->hasMany(ResidenteTelefono::class, 'residente_id', 'id');
+    }
+
+    public function servicios()
+    {
+        return $this->hasMany(ServicioAgua::class, 'residente_id', 'id');
     }
 
 }

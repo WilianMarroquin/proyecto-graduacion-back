@@ -3,6 +3,7 @@
 namespace App\Models\ServicioAgua;
 
 
+use App\Models\Residentes\Residente;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,12 +43,11 @@ class ServicioAgua extends Model
     protected $table = 'servicio_aguas';
 
 
-    protected $fillable =
-        [
-    'correlativo',
-    'residente_id',
-    'estado_id'
-];
+    protected $fillable = [
+        'correlativo',
+        'residente_id',
+        'estado_id'
+    ];
 
 
     /**
@@ -55,8 +55,7 @@ class ServicioAgua extends Model
      *
      * @var array
      */
-    protected $casts =
-        [
+    protected $casts = [
         'id' => 'integer',
         'correlativo' => 'string',
         'residente_id' => 'integer',
@@ -67,18 +66,16 @@ class ServicioAgua extends Model
     ];
 
 
-
     /**
      * Validation rules
      *
      * @var array
      */
-    public static $rules =
-    [
-    'correlativo' => 'required|string|max:45',
-    'residente_id' => 'required|integer',
-    'estado_id' => 'required|integer',
-];
+    public static $rules = [
+        'correlativo' => 'required|string|max:45',
+        'residente_id' => 'required|integer',
+        'estado_id' => 'required|integer',
+    ];
 
 
     /**
@@ -86,7 +83,7 @@ class ServicioAgua extends Model
      *
      * @var array
      */
-    public static $messages =[
+    public static $messages = [
 
     ];
 
@@ -98,12 +95,18 @@ class ServicioAgua extends Model
      */
     public function residente()
     {
-    return $this->belongsTo(Residente::class,'residente_id','id');
+        return $this->belongsTo(Residente::class, 'residente_id', 'id');
     }
 
-    public function servicioAguaEstado()
+    public function estado()
     {
-    return $this->belongsTo(ServicioAguaEstado::class,'estado_id','id');
+        return $this->belongsTo(ServicioAguaEstado::class, 'estado_id', 'id');
     }
+
+//    public function bitacoras()
+//    {
+//        return $this->hasMany(ServicioAgua::class, 'servicio_agua_id', 'id');
+//
+//    }
 
 }

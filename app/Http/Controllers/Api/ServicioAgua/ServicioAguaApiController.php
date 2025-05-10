@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Api\ServicioAgua;
 
+use App\Exceptions\ServicioAguaException;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\Api\ServicioAgua\CreateServicioAguaApiRequest;
 use App\Http\Requests\Api\ServicioAgua\UpdateServicioAguaApiRequest;
 use App\Models\ServicioAgua\ServicioAgua;
+use App\Traits\Direccion\DireccionTrait;
+use App\Traits\ServicioAgua\ServicioAguaTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -17,6 +21,9 @@ use Spatie\QueryBuilder\QueryBuilder;
  */
 class ServicioAguaApiController extends AppbaseController implements HasMiddleware
 {
+
+    use DireccionTrait;
+    use ServicioAguaTrait;
 
     /**
      * @return array
@@ -62,11 +69,23 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
      */
     public function store(CreateServicioAguaApiRequest $request): JsonResponse
     {
-        $input = $request->all();
+        try {
+            DB::beginTransaction();
 
-        $servicio_aguas = ServicioAgua::create($input);
+            $direccion = $this->crearDireccion($request->direccion);
 
-        return $this->sendResponse($servicio_aguas->toArray(), 'Servicio Agua creado con éxito.');
+            $servicioAgua = $this->crearServicioAgua($request->residente_id);
+
+            //Todo: Falta asociar una bitacora al servicio de agua creado.
+
+            DB::commit();
+
+        }catch (\Exception $e) {
+            DB::rollBack();
+            throw new ServicioAguaException("Error al crear el servicio de agua: " . $e->getMessage());
+        }
+
+        return $this->sendResponse($servicioAgua->toArray(), 'Servicio Agua creado con éxito.');
     }
 
     /**

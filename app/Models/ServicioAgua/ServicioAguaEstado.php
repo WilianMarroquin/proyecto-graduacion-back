@@ -3,9 +3,9 @@
 namespace App\Models\ServicioAgua;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int $id
@@ -73,6 +73,10 @@ class ServicioAguaEstado extends Model
 
     ];
 
+    const ACTIVA = 1;
+    const SUSPENDIDA = 2;
+    const REACTIVADA = 3;
+    const CANCELADA = 4;
 
     /**
      * Accessor for relationships
