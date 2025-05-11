@@ -117,6 +117,8 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
      */
     public function show(Residente $residente)
     {
+        $residente->load('servicios');
+
         return $this->sendResponse($residente->toArray(), 'Residente recuperado con éxito.');
     }
 

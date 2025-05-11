@@ -85,7 +85,12 @@ class ServicioAgua extends Model
 
     ];
 
-    protected $appends = ['tipo_adquisicion', 'fecha_adquisicion', 'direccion_actual'];
+    protected $appends = [
+        'tipo_adquisicion',
+        'fecha_adquisicion',
+        'direccion_actual',
+        'direccion_actual_id',
+    ];
 
 
     /**
@@ -134,7 +139,7 @@ class ServicioAgua extends Model
             ?->direccion;
 
         if (!$direccionActual) {
-            return null; // o puedes retornar "Sin dirección" si prefieres
+            return null;
         }
 
         $direccionActual->load('barrio.comunidad');
@@ -145,5 +150,14 @@ class ServicioAgua extends Model
         return $comunidad . ', ' . $barrio . ', ' . $direccionActual->direccion;
     }
 
+    public function getDireccionActualIdAttribute()
+    {
+        return $this->bitacoras()
+            ->latest()
+            ->first()
+            ?->direccion
+            ?->id;
+
+    }
 
 }
