@@ -72,6 +72,8 @@ class Residente extends Model
     ];
 
 
+    public $timestamps = false;
+
     /**
      * The attributes that should be casted to native types.
      *

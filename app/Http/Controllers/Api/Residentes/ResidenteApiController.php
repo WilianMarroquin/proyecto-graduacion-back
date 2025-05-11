@@ -154,4 +154,12 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
         return $this->sendResponse(null, 'Residente eliminado con éxito.');
     }
 
+    public function obtenerTodosResidentes(): JsonResponse
+    {
+        $residentes = Residente::all();
+
+        return $this->sendResponse($residentes->toArray(), 'Residentes recuperados con éxito.');
+
+    }
+
 }

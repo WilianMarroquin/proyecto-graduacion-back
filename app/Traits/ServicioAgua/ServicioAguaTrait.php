@@ -54,8 +54,6 @@ trait ServicioAguaTrait
         return $prefijo . $nuevoNumero;
     }
 
-
-
     public function guardarBitacoraCreacionServicio(ServicioAgua $servicioAgua, Request $request, ComunidadBarrioDireccion $direccion)
     {
 
@@ -71,5 +69,29 @@ trait ServicioAguaTrait
 
     }
 
+    public function trasladarServicioAgua(Request $request)
+    {
+        $servicio = ServicioAgua::find($request->servicio_id);
+
+        $servicio->update([
+            'residente_id' => $request->nuevo_residente_id
+        ]);
+
+        return $servicio;
+    }
+    public function guardarBitacoraTrasladoServicio(ServicioAgua $servicioAgua, Request $request, ComunidadBarrioDireccion $direccion)
+    {
+
+        $servicioAgua->bitacoras()->create([
+            'fecha_registro' => Carbon::now(),
+            'residente_id' => $request->nuevo_residente_id,
+            'servicio_agua_id' => $servicioAgua->id,
+            'transaccion_id' => $request->tipo_traslado_id,
+            'direccion_id' => $direccion->id,
+            'user_transacciona_id' => $request->user()->id,
+            'observaciones' => $request->observaciones ?? null
+        ]);
+
+    }
 
 }

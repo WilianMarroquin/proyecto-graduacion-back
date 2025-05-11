@@ -25,6 +25,8 @@ Route::prefix('servicio/agua')->group(function () {
         });
     });
 
+    Route::post('/trasladar', [ServicioAguaApiController::class, 'trasladarServicio']);
+
     Route::apiResource('/', ServicioAguaApiController::class)
         ->parameters(['' => 'servicioAgua']);
 

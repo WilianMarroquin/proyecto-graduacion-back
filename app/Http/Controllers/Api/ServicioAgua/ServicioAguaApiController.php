@@ -118,4 +118,19 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
         return $this->sendResponse(null, 'Servicio Agua eliminado con éxito.');
     }
 
+    public function trasladarServicio(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $direccion = $this->crearDireccion($request->direccion);
+            $servicioAgua = $this->trasladarServicioAgua($request);
+            $this->guardarBitacoraTrasladoServicio($servicioAgua, $request, $direccion);
+            DB::commit();
+        }catch (\Exception $e) {
+            DB::rollBack();
+            throw new ServicioAguaException("Error al crear el servicio de agua: " . $e->getMessage());
+        }
+
+    }
+
 }

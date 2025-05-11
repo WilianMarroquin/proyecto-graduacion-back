@@ -29,6 +29,8 @@ Route::prefix('/residentes')->group(function () {
 
     });
 
+    Route::get('obtener/todos-residentes', [ResidenteApiController::class, 'obtenerTodosResidentes']);
+
     Route::apiResource('/', ResidenteApiController::class)
         ->parameters(['' => 'residente']);
 });
