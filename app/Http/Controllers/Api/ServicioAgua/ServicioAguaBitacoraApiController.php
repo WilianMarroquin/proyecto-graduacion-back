@@ -7,6 +7,7 @@ use App\Http\Requests\Api\ServicioAgua\CreateServicioAguaBitacoraApiRequest;
 use App\Http\Requests\Api\ServicioAgua\UpdateServicioAguaBitacoraApiRequest;
 use App\Models\ServicioAgua\ServicioAguaBitacora;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -36,10 +37,8 @@ class ServicioAguaBitacoraApiController extends AppbaseController implements Has
      * Display a listing of the Servicio_agua_bitacoras.
      * GET|HEAD /servicio_agua_bitacoras
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $page = request('page.number', 1); // ← Aquí sí lee tu frontend
-        $perPage = request('page.size', 10);
 
         $servicio_agua_bitacoras = QueryBuilder::for(ServicioAguaBitacora::class)
             ->allowedFilters([
@@ -68,7 +67,7 @@ class ServicioAguaBitacoraApiController extends AppbaseController implements Has
                 'residente'
             ])
             ->defaultSort('-id')
-            ->paginate($perPage, ['*'], 'page', $page); // 👈 Aquí indicamos el número de página
+            ->paginate($request->get('per_page', 10));
 
 
         return $this->sendResponse($servicio_agua_bitacoras->toArray(),
