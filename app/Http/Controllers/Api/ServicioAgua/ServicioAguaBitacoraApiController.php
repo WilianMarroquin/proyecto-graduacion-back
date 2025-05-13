@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -39,11 +40,10 @@ class ServicioAguaBitacoraApiController extends AppbaseController implements Has
     public function index(Request $request): JsonResponse
     {
         $servicio_agua_bitacoras = QueryBuilder::for(ServicioAguaBitacora::class)
-            ->with([])
             ->allowedFilters([
                 'fecha_registro',
                 'residente_id',
-                'servicio_agua_id',
+                AllowedFilter::exact('servicio_agua_id'),
                 'transaccion_id',
                 'direccion_id',
                 'user_transacciona_id',
@@ -58,7 +58,14 @@ class ServicioAguaBitacoraApiController extends AppbaseController implements Has
                 'user_transacciona_id',
                 'observaciones'
             ])
-            ->defaultSort('-id') // Ordenar por defecto por fecha descendente
+            ->allowedIncludes([
+                'tipoTransaccion',
+                'servicioAgua',
+                'direccion',
+                'userTransacciona',
+                'residente'
+            ])
+            ->defaultSort('-id')
             ->paginate($request->get('per_page', 10));
 
         return $this->sendResponse($servicio_agua_bitacoras->toArray(),

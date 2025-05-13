@@ -99,6 +99,9 @@ class ServicioAguaBitacora extends Model
             'observaciones' => 'nullable|string',
         ];
 
+    protected $appends = [
+        'direccion_actual',
+    ];
 
     /**
      * Custom messages for validation
@@ -135,9 +138,25 @@ class ServicioAguaBitacora extends Model
         return $this->belongsTo(ServicioAguaBitacoraTipoTransaccion::class, 'transaccion_id', 'id');
     }
 
-    public function user()
+    public function userTransacciona()
     {
         return $this->belongsTo(User::class, 'user_transacciona_id', 'id');
+    }
+
+    public function getDireccionActualAttribute()
+    {
+        $direccionActual = $this->direccion;
+
+        if (!$direccionActual) {
+            return null;
+        }
+
+        $direccionActual->load('barrio.comunidad');
+
+        $barrio = $direccionActual->barrio->nombre ?? 'Sin barrio';
+        $comunidad = $direccionActual->barrio->comunidad->nombre ?? 'Sin comunidad';
+
+        return $comunidad . ', ' . $barrio . ', ' . $direccionActual->direccion;
     }
 
 }

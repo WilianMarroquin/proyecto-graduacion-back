@@ -97,7 +97,8 @@ class Residente extends Model
     ];
 
     protected $appends = [
-        'nombre_completo'
+        'nombre_completo',
+        'nombre_corto',
     ];
 
     /**
@@ -173,6 +174,12 @@ class Residente extends Model
             $this->primer_apellido . ' ' .
             ($this->segundo_apellido ? $this->segundo_apellido . ' ' : '') .
             ($this->apellido_casada ? $this->apellido_casada : '');
+    }
+
+    public function getNombreCortoAttribute()
+    {
+        return $this->primer_nombre . ' ' . $this->primer_apellido;
+
     }
 
     /**
