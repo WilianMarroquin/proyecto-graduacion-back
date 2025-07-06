@@ -117,4 +117,40 @@ class ServicioAguaBitacoraApiController extends AppbaseController implements Has
         return $this->sendResponse(null, 'ServicioAguaBitacora eliminado con éxito.');
     }
 
+    public function obtenerBitacoras(Request $request): JsonResponse
+    {
+
+        $servicio_agua_bitacoras = QueryBuilder::for(ServicioAguaBitacora::class)
+            ->allowedFilters([
+                'fecha_registro',
+                'residente_id',
+                AllowedFilter::exact('servicio_agua_id'),
+                'transaccion_id',
+                'direccion_id',
+                'user_transacciona_id',
+                'observaciones'
+            ])
+            ->allowedSorts([
+                'fecha_registro',
+                'residente_id',
+                'servicio_agua_id',
+                'transaccion_id',
+                'direccion_id',
+                'user_transacciona_id',
+                'observaciones'
+            ])
+            ->allowedIncludes([
+                'tipoTransaccion',
+                'servicioAgua',
+                'direccion',
+                'userTransacciona',
+                'residente'
+            ])
+            ->defaultSort('-id')
+            ->paginate($request->get('per_page', 10));
+
+
+        return $this->sendResponse($servicio_agua_bitacoras->toArray(),
+            'Bitácoras recuperados con éxito.');
+    }
 }

@@ -43,6 +43,20 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
      */
     public function index(Request $request): JsonResponse
     {
+        $allowedFields = [
+            'id',
+            'primer_nombre',
+            'segundo_nombre',
+            'tercer_nombre',
+            'primer_apellido',
+            'segundo_apellido',
+            'apellido_casada',
+            'dpi',
+            'fecha_nacimiento',
+            'direccion_id',
+            'genero_id',
+        ];
+
         $residentes = QueryBuilder::for(Residente::class)
             ->allowedFilters([
                 'id',
@@ -56,6 +70,13 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
                 'fecha_nacimiento',
                 'direccion_id',
                 'genero_id',
+                AllowedFilter::callback('data', function ($query, $value) use ($allowedFields) {
+                    $query->where(function ($q) use ($allowedFields, $value) {
+                        foreach ($allowedFields as $field) {
+                            $q->orWhere($field, 'LIKE', "%{$value}%");
+                        }
+                    });
+                }),
                 AllowedFilter::callback('conServicio', function ($query, $value) {
                     if (filter_var($value, FILTER_VALIDATE_BOOLEAN)) {
                         $query->whereHas('servicios');
@@ -84,9 +105,8 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
             ->defaultSort('-id')
             ->paginate($request->get('per_page', 10));
 
-        return $this->sendResponse($residentes->toArray(), 'residentes recuperados con éxito.');
+        return $this->sendResponse($residentes->toArray(), 'Residentes recuperados con éxito.');
     }
-
     /**
      * Store a newly created Residente in storage.
      * POST /residentes
@@ -160,6 +180,72 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
 
         return $this->sendResponse($residentes->toArray(), 'Residentes recuperados con éxito.');
 
+    }
+    public function obtenerResidentes(Request $request): JsonResponse
+    {
+        $allowedFields = [
+            'id',
+            'primer_nombre',
+            'segundo_nombre',
+            'tercer_nombre',
+            'primer_apellido',
+            'segundo_apellido',
+            'apellido_casada',
+            'dpi',
+            'fecha_nacimiento',
+            'direccion_id',
+            'genero_id',
+        ];
+
+        $residentes = QueryBuilder::for(Residente::class)
+            ->allowedFilters([
+                'id',
+                'primer_nombre',
+                'segundo_nombre',
+                'tercer_nombre',
+                'primer_apellido',
+                'segundo_apellido',
+                'apellido_casada',
+                'dpi',
+                'fecha_nacimiento',
+                'direccion_id',
+                'genero_id',
+                AllowedFilter::callback('data', function ($query, $value) use ($allowedFields) {
+                    $query->where(function ($q) use ($allowedFields, $value) {
+                        foreach ($allowedFields as $field) {
+                            $q->orWhere($field, 'LIKE', "%{$value}%");
+                        }
+                    });
+                }),
+                AllowedFilter::callback('conServicio', function ($query, $value) {
+                    if (filter_var($value, FILTER_VALIDATE_BOOLEAN)) {
+                        $query->whereHas('servicios');
+                    }
+                }),
+            ])
+            ->allowedSorts([
+                'id',
+                'primer_nombre',
+                'segundo_nombre',
+                'tercer_nombre',
+                'primer_apellido',
+                'segundo_apellido',
+                'apellido_casada',
+                'dpi',
+                'fecha_nacimiento',
+                'direccion_id',
+                'genero_id'
+            ])
+            ->allowedIncludes([
+                'direccion',
+                'genero',
+                'telefonos',
+                'servicios',
+            ])
+            ->defaultSort('-id')
+            ->paginate($request->get('per_page', 10));
+
+        return $this->sendResponse($residentes->toArray(), 'Residentes recuperados con éxito.');
     }
 
 }

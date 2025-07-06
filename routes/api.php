@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Residentes\ResidenteApiController;
+use App\Http\Controllers\Api\ServicioAgua\ServicioAguaApiController;
+use App\Http\Controllers\Api\ServicioAgua\ServicioAguaBitacoraApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +27,12 @@ require __DIR__.'/auth.php';
 Route::prefix('libres')->group(function () {
 
     require __DIR__.'/admin/Configuraciones/api_libres.php';
+
+    Route::get('/obtener/residentes', [ResidenteApiController::class, 'obtenerResidentes']);
+
+    Route::get('/obtener/servicios/agua', [ServicioAguaApiController::class, 'obtenerServiciosAgua']);
+
+    Route::get('/obtener/bitacoras', [ServicioAguaBitacoraApiController::class, 'obtenerBitacoras']);
 
 });
 

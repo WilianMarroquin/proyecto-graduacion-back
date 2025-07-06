@@ -134,5 +134,26 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
 
     }
 
+    public function obtenerServiciosAgua(Request $request): JsonResponse
+    {
+        $servicio_aguas = QueryBuilder::for(ServicioAgua::class)
+            ->allowedFilters([
+                'correlativo',
+                AllowedFilter::exact('residente_id'),
+                'estado_id'
+            ])
+            ->allowedSorts([
+                'correlativo',
+                'residente_id',
+                'estado_id'
+            ])
+            ->allowedIncludes([
+                'residente'
+            ])
+            ->defaultSort('-id')
+            ->paginate($request->get('per_page', 10));
+
+        return $this->sendResponse($servicio_aguas->toArray(), 'Servicio Aguas recuperados con éxito.');
+    }
 
 }
