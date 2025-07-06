@@ -90,6 +90,7 @@ class ServicioAgua extends Model
         'fecha_adquisicion',
         'direccion_actual',
         'direccion_actual_id',
+        'comunidad_actual'
     ];
 
 
@@ -112,6 +113,12 @@ class ServicioAgua extends Model
     {
         return $this->hasMany(ServicioAguaBitacora::class, 'servicio_agua_id', 'id');
 
+    }
+
+    public function ultimaBitacora()
+    {
+        return $this->hasOne(ServicioAguaBitacora::class, 'servicio_agua_id', 'id')
+            ->latestOfMany();
     }
 
     public function getTipoAdquisicionAttribute()
@@ -157,6 +164,23 @@ class ServicioAgua extends Model
             ->first()
             ?->direccion
             ?->id;
+
+    }
+
+    public function getComunidadActualAttribute()
+    {
+        $direccionActual = $this->bitacoras()
+            ->latest()
+            ->first()
+            ?->direccion;
+
+        if (!$direccionActual) {
+            return null;
+        }
+
+        $direccionActual->load('barrio.comunidad');
+
+        return $direccionActual->barrio->comunidad->nombre ?? 'Sin comunidad';
 
     }
 

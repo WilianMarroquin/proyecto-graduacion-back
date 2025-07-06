@@ -48,6 +48,7 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
     {
         $servicio_aguas = QueryBuilder::for(ServicioAgua::class)
             ->allowedFilters([
+                AllowedFilter::exact('id'),
                 'correlativo',
                 AllowedFilter::exact('residente_id'),
                 'estado_id'
@@ -58,7 +59,9 @@ class ServicioAguaApiController extends AppbaseController implements HasMiddlewa
                 'estado_id'
             ])
             ->allowedIncludes([
-                'residente'
+                'residente',
+                'ultimaBitacora',
+                'ultimaBitacora.tipoTransaccion'
             ])
             ->defaultSort('-id')
             ->paginate($request->get('per_page', 10));

@@ -99,6 +99,7 @@ class Residente extends Model
     protected $appends = [
         'nombre_completo',
         'nombre_corto',
+        'direccion_actual',
     ];
 
     /**
@@ -194,6 +195,22 @@ class Residente extends Model
     public function servicios()
     {
         return $this->hasMany(ServicioAgua::class, 'residente_id', 'id');
+    }
+
+    public function getDireccionActualAttribute()
+    {
+        $direccionActual = $this->direccion;
+
+        if (!$direccionActual) {
+            return null;
+        }
+
+        $direccionActual->loadMissing('barrio.comunidad');
+
+        $barrio = optional($direccionActual->barrio)->nombre ?? 'Sin barrio';
+        $comunidad = optional(optional($direccionActual->barrio)->comunidad)->nombre ?? 'Sin comunidad';
+
+        return "{$comunidad}, {$barrio}, {$direccionActual->direccion}";
     }
 
 }
