@@ -311,24 +311,24 @@ class OpcionesMenuTableSeeder extends Seeder
             "subject" => "ServicioAguaBitacoraTipoTransaccion",
             "parent_id" => 24
         ]);
-
         MenuOpcion::create([
             "id" => 27,
-            "titulo" => null,
-            "titulo_seccion" => 'Modulo Dev',
-            "icono" => null,
-            "ruta" => null,
+            "titulo" => 'Gráficas',
+            "icono" => 'ri-line-chart-fill',
+            "ruta" => 'graficas',
             "orden" => 26,
-            "action" => "Ver Modulo Desarrollo",
-            "subject" => "Desarrollo",
+            "titulo_seccion" => null,
+            "action" => "Ver Graficas",
+            "subject" => "ServicioAgua",
             "parent_id" => null
         ]);
 
         MenuOpcion::create([
             "id" => 28,
-            "titulo" => "Developers",
-            "icono" => "ri-tools-fill",
-            "ruta" => "second-page",
+            "titulo" => null,
+            "titulo_seccion" => 'Modulo Dev',
+            "icono" => null,
+            "ruta" => null,
             "orden" => 27,
             "action" => "Ver Modulo Desarrollo",
             "subject" => "Desarrollo",
@@ -337,24 +337,35 @@ class OpcionesMenuTableSeeder extends Seeder
 
         MenuOpcion::create([
             "id" => 29,
-            "titulo" => "Configuraciones",
-            "icono" => "ri-settings-5-fill",
-            "ruta" => "dev-configuraciones",
+            "titulo" => "Developers",
+            "icono" => "ri-tools-fill",
+            "ruta" => "second-page",
             "orden" => 28,
-            "action" => "Listar Configuraciones",
-            "subject" => "Configuracion",
-            "parent_id" => 28
+            "action" => "Ver Modulo Desarrollo",
+            "subject" => "Desarrollo",
+            "parent_id" => null
         ]);
 
         MenuOpcion::create([
             "id" => 30,
+            "titulo" => "Configuraciones",
+            "icono" => "ri-settings-5-fill",
+            "ruta" => "dev-configuraciones",
+            "orden" => 29,
+            "action" => "Listar Configuraciones",
+            "subject" => "Configuracion",
+            "parent_id" => 29
+        ]);
+
+        MenuOpcion::create([
+            "id" => 31,
             "titulo" => "Componentes",
             "icono" => "ri-code-box-line",
             "ruta" => "dev-componentes",
-            "orden" => 29,
+            "orden" => 30,
             "action" => "Listar Componentes",
             "subject" => "Desarrollo",
-            "parent_id" => 28
+            "parent_id" => 29
         ]);
 
 
