@@ -4,6 +4,7 @@ namespace Database\Seeders\ServicioAgua;
 
 use App\Models\Direcciones\ComunidadBarrio;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ComunidadBarriosTableSeeder extends Seeder
 {
@@ -14,6 +15,11 @@ class ComunidadBarriosTableSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        ComunidadBarrio::truncate();
+
         ComunidadBarrio::create([
             'nombre' => 'Las Pilas',
             'comunidad_id' => 1
@@ -26,5 +32,7 @@ class ComunidadBarriosTableSeeder extends Seeder
             'nombre' => 'El centro',
             'comunidad_id' => 1
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

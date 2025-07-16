@@ -4,6 +4,7 @@ namespace Database\Seeders\ServicioAgua;
 
 use App\Models\Residentes\Genero;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class GenerosTableSeeder extends Seeder
 {
@@ -14,6 +15,11 @@ class GenerosTableSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        Genero::truncate();
+
         Genero::create([
             'nombre' => 'Masculino',
             'descripcion' => 'Hombre',
@@ -25,6 +31,8 @@ class GenerosTableSeeder extends Seeder
             'descripcion' => 'Mujer',
             'estado' => 1,
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
     }
 }

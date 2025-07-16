@@ -4,6 +4,7 @@ namespace Database\Seeders\ServicioAgua;
 
 use App\Models\ServicioAgua\ServicioAguaBitacoraTipoTransaccion;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ServicioAguaBitacoraTipoTransaccionesTableSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class ServicioAguaBitacoraTipoTransaccionesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        ServicioAguaBitacoraTipoTransaccion::truncate();
 
         ServicioAguaBitacoraTipoTransaccion::firstOrCreate([
             'nombre' => 'Compra',
@@ -30,5 +34,7 @@ class ServicioAguaBitacoraTipoTransaccionesTableSeeder extends Seeder
         ServicioAguaBitacoraTipoTransaccion::firstOrCreate([
             'nombre' => 'Trabajo Comunitario',
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

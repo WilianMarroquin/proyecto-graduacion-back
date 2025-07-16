@@ -10,7 +10,7 @@ class OpcionesMenuTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * php artisan db:seed --class="Database\Seeders\ServicioAgua\IndexTableSeeder"
+     * php artisan db:seed OpcionesMenuTableSeeder
      * @return void
      */
     public function run(): void

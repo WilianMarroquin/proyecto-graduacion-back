@@ -4,8 +4,10 @@ namespace Database\Seeders\ServicioAgua;
 
 use App\Models\Residentes\ResidenteTelefonoTipo;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class ResidenteTelefonoTiposTableSeeder extends Seeder
+class
+ResidenteTelefonoTiposTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +16,10 @@ class ResidenteTelefonoTiposTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        ResidenteTelefonoTipo::truncate();
+
         ResidenteTelefonoTipo::create([
             'nombre' => 'Casa',
         ]);
@@ -26,6 +32,8 @@ class ResidenteTelefonoTiposTableSeeder extends Seeder
         ResidenteTelefonoTipo::create([
             'nombre' => 'Otro',
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
     }
 }

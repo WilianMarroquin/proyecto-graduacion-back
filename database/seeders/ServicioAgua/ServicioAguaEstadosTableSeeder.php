@@ -4,6 +4,7 @@ namespace Database\Seeders\ServicioAgua;
 
 use App\Models\ServicioAgua\ServicioAguaEstado;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ServicioAguaEstadosTableSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class ServicioAguaEstadosTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        ServicioAguaEstado::truncate();
 
         ServicioAguaEstado::firstOrCreate([
             'nombre' => 'Activo',
@@ -26,5 +30,7 @@ class ServicioAguaEstadosTableSeeder extends Seeder
         ServicioAguaEstado::firstOrCreate([
             'nombre' => 'Inactivo',
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
