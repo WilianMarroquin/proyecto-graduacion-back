@@ -39,7 +39,6 @@ test('Login Incorrecto', function () {
     $response->assertStatus(422);
 });
 
-
 test('Cerrar Sesión', function () {
 
     //Crear usuario de prueba

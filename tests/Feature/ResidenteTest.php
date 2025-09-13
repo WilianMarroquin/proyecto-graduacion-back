@@ -123,7 +123,6 @@ test('Editar un residente', function () {
     ]);
 });
 
-
 test('Eliminar un residente', function () {
 
     //Creamos la dirección para asignarla al residente
