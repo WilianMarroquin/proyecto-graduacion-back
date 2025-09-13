@@ -128,7 +128,7 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
             throw new ResidenteExeption("Error al crear residente: " . $e->getMessage());
         }
 
-        return $this->sendResponse($residente->toArray(), 'Residente creado con éxito1.');
+        return $this->sendResponse($residente->toArray(), 'Residente creado con éxito.');
     }
 
     /**
