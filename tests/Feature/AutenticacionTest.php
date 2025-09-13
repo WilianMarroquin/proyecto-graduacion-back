@@ -5,10 +5,11 @@ use App\Models\UserEstado;
 use Illuminate\Support\Facades\Hash;
 
 beforeEach(function () {
+    //Llena la base de datos con datos de prueba antes de cada test
     $this->seed(\Database\Seeders\DatabaseSeeder::class);
 });
 
-test('login correcto devuelve 204 no content', function () {
+test('Login', function () {
 
     //Traemos al usuario por defecto creado en el seeder
     $user = User::find(1);
@@ -26,7 +27,7 @@ test('login correcto devuelve 204 no content', function () {
     $this->assertAuthenticatedAs($user);
 });
 
-test('login incorrecto devuelve 401', function () {
+test('Login Incorrecto', function () {
 
     //Intentar loguearse con credenciales incorrectas
     $response = $this->postJson('/api/login', [
@@ -34,11 +35,12 @@ test('login incorrecto devuelve 401', function () {
         'password' => 'badpass',
     ]);
 
-    //Verificar que la respuesta es 422 unprocessable entity
+    //Verificar que la respuesta es 422 con credenciales incorrectas
     $response->assertStatus(422);
 });
 
-test('logout devuelve 204 y desautentica', function () {
+
+test('Cerrar Sesión', function () {
 
     //Crear usuario de prueba
     $user = User::create([

@@ -11,22 +11,20 @@ use Spatie\Permission\Models\Role;
 beforeEach(function () {
     $this->seed(\Database\Seeders\DatabaseSeeder::class);
 
+    // Autenticar como usuario con rol de Super Admin
     $this->user = User::find(1);
 
+    //Traer el rol de Super Admin
     $rolSuperAdmin = Role::findByName('Super Admin');
 
+    //Asignar el rol al usuario
     $this->user->assignRole($rolSuperAdmin);
 
+    // Autenticar el usuario para las peticiones
     $this->actingAs($this->user);
 });
 
-test('crear un residente', function () {
-    //Creamos la dirección para asignarla al residente
-    $direccion = ComunidadBarrioDireccion::create([
-        'id' => 3,
-        'direccion' => 'Frente a la iglesia',
-        'barrio_id' => ComunidadBarrio::EL_CENTRO
-    ]);
+test('Crear un residente', function () {
 
     //Datos de ejemplo para crear un residente
     $data = [
@@ -48,6 +46,7 @@ test('crear un residente', function () {
     // Realizar la petición POST para crear el residente
     $response = $this->postJson('/api/residentes', $data);
 
+    // Validar que la respuesta tenga el formato esperado
     $response->assertStatus(200)
         ->assertJson([
             'success' => true,
@@ -58,6 +57,7 @@ test('crear un residente', function () {
             'primer_apellido' => 'Gonzalez',
         ]);
 
+    // Verificar que el residente fue creado en la base de datos
     $this->assertDatabaseHas('residentes', [
         'dpi' => '1234567890101',
         'primer_nombre' => 'Cesar',
@@ -66,7 +66,7 @@ test('crear un residente', function () {
 
 });
 
-test('editar un residente', function () {
+test('Editar un residente', function () {
 
     //Creamos la dirección para asignarla al residente
     $direccion = ComunidadBarrioDireccion::create([
@@ -101,9 +101,10 @@ test('editar un residente', function () {
     $updateData['primer_nombre'] = 'Juan';
     $updateData['segundo_apellido'] = 'Palencia';
 
-    // PUT request
+    // Hacemos la petición PUT para actualizar el residente
     $response = $this->putJson("/api/residentes/{$residente->id}", $updateData);
 
+    // Validamos que la respuesta tenga el formato esperado
     $response->assertStatus(200)
         ->assertJson([
             'success' => true,
@@ -114,6 +115,7 @@ test('editar un residente', function () {
             'segundo_apellido' => 'Palencia',
         ]);
 
+    // Verificamos que los datos fueron actualizados en la base de datos
     $this->assertDatabaseHas('residentes', [
         'dpi' => '1234567890101',
         'primer_nombre' => 'Juan',
@@ -122,7 +124,7 @@ test('editar un residente', function () {
 });
 
 
-test('eliminar un residente', function () {
+test('Eliminar un residente', function () {
 
     //Creamos la dirección para asignarla al residente
     $direccion = ComunidadBarrioDireccion::create([
@@ -152,6 +154,7 @@ test('eliminar un residente', function () {
     // Creamos un residente para luego editarlo
     $residente = Residente::create($data);
 
+    // Hacer la petición DELETE para eliminar el residente
     $response = $this->deleteJson("/api/residentes/{$residente->id}");
 
     // Validar respuesta
@@ -161,6 +164,7 @@ test('eliminar un residente', function () {
             'message' => 'Residente eliminado con éxito.',
         ]);
 
+    // Verificar que el residente fue eliminado (soft delete) en la base de datos
     $this->assertSoftDeleted('residentes', [
         'dpi' => '1234567890101',
     ]);
