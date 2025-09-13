@@ -17,7 +17,9 @@ class RolesPermisosBaseTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         Role::truncate();
         Permission::truncate();
@@ -154,6 +156,8 @@ class RolesPermisosBaseTableSeeder extends Seeder
 
         User::find(1)->assignRole('Super Admin');
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
     }
 }

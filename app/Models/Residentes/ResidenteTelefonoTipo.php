@@ -42,6 +42,12 @@ class ResidenteTelefonoTipo extends Model
     'nombre'
 ];
 
+    const CASA = 1;
+    const CELULAR = 2;
+    const TRABAJO = 3;
+    const OTRO = 4;
+
+
 
     /**
      * The attributes that should be casted to native types.

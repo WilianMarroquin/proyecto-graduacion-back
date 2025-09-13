@@ -21,6 +21,10 @@ class ComunidadBarrio extends Model
         'comunidad_id'
     ];
 
+    const LAS_PILAS = 1;
+    const LAS_JOYAS = 2;
+    const EL_CENTRO = 3;
+
 
     /**
      * The attributes that should be casted to native types.

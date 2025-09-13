@@ -15,7 +15,9 @@ class ServicioAguaEstadosTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         ServicioAguaEstado::truncate();
 
@@ -31,6 +33,8 @@ class ServicioAguaEstadosTableSeeder extends Seeder
             'nombre' => 'Inactivo',
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
     }
 }

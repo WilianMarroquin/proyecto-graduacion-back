@@ -156,6 +156,7 @@ class ResidenteApiController extends AppbaseController implements HasMiddleware
             $this->actualizarResidente($residente->id, $request);
             $this->sincronizarNumerosTelefono($residente->id, $request->telefonos);
             DB::commit();
+            $residente->refresh();
             return $this->sendResponse($residente->toArray(), 'Residente actualizado con éxito.');
 
         } catch (\Exception $e) {

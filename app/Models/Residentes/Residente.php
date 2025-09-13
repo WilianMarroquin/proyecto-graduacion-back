@@ -68,7 +68,7 @@ class Residente extends Model
         'dpi',
         'fecha_nacimiento',
         'direccion_id',
-        'genero_id'
+        'genero_id',
     ];
 
 

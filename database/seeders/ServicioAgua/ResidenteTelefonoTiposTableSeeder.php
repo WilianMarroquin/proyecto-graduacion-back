@@ -16,7 +16,9 @@ ResidenteTelefonoTiposTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         ResidenteTelefonoTipo::truncate();
 
@@ -33,7 +35,9 @@ ResidenteTelefonoTiposTableSeeder extends Seeder
             'nombre' => 'Otro',
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
     }
 }

@@ -15,7 +15,9 @@ class ServicioAguaBitacoraTipoTransaccionesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         ServicioAguaBitacoraTipoTransaccion::truncate();
 
@@ -35,6 +37,9 @@ class ServicioAguaBitacoraTipoTransaccionesTableSeeder extends Seeder
             'nombre' => 'Trabajo Comunitario',
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
+
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Models\Residentes;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  *
@@ -46,6 +46,9 @@ class Genero extends Model
         'descripcion',
         'estado'
     ];
+
+    const MASCULINO = 1;
+    const FEMENINO = 2;
 
 
     /**

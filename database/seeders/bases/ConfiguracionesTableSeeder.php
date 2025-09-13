@@ -15,7 +15,9 @@ class ConfiguracionesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         Configuracion::truncate();
 
@@ -60,7 +62,10 @@ class ConfiguracionesTableSeeder extends Seeder
             'descripcion' => 'Logo de la App'
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
     }
 }

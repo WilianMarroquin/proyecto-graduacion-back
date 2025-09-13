@@ -16,7 +16,9 @@ class GenerosTableSeeder extends Seeder
     public function run()
     {
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         Genero::truncate();
 
@@ -32,7 +34,9 @@ class GenerosTableSeeder extends Seeder
             'estado' => 1,
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
     }
 }

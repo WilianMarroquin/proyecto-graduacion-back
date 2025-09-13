@@ -54,6 +54,7 @@ class Comunidad extends Model
         'deleted_at' => 'timestamp',
     ];
 
+    const COMUNIDAD_NARANJO = 1;
 
     /**
      * Validation rules

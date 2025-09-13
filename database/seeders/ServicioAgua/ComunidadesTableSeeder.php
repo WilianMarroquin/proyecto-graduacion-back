@@ -16,7 +16,9 @@ class ComunidadesTableSeeder extends Seeder
     public function run()
     {
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         Comunidad::truncate();
 
@@ -24,6 +26,9 @@ class ComunidadesTableSeeder extends Seeder
             'nombre' => 'El Naranjo',
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
     }
 }
