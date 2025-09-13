@@ -4,27 +4,25 @@ use App\Models\User;
 use App\Models\UserEstado;
 use Illuminate\Support\Facades\Hash;
 
+beforeEach(function () {
+    $this->seed(\Database\Seeders\DatabaseSeeder::class);
+});
+
 test('login correcto devuelve 204 no content', function () {
-    //Crear un usuario
-    $user = User::create([
-        'usuario' => 'manuel34',
-        'primer_nombre' => 'Manuel',
-        'segundo_nombre' => 'Antonio',
-        'primer_apellido' => 'Fuentes',
-        'segundo_apellido' => 'Chamo',
-        'email' => 'manuelfuente@gmail.com',
-        'estado_id' => UserEstado::ACTIVO,
-        'password' => Hash::make('secret123'),
-    ]);
+
+    //Traemos al usuario por defecto creado en el seeder
+    $user = User::find(1);
 
     //Intentar loguearse
     $response = $this->postJson('/api/login', [
-        'usuario' => $user->usuario,
-        'password' => 'secret123',
+        'usuario' => 'Admin',
+        'password' => '12345',
     ]);
 
     //Verificar que la respuesta es 204 no content
     $response->assertNoContent();
+
+    //Luego de validar la respuesta, verificar que el usuario está autenticado
     $this->assertAuthenticatedAs($user);
 });
 
